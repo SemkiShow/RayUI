@@ -21,8 +21,10 @@
   - [ ] RDropdown
   - [ ] RColorPicker
   - [ ] RBar
-- [ ] RLayout
-  - [ ] RVLayout
-  - [ ] RHLayout
-  - [ ] RGridLayout
+  - [ ] RScrollArea
+  - [ ] RLayout
+    - [ ] RVBoxLayout
+    - [ ] RHBoxLayout
+    - [ ] RGridLayout
 - [ ] raygui icons
+- [ ] Functions for native popups and menu bar

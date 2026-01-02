@@ -4,7 +4,7 @@ A GUI library for raylib
 
 ## How to use
 
-The only dependency of the library is raylib
+The only external dependency is raylib
 
 1. Add the library as a submodule
 ```bash
