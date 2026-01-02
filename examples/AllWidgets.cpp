@@ -21,14 +21,16 @@ void InitUI()
     auto layout = std::make_shared<RVBoxLayout>();
     pane->SetLayout(layout);
 
+    auto colorLayout = std::make_shared<RHBoxLayout>();
     RColor colors[] = {{255, 0, 0},   {0, 255, 0},   {0, 0, 255},
                        {255, 255, 0}, {255, 0, 255}, {0, 255, 255}};
     for (auto& color: colors)
     {
         auto rec = std::make_shared<RPane>(color);
         rec->SetMaxSize({25, 25});
-        layout->AddWidget(rec);
+        colorLayout->AddWidget(rec);
     }
+    layout->AddWidget(colorLayout);
 
     window->SetCentralWidget(pane);
 

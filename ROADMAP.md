@@ -2,11 +2,11 @@
 
 ## v1.0.0
 
-- [ ] RApplication
-- [ ] RWindow
+- [x] RApplication
+- [x] RWindow
   - [ ] RPopupWindow
   - [ ] ROkCancelWindow
-- [ ] RWidget
+- [x] RWidget
   - [ ] RBaseButton
     - [ ] RButton
     - [ ] RImageButton
@@ -22,9 +22,9 @@
   - [ ] RColorPicker
   - [ ] RBar
   - [ ] RScrollArea
-  - [ ] RLayout
-    - [ ] RVBoxLayout
-    - [ ] RHBoxLayout
+  - [x] RLayout
+    - [x] RVBoxLayout
+    - [x] RHBoxLayout
     - [ ] RGridLayout
 - [ ] raygui icons
 - [ ] Functions for native popups and menu bar

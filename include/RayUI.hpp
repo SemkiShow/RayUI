@@ -11,6 +11,7 @@
 // Widgets/Containers/Layouts
 #include "Widgets/Containers/Layouts/RLayout.hpp"     // IWYU pragma: export
 #include "Widgets/Containers/Layouts/RVBoxLayout.hpp" // IWYU pragma: export
+#include "Widgets/Containers/Layouts/RHBoxLayout.hpp" // IWYU pragma: export
 
 // Widgets/Containers/Panes
 #include "Widgets/Containers/Panes/RPane.hpp" // IWYU pragma: export
