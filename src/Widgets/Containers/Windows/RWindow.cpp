@@ -13,20 +13,20 @@ void RWindow::Update()
 
         SetSize(rui::GetWindowSize());
 
-        auto centralWidgetBounds = GetBounds();
-        centralWidgetBounds = AddMargin(centralWidgetBounds, margin);
-        centralWidgetBounds = ClampBounds(centralWidgetBounds, centralWidget->GetMinSize(),
-                                          centralWidget->GetMaxSize());
-        centralWidget->SetBounds(centralWidgetBounds);
-        centralWidget->UpdateBounds();
+        if (centralWidget)
+        {
+            auto centralWidgetBounds = GetBounds();
+            centralWidgetBounds = AddMargin(centralWidgetBounds, margin);
+            centralWidgetBounds = ClampBounds(centralWidgetBounds, centralWidget->GetMinSize(),
+                                              centralWidget->GetMaxSize());
+            centralWidget->SetBounds(centralWidgetBounds);
+            centralWidget->UpdateBounds();
+        }
     }
-    centralWidget->Update();
+    if (centralWidget) centralWidget->Update();
 }
 
 void RWindow::Draw()
 {
-    if (centralWidget)
-    {
-        centralWidget->Draw();
-    }
+    if (centralWidget) centralWidget->Draw();
 }

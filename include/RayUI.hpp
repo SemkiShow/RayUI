@@ -14,6 +14,7 @@
 
 // Widgets/Containers/Panes
 #include "Widgets/Containers/Panes/RPane.hpp" // IWYU pragma: export
+#include "Widgets/Containers/Panes/RPaneRounded.hpp" // IWYU pragma: export
 
 // Widgets/Containers/Windows
 #include "Widgets/Containers/Windows/RWindow.hpp" // IWYU pragma: export

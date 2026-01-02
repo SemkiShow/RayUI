@@ -8,28 +8,29 @@
 
 Vector2 windowSize{16 * 50, 9 * 50};
 std::shared_ptr<RApplication> app;
-std::shared_ptr<RWindow> window;
-std::shared_ptr<RVBoxLayout> layout;
-std::shared_ptr<RPane> pane, rec;
 
 void InitUI()
 {
     app = std::make_shared<RApplication>();
 
-    window = std::make_shared<RWindow>();
-    window->SetMargin(0);
+    auto window = std::make_shared<RWindow>();
 
-    layout = std::make_shared<RVBoxLayout>();
-
-    pane = std::make_shared<RPane>();
+    auto pane = std::make_shared<RPaneRounded>();
     pane->SetMinSize({100, 100});
-    layout->AddWidget(pane);
 
-    rec = std::make_shared<RPane>();
-    rec->SetMaxSize({100, 100});
-    layout->AddWidget(rec);
+    auto layout = std::make_shared<RVBoxLayout>();
+    pane->SetLayout(layout);
 
-    window->SetCentralWidget(layout);
+    RColor colors[] = {{255, 0, 0},   {0, 255, 0},   {0, 0, 255},
+                       {255, 255, 0}, {255, 0, 255}, {0, 255, 255}};
+    for (auto& color: colors)
+    {
+        auto rec = std::make_shared<RPane>(color);
+        rec->SetMaxSize({25, 25});
+        layout->AddWidget(rec);
+    }
+
+    window->SetCentralWidget(pane);
 
     app->AddWindow(window);
 }

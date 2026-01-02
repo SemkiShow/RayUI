@@ -40,9 +40,10 @@ struct RColor
     }
 };
 
-float Clamp(float val, float min, float max);
 RRectangle ClampBounds(const RRectangle& bounds, const RVector2& minSize, const RVector2& maxSize);
 RVector2 ClampSize(const RVector2& size, const RVector2& minSize, const RVector2& maxSize);
+float ClampWidth(float val, float min, float max);
+float ClampHeight(float val, float min, float max);
 RVector2 MinSize(const RVector2& a, const RVector2& b);
 float MinWidth(float a, float b);
 float MinHeight(float a, float b);

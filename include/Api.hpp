@@ -13,4 +13,5 @@ float GetWindowWidth();
 float GetWindowHeight();
 
 void DrawRectangle(RRectangle rec, RColor color);
+void DrawRectangleRounded(RRectangle rec, float roundness, int segments, RColor color);
 } // namespace rui

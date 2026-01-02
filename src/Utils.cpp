@@ -5,8 +5,6 @@
 #include "Utils.hpp"
 #include <algorithm>
 
-float Clamp(float val, float min, float max) { return std::max(min, std::min(max, val)); }
-
 RRectangle ClampBounds(const RRectangle& bounds, const RVector2& minSize, const RVector2& maxSize)
 {
     auto rec = bounds;
@@ -17,16 +15,19 @@ RRectangle ClampBounds(const RRectangle& bounds, const RVector2& minSize, const 
 RVector2 ClampSize(const RVector2& size, const RVector2& minSize, const RVector2& maxSize)
 {
     RVector2 vec;
-    if (maxSize.x < 0)
-        vec.x = std::max(size.x, minSize.x);
-    else
-        vec.x = maxSize.x;
-    if (maxSize.y < 0)
-        vec.y = std::max(size.y, minSize.y);
-    else
-        vec.y = maxSize.y;
+    vec.x = ClampWidth(size.x, minSize.x, maxSize.x);
+    vec.y = ClampHeight(size.y, minSize.y, maxSize.y);
     return vec;
 }
+
+float ClampWidth(float val, float min, float max)
+{
+    if (min < 0) return -1;
+    if (max < 0) return std::max(min, val);
+    return std::max(min, std::min(max, val));
+}
+
+float ClampHeight(float val, float min, float max) { return ClampWidth(val, min, max); }
 
 RVector2 MinSize(const RVector2& a, const RVector2& b)
 {
