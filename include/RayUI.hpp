@@ -4,6 +4,8 @@
 
 #pragma once
 
+#include "Conversions.hpp" // IWYU pragma: export
+
 // Core
 #include "Core/Native.hpp"       // IWYU pragma: export
 #include "Core/RApplication.hpp" // IWYU pragma: export
