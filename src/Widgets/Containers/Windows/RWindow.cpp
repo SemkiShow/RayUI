@@ -13,7 +13,7 @@ void RWindow::Update()
 
         SetSize(rui::GetWindowSize());
 
-        if (centralWidget)
+        if (centralWidget && centralWidget->IsVisible())
         {
             auto centralWidgetBounds = GetBounds();
             centralWidgetBounds = AddMargin(centralWidgetBounds, margin);
@@ -23,10 +23,7 @@ void RWindow::Update()
             centralWidget->UpdateBounds();
         }
     }
-    if (centralWidget) centralWidget->Update();
+    if (centralWidget && centralWidget->IsVisible()) centralWidget->Update();
 }
 
-void RWindow::Draw()
-{
-    if (centralWidget) centralWidget->Draw();
-}
+void RWindow::Draw() { DrawCentralWidget(); }

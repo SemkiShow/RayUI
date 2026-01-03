@@ -23,4 +23,12 @@ class RLayout : public RWidget
   protected:
     float padding = 5, margin = 10;
     std::vector<std::shared_ptr<RWidget>> widgets;
+
+    void UpdateWidgets()
+    {
+        for (auto& widget: widgets)
+        {
+            if (widget->IsVisible()) widget->Update();
+        }
+    }
 };

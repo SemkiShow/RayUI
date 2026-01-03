@@ -74,3 +74,6 @@ const RVector2& operator/=(RVector2& a, const float& b);
 const RVector2& operator/=(RVector2& a, const RVector2& b);
 bool operator==(const RVector2& a, const RVector2& b);
 bool operator!=(const RVector2& a, const RVector2& b);
+
+bool operator==(const RColor& a, const RColor& b);
+bool operator!=(const RColor& a, const RColor& b);

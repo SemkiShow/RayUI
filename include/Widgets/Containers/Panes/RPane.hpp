@@ -26,4 +26,9 @@ class RPane : public RWidget
   protected:
     RColor color;
     std::shared_ptr<RLayout> layout;
+
+    void DrawLayout()
+    {
+        if (layout && layout->IsVisible()) layout->Draw();
+    }
 };

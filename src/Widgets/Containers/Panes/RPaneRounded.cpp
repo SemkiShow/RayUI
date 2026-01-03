@@ -8,5 +8,5 @@
 void RPaneRounded::Draw()
 {
     rui::DrawRectangleRounded(bounds, roundness, segments, color);
-    if (layout) layout->Draw();
+    RPane::DrawLayout();
 }

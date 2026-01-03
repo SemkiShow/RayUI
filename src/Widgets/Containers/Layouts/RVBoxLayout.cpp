@@ -13,13 +13,16 @@ void RVBoxLayout::Update()
         float fixedHeight = 0;
         for (auto& widget: widgets)
         {
-            if (widget->GetMaxHeight() >= 0) fixedHeight += widget->GetMaxHeight();
+            if (widget->GetMaxHeight() >= 0 && widget->IsVisible())
+                fixedHeight += widget->GetMaxHeight();
         }
         float maxWidth = GetWidth() - 2 * margin;
         float dynamicHeight = GetHeight() - 2 * margin - widgets.size() * padding - fixedHeight;
         float posY = GetPositionY() + margin;
         for (auto& widget: widgets)
         {
+            if (!widget->IsVisible()) continue;
+
             if (widget->GetMaxHeight() < 0)
             {
                 widget->SetHeight(dynamicHeight);
@@ -37,8 +40,9 @@ void RVBoxLayout::Update()
         }
 
         for (auto& widget: widgets)
-            widget->UpdateBounds();
+        {
+            if (widget->IsVisible()) widget->UpdateBounds();
+        }
     }
-    for (auto& widget: widgets)
-        widget->Update();
+    RLayout::UpdateWidgets();
 }

@@ -21,4 +21,9 @@ class RWindow : public RWidget
   protected:
     float margin = 10;
     std::shared_ptr<RWidget> centralWidget;
+
+    void DrawCentralWidget()
+    {
+        if (centralWidget && centralWidget->IsVisible()) centralWidget->Draw();
+    }
 };

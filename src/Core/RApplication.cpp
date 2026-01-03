@@ -16,14 +16,20 @@ void RApplication::Update()
     {
         updateBounds = false;
         for (auto& window: windows)
-            window->UpdateBounds();
+        {
+            if (window->IsVisible()) window->UpdateBounds();
+        }
     }
     for (auto& window: windows)
-        window->Update();
+    {
+        if (window->IsVisible()) window->Update();
+    }
 }
 
 void RApplication::Draw()
 {
     for (auto& window: windows)
-        window->Draw();
+    {
+        if (window->IsVisible()) window->Draw();
+    }
 }

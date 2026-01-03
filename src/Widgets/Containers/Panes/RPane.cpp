@@ -10,17 +10,17 @@ void RPane::Update()
     if (updateBounds)
     {
         updateBounds = false;
-        if (layout)
+        if (layout && layout->IsVisible())
         {
             layout->SetBounds(GetBounds());
             layout->UpdateBounds();
         }
     }
-    if (layout) layout->Update();
+    if (layout && layout->IsVisible()) layout->Update();
 }
 
 void RPane::Draw()
 {
     rui::DrawRectangle(bounds, color);
-    if (layout) layout->Draw();
+    DrawLayout();
 }

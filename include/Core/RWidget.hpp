@@ -48,9 +48,18 @@ class RWidget
 
     void UpdateBounds() { updateBounds = true; }
 
+    void SetVisible(bool val)
+    {
+        visible = val;
+        if (visible) UpdateBounds();
+    }
+
+    bool IsVisible() { return visible; }
+
   protected:
     bool updateBounds = false;
     RRectangle bounds{0, 0, -1, -1};
     RVector2 minSize{10, 10};
     RVector2 maxSize{-1, -1};
+    bool visible = true;
 };

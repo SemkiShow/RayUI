@@ -10,14 +10,17 @@ void RLayout::Update()
     {
         updateBounds = false;
         for (auto& widget: widgets)
-            widget->UpdateBounds();
+        {
+            if (widget->IsVisible()) widget->UpdateBounds();
+        }
     }
-    for (auto& widget: widgets)
-        widget->Update();
+    UpdateWidgets();
 }
 
 void RLayout::Draw()
 {
     for (auto& widget: widgets)
-        widget->Draw();
+    {
+        if (widget->IsVisible()) widget->Draw();
+    }
 }

@@ -140,3 +140,13 @@ const RVector2& operator/=(RVector2& a, const RVector2& b) { return a = a / b; }
 bool operator==(const RVector2& a, const RVector2& b) { return a.x == b.x && a.y == b.x; }
 
 bool operator!=(const RVector2& a, const RVector2& b) { return a.x != b.x || a.y != b.y; }
+
+bool operator==(const RColor& a, const RColor& b)
+{
+    return a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a;
+}
+
+bool operator!=(const RColor& a, const RColor& b)
+{
+    return a.r != b.r || a.g != b.g || a.b != b.b || a.a != b.a;
+}

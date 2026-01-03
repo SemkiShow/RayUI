@@ -27,6 +27,7 @@ void InitUI()
     for (auto& color: colors)
     {
         auto rec = std::make_shared<RPane>(color);
+        if (color == RColor{255, 0, 0}) rec->SetVisible(false);
         rec->SetMaxSize({25, 25});
         colorLayout->AddWidget(rec);
     }

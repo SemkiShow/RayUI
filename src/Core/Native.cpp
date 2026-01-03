@@ -220,12 +220,12 @@ std::string ShowSelectFolderDialog(const std::string& title,
 RColor ShowColorPicker(const std::string& title, const std::string& defaultRbgHex)
 {
 #ifdef _WIN32
-    unsigned char res[3];
+    unsigned char res[3]{0, 0, 0};
     tinyfd_colorChooserW(StringToWString(title).c_str(), StringToWString(defaultRbgHex).c_str(),
                          res, res);
     return {res[0], res[1], res[2]};
 #else
-    unsigned char res[3];
+    unsigned char res[3]{0, 0, 0};
     tinyfd_colorChooser(title.c_str(), defaultRbgHex.c_str(), res, res);
     return {res[0], res[1], res[2]};
 #endif
@@ -234,11 +234,11 @@ RColor ShowColorPicker(const std::string& title, const std::string& defaultRbgHe
 RColor ShowColorPicker(const std::string& title, const unsigned char defaultRgb[3])
 {
 #ifdef _WIN32
-    unsigned char res[3];
+    unsigned char res[3]{0, 0, 0};
     tinyfd_colorChooserW(StringToWString(title).c_str(), NULL, defaultRgb, res);
     return {res[0], res[1], res[2]};
 #else
-    unsigned char res[3];
+    unsigned char res[3]{0, 0, 0};
     tinyfd_colorChooser(title.c_str(), NULL, defaultRgb, res);
     return {res[0], res[1], res[2]};
 #endif
@@ -247,13 +247,13 @@ RColor ShowColorPicker(const std::string& title, const unsigned char defaultRgb[
 std::string ShowColorPickerHex(const std::string& title, const std::string& defaultRbgHex)
 {
 #ifdef _WIN32
-    unsigned char buf[3];
+    unsigned char buf[3]{0, 0, 0};
     auto res = tinyfd_colorChooserW(StringToWString(title).c_str(),
                                     StringToWString(defaultRbgHex).c_str(), buf, buf);
     if (!res) return "";
     return WStringToString(std::wstring(res));
 #else
-    unsigned char buf[3];
+    unsigned char buf[3]{0, 0, 0};
     auto res = tinyfd_colorChooser(title.c_str(), defaultRbgHex.c_str(), buf, buf);
     if (!res) return "";
     return res;
@@ -263,12 +263,12 @@ std::string ShowColorPickerHex(const std::string& title, const std::string& defa
 std::string ShowColorPickerHex(const std::string& title, const unsigned char defaultRgb[3])
 {
 #ifdef _WIN32
-    unsigned char buf[3];
+    unsigned char buf[3]{0, 0, 0};
     auto res = tinyfd_colorChooserW(StringToWString(title).c_str(), NULL, defaultRgb, buf);
     if (!res) return "";
     return WStringToString(std::wstring(res));
 #else
-    unsigned char buf[3];
+    unsigned char buf[3]{0, 0, 0};
     auto res = tinyfd_colorChooser(title.c_str(), NULL, defaultRgb, buf);
     if (!res) return "";
     return res;
