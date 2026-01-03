@@ -14,7 +14,7 @@ PrintHelp() {
     echo "-m, --memory-leak    Compile the memory leak build and run it"
     echo ""
     echo "Available EXAMPLE-NAMEs"
-    for f in *.cpp; do echo "${f%.*}"; done
+    for f in src/*.cpp; do echo "$(basename ${f%.*})"; done
 }
 
 # Debug build
@@ -35,9 +35,9 @@ elif [ "$1" == "-w" ] || [ "$1" == "--windows" ]; then
         exit 1
     fi
     clear
-    cmake -B build_win -DCMAKE_TOOLCHAIN_FILE="$(pwd)/mingw-w64-x86_64.cmake" -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    cmake --build build_win -j$(nproc)
-    wine ./build_win/bin/$2.exe
+    cmake -B build_windows -DCMAKE_TOOLCHAIN_FILE="$(pwd)/mingw-w64-x86_64.cmake" -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cmake --build build_windows -j$(nproc)
+    wine ./build_windows/bin/$2.exe
 
 # Profile build
 elif [ "$1" == "-p" ] || [ "$1" == "--profile" ]; then

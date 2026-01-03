@@ -17,15 +17,11 @@ inline RVector2 FromRaylib(::Vector2 vec) { return {vec.x, vec.y}; }
 inline RRectangle FromRaylib(::Rectangle rec) { return {rec.x, rec.y, rec.width, rec.height}; }
 inline RColor FromRaylib(::Color color) { return {color.r, color.g, color.b, color.a}; }
 
-RVector2 GetWindowSize()
-{
-    RVector2 vec = {static_cast<float>(GetRenderWidth()), static_cast<float>(GetRenderHeight())};
-    return vec / FromRaylib(GetWindowScaleDPI());
-}
+float GetWindowWidth() { return static_cast<float>(GetRenderWidth()) / GetWindowScaleDPI().x; }
 
-float GetWindowWidth() { return GetWindowSize().x; }
+float GetWindowHeight() { return static_cast<float>(GetRenderHeight()) / GetWindowScaleDPI().y; }
 
-float GetWindowHeight() { return GetWindowSize().y; }
+RVector2 GetWindowSize() { return {GetWindowWidth(), GetWindowHeight()}; }
 
 void DrawRectangle(RRectangle rec, RColor color)
 {

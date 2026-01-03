@@ -8,11 +8,12 @@ The only external dependency is raylib
 
 1. Add the library as a submodule
 ```bash
+mkdir -p thirdparty
 cd thirdparty
 git submodule add https://github.com/SemkiShow/RayUI
 cd ..
 ```
-1. Add RayUI to you CMakeLists.txt
+2. Add RayUI to you CMakeLists.txt
 ```cmake
 add_subdirectory(thirdparty/RayUI)
 ```

@@ -10,11 +10,15 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # RayUI
 add_subdirectory(${CMAKE_SOURCE_DIR}/.. ${CMAKE_SOURCE_DIR}/../build)
 
-# AllWidgets
-add_executable(AllWidgets AllWidgets.cpp)
-target_compile_options(AllWidgets PRIVATE -Wall -Wextra)
-set_target_properties(AllWidgets PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-target_link_libraries(AllWidgets PRIVATE raylib RayUI)
+function(new_example name)
+    add_executable(${name} src/${name}.cpp)
+    target_compile_options(${name} PRIVATE -Wall -Wextra)
+    set_target_properties(${name} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+    target_link_libraries(${name} PRIVATE raylib RayUI)
+endfunction()
+
+new_example(AllWidgets)
+new_example(Native)
 
 # Checks if OSX and links appropriate frameworks (Only required on MacOS)
 if (APPLE)

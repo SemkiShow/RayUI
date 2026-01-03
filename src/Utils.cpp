@@ -4,21 +4,8 @@
 
 #include "Utils.hpp"
 #include <algorithm>
-
-RRectangle ClampBounds(const RRectangle& bounds, const RVector2& minSize, const RVector2& maxSize)
-{
-    auto rec = bounds;
-    rec.SetSize(ClampSize(rec.GetSize(), minSize, maxSize));
-    return rec;
-}
-
-RVector2 ClampSize(const RVector2& size, const RVector2& minSize, const RVector2& maxSize)
-{
-    RVector2 vec;
-    vec.x = ClampWidth(size.x, minSize.x, maxSize.x);
-    vec.y = ClampHeight(size.y, minSize.y, maxSize.y);
-    return vec;
-}
+#include <codecvt>
+#include <locale>
 
 float ClampWidth(float val, float min, float max)
 {
@@ -29,9 +16,19 @@ float ClampWidth(float val, float min, float max)
 
 float ClampHeight(float val, float min, float max) { return ClampWidth(val, min, max); }
 
-RVector2 MinSize(const RVector2& a, const RVector2& b)
+RVector2 ClampSize(const RVector2& size, const RVector2& minSize, const RVector2& maxSize)
 {
-    return {MinWidth(a.x, b.x), MinHeight(a.y, b.y)};
+    RVector2 vec;
+    vec.x = ClampWidth(size.x, minSize.x, maxSize.x);
+    vec.y = ClampHeight(size.y, minSize.y, maxSize.y);
+    return vec;
+}
+
+RRectangle ClampBounds(const RRectangle& bounds, const RVector2& minSize, const RVector2& maxSize)
+{
+    auto rec = bounds;
+    rec.SetSize(ClampSize(rec.GetSize(), minSize, maxSize));
+    return rec;
 }
 
 float MinWidth(float a, float b)
@@ -43,9 +40,9 @@ float MinWidth(float a, float b)
 
 float MinHeight(float a, float b) { return MinWidth(a, b); }
 
-RVector2 MaxSize(const RVector2& a, const RVector2& b)
+RVector2 MinSize(const RVector2& a, const RVector2& b)
 {
-    return {MaxWidth(a.x, b.x), MaxHeight(a.y, b.y)};
+    return {MinWidth(a.x, b.x), MinHeight(a.y, b.y)};
 }
 
 float MaxWidth(float a, float b)
@@ -56,6 +53,11 @@ float MaxWidth(float a, float b)
 
 float MaxHeight(float a, float b) { return MaxWidth(a, b); }
 
+RVector2 MaxSize(const RVector2& a, const RVector2& b)
+{
+    return {MaxWidth(a.x, b.x), MaxHeight(a.y, b.y)};
+}
+
 RRectangle AddMargin(const RRectangle& bounds, float margin)
 {
     auto rec = bounds;
@@ -64,6 +66,33 @@ RRectangle AddMargin(const RRectangle& bounds, float margin)
     rec.width -= 2 * margin;
     rec.height -= 2 * margin;
     return rec;
+}
+
+std::wstring StringToWString(const std::string& s)
+{
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+    return converter.from_bytes(s);
+}
+
+std::string WStringToString(const std::wstring& s)
+{
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+    return converter.to_bytes(s);
+}
+
+std::vector<std::string> Split(const std::string& s, char delimiter)
+{
+    std::vector<std::string> out(1, "");
+    for (size_t i = 0; i < s.size(); i++)
+    {
+        if (s[i] == delimiter)
+        {
+            out.push_back("");
+            continue;
+        }
+        out.back() += s[i];
+    }
+    return out;
 }
 
 std::ostream& operator<<(std::ostream& out, const RVector2& vec)

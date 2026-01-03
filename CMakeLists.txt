@@ -10,11 +10,15 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Raylib
 find_package(raylib REQUIRED)
 
+# tinyfiledialogs
+add_library(tinyfiledialogs thirdparty/tinyfiledialogs/tinyfiledialogs.c)
+target_include_directories(tinyfiledialogs PUBLIC thirdparty/tinyfiledialogs)
+
 file(GLOB_RECURSE SOURCES src/*.cpp)
 add_library(${PROJECT_NAME} ${SOURCES})
 target_include_directories(${PROJECT_NAME} PUBLIC include/)
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra)
-target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
+target_link_libraries(${PROJECT_NAME} PRIVATE raylib tinyfiledialogs)
 
 # Checks if OSX and links appropriate frameworks (Only required on MacOS)
 if (APPLE)

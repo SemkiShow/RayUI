@@ -37,19 +37,11 @@ void InitUI()
     app->AddWindow(window);
 }
 
-void UpdateWindowSize()
-{
-    windowSize = {(float)GetRenderWidth(), (float)GetRenderHeight()};
-    windowSize /= GetWindowScaleDPI();
-}
-
 void DrawFrame()
 {
     BeginDrawing();
 
     ClearBackground(BLACK);
-
-    UpdateWindowSize();
 
     app->Update();
     app->Draw();

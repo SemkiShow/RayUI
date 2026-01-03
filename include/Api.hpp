@@ -8,9 +8,9 @@
 
 namespace rui
 {
-RVector2 GetWindowSize();
 float GetWindowWidth();
 float GetWindowHeight();
+RVector2 GetWindowSize();
 
 void DrawRectangle(RRectangle rec, RColor color);
 void DrawRectangleRounded(RRectangle rec, float roundness, int segments, RColor color);
