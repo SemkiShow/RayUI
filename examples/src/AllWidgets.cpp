@@ -3,11 +3,31 @@
 // SPDX-License-Identifier: MIT
 
 #include <RayUI.hpp>
+#include <iostream>
 #include <raylib.h>
 #include <raymath.h>
 
 Vector2 windowSize{16 * 50, 9 * 50};
 std::shared_ptr<RApplication> app;
+
+class CustomPane : public RPane
+{
+  public:
+    using RPane::RPane;
+    virtual ~CustomPane() = default;
+
+    bool PollEvents() override
+    {
+        if (PollLayoutEvents()) return true;
+        if (bounds.IsInside(rui::GetMousePosition()) &&
+            rui::IsMouseButtonReleased(rui::MouseButton::Left))
+        {
+            std::cout << "Mouse clicked on " << color << '\n';
+            return true;
+        }
+        return RWidget::PollEvents();
+    }
+};
 
 void InitUI()
 {
@@ -22,12 +42,12 @@ void InitUI()
     pane->SetLayout(layout);
 
     auto colorLayout = std::make_shared<RHBoxLayout>();
-    RColor colors[] = {{255, 0, 0},   {0, 255, 0},   {0, 0, 255},
-                       {255, 255, 0}, {255, 0, 255}, {0, 255, 255}};
+    RColor colors[] = {{255, 0, 0},   {0, 255, 0},     {0, 0, 255}, {255, 255, 0},  {255, 0, 255},
+                       {0, 255, 255}, {255, 255, 255}, {0, 0, 0},   {127, 127, 127}};
     for (auto& color: colors)
     {
-        auto rec = std::make_shared<RPane>(color);
-        if (color == RColor{255, 0, 0}) rec->SetVisible(false);
+        auto rec = std::make_shared<CustomPane>(color);
+        if (color == RColor{127, 127, 127}) rec->SetVisible(false);
         rec->SetMaxSize({25, 25});
         colorLayout->AddWidget(rec);
     }

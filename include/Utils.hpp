@@ -29,6 +29,11 @@ struct RRectangle
 
     RVector2 GetPosition() const { return {x, y}; }
     RVector2 GetSize() const { return {width, height}; }
+
+    bool IsInside(RVector2 p)
+    {
+        return p.x >= x && p.x <= x + width && p.y >= y && p.y <= y + height;
+    }
 };
 
 struct RColor
@@ -74,6 +79,9 @@ const RVector2& operator/=(RVector2& a, const float& b);
 const RVector2& operator/=(RVector2& a, const RVector2& b);
 bool operator==(const RVector2& a, const RVector2& b);
 bool operator!=(const RVector2& a, const RVector2& b);
+
+bool operator==(const RRectangle& a, const RRectangle& b);
+bool operator!=(const RRectangle& a, const RRectangle& b);
 
 bool operator==(const RColor& a, const RColor& b);
 bool operator!=(const RColor& a, const RColor& b);

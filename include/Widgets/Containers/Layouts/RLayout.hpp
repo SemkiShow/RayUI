@@ -13,6 +13,7 @@ class RLayout : public RWidget
   public:
     virtual ~RLayout() = default;
 
+    bool PollEvents() override;
     void Update() override;
     void Draw() override;
 
@@ -23,6 +24,15 @@ class RLayout : public RWidget
   protected:
     float padding = 5, margin = 10;
     std::vector<std::shared_ptr<RWidget>> widgets;
+
+    bool PollWidgetsEvents()
+    {
+        for (int i = widgets.size() - 1; i >= 0; i--)
+        {
+            if (widgets[i]->IsVisible() && widgets[i]->PollEvents()) return true;
+        }
+        return false;
+    }
 
     void UpdateWidgets()
     {

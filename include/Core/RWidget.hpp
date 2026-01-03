@@ -11,6 +11,7 @@ class RWidget
   public:
     virtual ~RWidget() = default;
 
+    virtual bool PollEvents();
     virtual void Update();
     virtual void Draw() {}
 

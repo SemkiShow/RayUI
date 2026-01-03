@@ -27,4 +27,5 @@
     - [x] RHBoxLayout
     - [ ] RGridLayout
 - [ ] raygui icons
-- [ ] Functions for native popups and menu bar
+- [x] Functions for native popups
+- [ ] Menu bar

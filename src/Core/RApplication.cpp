@@ -5,6 +5,15 @@
 #include "Api.hpp"
 #include "Core/RApplication.hpp"
 
+bool RApplication::PollEvents()
+{
+    for (int i = windows.size() - 1; i >= 0; i--)
+    {
+        if (windows[i]->IsVisible() && windows[i]->PollEvents()) return true;
+    }
+    return false;
+}
+
 void RApplication::Update()
 {
     if (rui::GetWindowSize() != lastWindowSize)
@@ -24,6 +33,8 @@ void RApplication::Update()
     {
         if (window->IsVisible()) window->Update();
     }
+
+    PollEvents();
 }
 
 void RApplication::Draw()

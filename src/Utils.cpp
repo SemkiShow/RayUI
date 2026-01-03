@@ -97,19 +97,21 @@ std::vector<std::string> Split(const std::string& s, char delimiter)
 
 std::ostream& operator<<(std::ostream& out, const RVector2& vec)
 {
-    out << vec.x << ' ' << vec.y;
+    out << std::to_string(vec.x) << ' ' << std::to_string(vec.y);
     return out;
 }
 
 std::ostream& operator<<(std::ostream& out, const RRectangle& rec)
 {
-    out << rec.x << ' ' << rec.y << ' ' << rec.width << ' ' << rec.height;
+    out << std::to_string(rec.x) << ' ' << std::to_string(rec.y) << ' ' << std::to_string(rec.width)
+        << ' ' << std::to_string(rec.height);
     return out;
 }
 
 std::ostream& operator<<(std::ostream& out, const RColor& color)
 {
-    out << color.r << ' ' << color.g << ' ' << color.b << ' ' << color.a;
+    out << std::to_string(color.r) << ' ' << std::to_string(color.g) << ' '
+        << std::to_string(color.b) << ' ' << std::to_string(color.a);
     return out;
 }
 
@@ -141,12 +143,16 @@ bool operator==(const RVector2& a, const RVector2& b) { return a.x == b.x && a.y
 
 bool operator!=(const RVector2& a, const RVector2& b) { return a.x != b.x || a.y != b.y; }
 
+bool operator==(const RRectangle& a, const RRectangle& b)
+{
+    return a.x == b.x && a.y == b.y && a.width == b.width && a.height == b.height;
+}
+
+bool operator!=(const RRectangle& a, const RRectangle& b) { return !(a == b); }
+
 bool operator==(const RColor& a, const RColor& b)
 {
     return a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a;
 }
 
-bool operator!=(const RColor& a, const RColor& b)
-{
-    return a.r != b.r || a.g != b.g || a.b != b.b || a.a != b.a;
-}
+bool operator!=(const RColor& a, const RColor& b) { return !(a == b); }

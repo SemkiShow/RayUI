@@ -5,6 +5,12 @@
 #include "Api.hpp"
 #include "Widgets/Containers/Windows/RWindow.hpp"
 
+bool RWindow::PollEvents()
+{
+    if (PollCentralWidgetEvents()) return true;
+    return RWidget::PollEvents();
+}
+
 void RWindow::Update()
 {
     if (updateBounds)

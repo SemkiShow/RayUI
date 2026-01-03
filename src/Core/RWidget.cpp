@@ -4,6 +4,8 @@
 
 #include "Core/RWidget.hpp"
 
+bool RWidget::PollEvents() { return false; }
+
 void RWidget::Update()
 {
     if (updateBounds)

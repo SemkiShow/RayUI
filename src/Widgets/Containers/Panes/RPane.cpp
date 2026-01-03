@@ -5,6 +5,12 @@
 #include "Api.hpp"
 #include "Widgets/Containers/Panes/RPane.hpp"
 
+bool RPane::PollEvents()
+{
+    if (PollLayoutEvents()) return true;
+    return RWidget::PollEvents();
+}
+
 void RPane::Update()
 {
     if (updateBounds)

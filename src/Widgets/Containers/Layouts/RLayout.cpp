@@ -4,6 +4,12 @@
 
 #include "Widgets/Containers/Layouts/RLayout.hpp"
 
+bool RLayout::PollEvents()
+{
+    if (PollWidgetsEvents()) return true;
+    return RWidget::PollEvents();
+}
+
 void RLayout::Update()
 {
     if (updateBounds)

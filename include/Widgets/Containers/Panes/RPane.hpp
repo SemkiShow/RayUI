@@ -14,6 +14,7 @@ class RPane : public RWidget
     RPane(RColor color = {127, 127, 127, 127}) : color(color) {}
     virtual ~RPane() = default;
 
+    bool PollEvents() override;
     void Update() override;
     void Draw() override;
 
@@ -26,6 +27,15 @@ class RPane : public RWidget
   protected:
     RColor color;
     std::shared_ptr<RLayout> layout;
+
+    bool PollLayoutEvents()
+    {
+        if (layout && layout->IsVisible())
+        {
+            if (layout->PollEvents()) return true;
+        }
+        return false;
+    }
 
     void DrawLayout()
     {
