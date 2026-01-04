@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "Widgets/Containers/Panes/RPane.hpp"
+#include "Widgets/Panes/RPane.hpp"
 
 class RPaneRounded : public RPane
 {

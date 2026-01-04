@@ -2,41 +2,41 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include "Widgets/Containers/Layouts/RHBoxLayout.hpp"
+#include "Widgets/Layouts/RVBoxLayout.hpp"
 
-void RHBoxLayout::Update()
+void RVBoxLayout::Update()
 {
     if (updateBounds)
     {
         updateBounds = false;
 
-        float fixedWidth = 0;
+        float fixedHeight = 0;
         for (auto& widget: widgets)
         {
             if (widget->GetMaxHeight() >= 0 && widget->IsVisible())
-                fixedWidth += widget->GetMaxWidth();
+                fixedHeight += widget->GetMaxHeight();
         }
-        float maxHeight = GetHeight() - 2 * margin;
-        float dynamicWidth = GetHeight() - 2 * margin - widgets.size() * padding - fixedWidth;
-        float posX = GetPositionX() + margin;
+        float maxWidth = GetWidth() - 2 * margin;
+        float dynamicHeight = GetHeight() - 2 * margin - widgets.size() * padding - fixedHeight;
+        float posY = GetPositionY() + margin;
         for (auto& widget: widgets)
         {
             if (!widget->IsVisible()) continue;
 
-            if (widget->GetMaxWidth() < 0)
+            if (widget->GetMaxHeight() < 0)
             {
-                widget->SetWidth(dynamicWidth);
+                widget->SetHeight(dynamicHeight);
             }
             else
             {
-                widget->SetWidth(widget->GetMaxWidth());
+                widget->SetHeight(widget->GetMaxHeight());
             }
-            widget->SetHeight(maxHeight);
+            widget->SetWidth(maxWidth);
             widget->SetBounds(
                 ClampBounds(widget->GetBounds(), widget->GetMinSize(), widget->GetMaxSize()));
-            widget->SetPositionX(posX);
-            widget->SetPositionY(GetPositionY() + margin);
-            posX += widget->GetWidth() + padding;
+            widget->SetPositionX(GetPositionX() + margin);
+            widget->SetPositionY(posY);
+            posY += widget->GetHeight() + padding;
         }
 
         for (auto& widget: widgets)

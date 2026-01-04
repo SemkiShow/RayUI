@@ -5,7 +5,7 @@
 #pragma once
 
 #include "Core/RWidget.hpp"
-#include "Widgets/Containers/Layouts/RLayout.hpp"
+#include "Widgets/Layouts/RLayout.hpp"
 #include <memory>
 
 class RPane : public RWidget

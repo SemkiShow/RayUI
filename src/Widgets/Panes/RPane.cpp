@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: MIT
 
 #include "Api.hpp"
-#include "Widgets/Containers/Panes/RPane.hpp"
+#include "Widgets/Panes/RPane.hpp"
 
 bool RPane::PollEvents()
 {

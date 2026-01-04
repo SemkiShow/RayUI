@@ -12,30 +12,30 @@
 #include "Core/RApplication.hpp" // IWYU pragma: export
 #include "Core/RWidget.hpp"      // IWYU pragma: export
 
-// Widgets/Containers/Layouts
-#include "Widgets/Containers/Layouts/RHBoxLayout.hpp" // IWYU pragma: export
-#include "Widgets/Containers/Layouts/RLayout.hpp"     // IWYU pragma: export
-#include "Widgets/Containers/Layouts/RVBoxLayout.hpp" // IWYU pragma: export
+// Widgets/Layouts
+#include "Widgets/Layouts/RHBoxLayout.hpp" // IWYU pragma: export
+#include "Widgets/Layouts/RLayout.hpp"     // IWYU pragma: export
+#include "Widgets/Layouts/RVBoxLayout.hpp" // IWYU pragma: export
 
-// Widgets/Containers/Panes
-#include "Widgets/Containers/Panes/RPane.hpp"        // IWYU pragma: export
-#include "Widgets/Containers/Panes/RPaneRounded.hpp" // IWYU pragma: export
+// Widgets/Panes
+#include "Widgets/Panes/RPane.hpp"        // IWYU pragma: export
+#include "Widgets/Panes/RPaneRounded.hpp" // IWYU pragma: export
 
-// Widgets/Containers/Windows
-#include "Widgets/Containers/Windows/RWindow.hpp" // IWYU pragma: export
+// Widgets/Windows
+#include "Widgets/Windows/RWindow.hpp" // IWYU pragma: export
 
-// Widgets/Containers/ScrollAreas
+// Widgets/ScrollAreas
 
-// Widgets/Controls/Buttons
+// Widgets/Buttons
 
-// Widgets/Controls/Sliders
+// Widgets/Sliders
 
-// Widgets/Input/Dropdowns
+// Widgets/Dropdowns
 
-// Widgets/Input/Textboxes
+// Widgets/Textboxes
 
-// Widgets/Input/ColorPickers
+// Widgets/ColorPickers
 
-// Widgets/Views/Labels
+// Widgets/Labels
 
-// Widgets/Views/Separators
+// Widgets/Separators

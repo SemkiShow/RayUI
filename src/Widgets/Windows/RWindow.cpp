@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: MIT
 
 #include "Api.hpp"
-#include "Widgets/Containers/Windows/RWindow.hpp"
+#include "Widgets/Windows/RWindow.hpp"
 
 bool RWindow::PollEvents()
 {

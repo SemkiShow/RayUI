@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "Widgets/Containers/Windows/RWindow.hpp"
+#include "Widgets/Windows/RWindow.hpp"
 #include <memory>
 #include <vector>
 
@@ -21,6 +21,6 @@ class RApplication
     bool updateBounds = true;
     std::vector<std::shared_ptr<RWindow>> windows;
     RVector2 lastWindowSize{-1, -1};
-    
+
     virtual bool PollEvents();
 };
