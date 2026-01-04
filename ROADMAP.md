@@ -7,11 +7,11 @@
   - [ ] RPopupWindow
   - [ ] ROkCancelWindow
 - [x] RWidget
-  - [ ] RBaseButton
-    - [ ] RButton
+  - [ ] RButton
+    - [ ] RLabelButton
     - [ ] RImageButton
-  - [ ] RBaseSlider
-    - [ ] RSlider
+  - [ ] RSlider
+    - [ ] RLabelSlider
     - [ ] RRectangleSlider
   - [ ] RLabel
     - [ ] RLinkLabel
@@ -20,7 +20,7 @@
     - [ ] RNumberTextbox
   - [ ] RDropdown
   - [ ] RColorPicker
-  - [ ] RBar
+  - [x] RBar
   - [ ] RScrollArea
   - [x] RLayout
     - [x] RVBoxLayout

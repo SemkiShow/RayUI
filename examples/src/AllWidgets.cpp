@@ -36,6 +36,9 @@ class MainWindow : public RWindow
                     [rec]() { std::cout << "Mouse clicked on " << rec->GetColor() << '\n'; });
         }
         layout->AddWidget(colorLayout);
+
+        auto bar = std::make_shared<RBar>();
+        layout->AddWidget(bar);
     }
 };
 
