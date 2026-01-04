@@ -5,57 +5,84 @@
 #include "Widgets/Layouts/RVBoxLayout.hpp"
 #include <cmath>
 
-void RVBoxLayout::Update()
+void RVBoxLayout::ShrinkToContent()
 {
-    if (updateBounds)
+    int visibleCount = 0;
+    float maxWidth = 0, totalHeight = 0;
+    for (auto& widget: widgets)
     {
-        updateBounds = false;
-
-        float fixedHeight = 0;
-        int visibleCount = 0, dynamicCount = 0;
-        for (auto& widget: widgets)
+        if (widget->IsVisible())
         {
-            if (widget->IsVisible())
-            {
-                if (widget->GetMaxHeight() < 0)
-                    dynamicCount++;
-                else
-                    fixedHeight += widget->GetMaxHeight();
-                visibleCount++;
-            }
-        }
-
-        if (visibleCount == 0) return;
-
-        float maxWidth = GetWidth() - 2 * margin;
-        float dynamicHeight = GetHeight() - 2 * margin - (visibleCount - 1) * padding - fixedHeight;
-        dynamicHeight = fmax(0, dynamicHeight);
-        if (dynamicCount > 0) dynamicHeight /= dynamicCount;
-        float posY = GetPositionY() + margin;
-        for (auto& widget: widgets)
-        {
-            if (!widget->IsVisible()) continue;
-
-            if (widget->GetMaxHeight() < 0)
-            {
-                widget->SetHeight(dynamicHeight);
-            }
-            else
-            {
-                widget->SetHeight(widget->GetMaxHeight());
-            }
-            widget->SetWidth(maxWidth);
-            widget->SetBounds(
-                ClampBounds(widget->GetBounds(), widget->GetMinSize(), widget->GetMaxSize()));
-            widget->SetPositionX(GetPositionX() + margin);
-            widget->SetPositionY(posY);
-            posY += widget->GetHeight() + padding;
-        }
-
-        for (auto& widget: widgets)
-        {
-            if (widget->IsVisible()) widget->UpdateBounds();
+            widget->ShrinkToContent();
+            visibleCount++;
+            maxWidth = fmax(maxWidth, widget->GetWidth());
+            totalHeight += widget->GetHeight() + padding;
         }
     }
+    totalHeight -= padding;
+
+    SetWidgetPositions();
+
+    RVector2 newSize{maxWidth, 2 * margin};
+    if (visibleCount > 0) newSize.y += totalHeight;
+    SetSize(newSize);
+}
+
+void RVBoxLayout::Update()
+{
+    if (!updateBounds)
+    {
+        RLayout::UpdateWidgets();
+        return;
+    }
+
+    updateBounds = false;
+
+    float fixedHeight = 0;
+    int visibleCount = 0, dynamicCount = 0;
+    for (auto& widget: widgets)
+    {
+        if (widget->IsVisible())
+        {
+            if (widget->GetMaxHeight() < 0)
+                dynamicCount++;
+            else
+                fixedHeight += widget->GetMaxHeight();
+            visibleCount++;
+        }
+    }
+
+    if (visibleCount == 0) return;
+
+    float maxWidth = GetWidth() - 2 * margin;
+    float dynamicHeight = GetHeight() - 2 * margin - (visibleCount - 1) * padding - fixedHeight;
+    dynamicHeight = fmax(0, dynamicHeight);
+    if (dynamicCount > 0) dynamicHeight /= dynamicCount;
+    for (auto& widget: widgets)
+    {
+        if (!widget->IsVisible()) continue;
+
+        if (widget->GetMaxHeight() < 0)
+        {
+            widget->SetHeight(dynamicHeight);
+        }
+        else
+        {
+            widget->SetHeight(widget->GetMaxHeight());
+        }
+        widget->SetWidth(maxWidth);
+        widget->SetBounds(
+            ClampBounds(widget->GetBounds(), widget->GetMinSize(), widget->GetMaxSize()));
+    }
+
+    SetWidgetPositions();
+
+    for (auto& widget: widgets)
+    {
+        if (widget->IsVisible()) widget->UpdateBounds();
+    }
+
     RLayout::UpdateWidgets();
+
+    ShrinkToContent();
 }

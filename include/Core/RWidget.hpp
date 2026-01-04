@@ -13,6 +13,7 @@ class RWidget
 
     virtual void ResetEvents();
     virtual bool PollEvents();
+    virtual void ShrinkToContent() {}
     virtual void Update();
     virtual void Draw() {}
 
