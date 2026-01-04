@@ -29,5 +29,5 @@
 - [ ] raygui icons
 - [x] Functions for native popups
 - [ ] Menu bar
-- [ ] Alignment flags
+- [x] Alignment flags
 - [x] Events handling

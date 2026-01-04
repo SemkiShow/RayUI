@@ -23,10 +23,29 @@ class MainWindow : public RWindow
         pane->SetLayout(layout);
 
         auto colorLayout = std::make_shared<RHBoxLayout>();
+        colorLayout->SetAlignment(RAlign::Left);
+        layout->AddWidget(colorLayout);
+
+        auto bar = std::make_shared<RBar>();
+        bar->SetAlignment(RAlign::VCenter);
+        layout->AddWidget(bar);
+
         auto colorLayout2 = std::make_shared<RHBoxLayout>();
+        colorLayout2->SetAlignment(RAlign::HCenter);
+        layout->AddWidget(colorLayout2);
+
+        auto bar2 = std::make_shared<RBar>();
+        bar2->SetAlignment(RAlign::Bottom);
+        layout->AddWidget(bar2);
+
+        auto colorLayout3 = std::make_shared<RHBoxLayout>();
+        colorLayout3->SetAlignment(RAlign::Right);
+        layout->AddWidget(colorLayout3);
+
         RColor colors[] = {{255, 0, 0},     {0, 255, 0},   {0, 0, 255},
                            {255, 255, 0},   {255, 0, 255}, {0, 255, 255},
                            {255, 255, 255}, {0, 0, 0},     {127, 127, 127}};
+
         for (auto& color: colors)
         {
             auto rec = std::make_shared<RPane>(color);
@@ -36,19 +55,19 @@ class MainWindow : public RWindow
 
             auto rec2 = std::make_shared<RPane>(*rec);
             colorLayout2->AddWidget(rec2);
-            
+
+            auto rec3 = std::make_shared<RPane>(*rec);
+            colorLayout3->AddWidget(rec3);
+
             Connect([rec]() { return rec->IsMouseLeftPressed(); },
                     [rec]() { std::cout << "Mouse clicked on " << rec->GetColor() << '\n'; });
-            
+
             Connect([rec2]() { return rec2->IsMouseLeftPressed(); },
                     [rec2]() { std::cout << "Mouse clicked on " << rec2->GetColor() << '\n'; });
+
+            Connect([rec3]() { return rec3->IsMouseLeftPressed(); },
+                    [rec3]() { std::cout << "Mouse clicked on " << rec3->GetColor() << '\n'; });
         }
-        layout->AddWidget(colorLayout);
-
-        auto bar = std::make_shared<RBar>();
-        layout->AddWidget(bar);
-
-        layout->AddWidget(colorLayout2);
     }
 };
 

@@ -6,6 +6,16 @@
 
 #include "Utils.hpp"
 
+enum class RAlign
+{
+    Left,
+    HCenter,
+    Right,
+    Top,
+    VCenter,
+    Bottom
+};
+
 class RWidget
 {
   public:
@@ -59,6 +69,15 @@ class RWidget
 
     bool IsVisible() { return visible; }
 
+    void SetAlignment(RAlign flag)
+    {
+        if (flag == RAlign::Left || flag == RAlign::HCenter || flag == RAlign::Right) alignH = flag;
+        if (flag == RAlign::Top || flag == RAlign::VCenter || flag == RAlign::Bottom) alignV = flag;
+    }
+
+    RAlign GetAlignH() { return alignH; }
+    RAlign GetAlignV() { return alignV; }
+
     bool IsMouseHovered() { return isMouseHovered; }
     bool IsMouseLeftDown() { return isMouseLeftDown; }
     bool IsMouseLeftPressed() { return isMouseLeftPressed; }
@@ -73,6 +92,7 @@ class RWidget
     RVector2 minSize{10, 10};
     RVector2 maxSize{-1, -1};
     bool visible = true;
+    RAlign alignH = RAlign::Left, alignV = RAlign::Top;
 
   private:
     bool isMouseHovered = false, isMouseLeftDown = false, isMouseLeftPressed = false,

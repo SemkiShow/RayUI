@@ -15,20 +15,55 @@ void RHBoxLayout::ShrinkToContent()
         {
             widget->ShrinkToContent();
             visibleCount++;
-            maxHeight = fmax(maxHeight, widget->GetWidth());
-            totalWidth += widget->GetHeight() + padding;
+            maxHeight = std::max(maxHeight, widget->GetHeight());
+            totalWidth += widget->GetWidth() + padding;
         }
     }
     totalWidth -= padding;
 
-    float posX = GetPositionX() + margin;
+    float posX = GetPositionX() + margin, widthLeft = totalWidth;
     for (auto& widget: widgets)
     {
+        float delta = widget->GetWidth() + padding;
+        switch (widget->GetAlignH())
+        {
+        case RAlign::Left:
+            break;
+        case RAlign::HCenter:
+            posX =
+                std::max(posX, GetPositionX() + margin + (GetWidth() - 2 * margin - widthLeft) / 2);
+            break;
+        case RAlign::Right:
+            posX = std::max(posX, GetPositionX() + margin + (GetWidth() - 2 * margin - widthLeft));
+            break;
+        default:
+            throw std::runtime_error("Invalid alignH set!");
+            break;
+        }
         widget->SetPositionX(posX);
-        widget->SetPositionY(GetPositionY() + margin);
+        posX += delta;
+        widthLeft -= delta;
+
+        switch (widget->GetAlignV())
+        {
+        case RAlign::Top:
+            widget->SetPositionY(GetPositionY() + margin);
+            break;
+        case RAlign::VCenter:
+            widget->SetPositionY(GetPositionY() + margin +
+                                 (GetHeight() - 2 * margin - widget->GetHeight()) / 2);
+            break;
+        case RAlign::Bottom:
+            widget->SetPositionY(GetPositionY() + margin +
+                                 (GetHeight() - 2 * margin - widget->GetHeight()));
+            break;
+        default:
+            throw std::runtime_error("Invalid alignV set!");
+            break;
+        }
+
         widget->UpdateBounds();
         widget->Update();
-        posX += widget->GetWidth() + padding;
     }
 
     RVector2 newSize{2 * margin, maxHeight + 2 * margin};

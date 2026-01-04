@@ -15,20 +15,56 @@ void RVBoxLayout::ShrinkToContent()
         {
             widget->ShrinkToContent();
             visibleCount++;
-            maxWidth = fmax(maxWidth, widget->GetWidth());
+            maxWidth = std::max(maxWidth, widget->GetWidth());
             totalHeight += widget->GetHeight() + padding;
         }
     }
     totalHeight -= padding;
 
-    float posY = GetPositionY() + margin;
+    float posY = GetPositionY() + margin, heightLeft = totalHeight;
     for (auto& widget: widgets)
     {
-        widget->SetPositionX(GetPositionX() + margin);
+        switch (widget->GetAlignH())
+        {
+        case RAlign::Left:
+            widget->SetPositionX(GetPositionX() + margin);
+            break;
+        case RAlign::HCenter:
+            widget->SetPositionX(GetPositionX() + margin +
+                                 (GetWidth() - 2 * margin - widget->GetWidth()) / 2);
+            break;
+        case RAlign::Right:
+            widget->SetPositionX(GetPositionX() + margin +
+                                 (GetWidth() - 2 * margin - widget->GetWidth()));
+            break;
+        default:
+            throw std::runtime_error("Invalid alignH set!");
+            break;
+        }
+
+        float delta = widget->GetHeight() + padding;
+        switch (widget->GetAlignV())
+        {
+        case RAlign::Top:
+            break;
+        case RAlign::VCenter:
+            posY = std::max(posY,
+                            GetPositionY() + margin + (GetHeight() - 2 * margin - heightLeft) / 2);
+            break;
+        case RAlign::Bottom:
+            posY =
+                std::max(posY, GetPositionY() + margin + (GetHeight() - 2 * margin - heightLeft));
+            break;
+        default:
+            throw std::runtime_error("Invalid alignV set!");
+            break;
+        }
         widget->SetPositionY(posY);
+        posY += delta;
+        heightLeft -= delta;
+
         widget->UpdateBounds();
         widget->Update();
-        posY += widget->GetHeight() + padding;
     }
 
     RVector2 newSize{maxWidth, 2 * margin};

@@ -30,12 +30,15 @@ void RApplication::Update()
         }
     }
 
+    for (auto& window: windows)
+    {
+        window->ResetEvents();
+    }
     PollEvents();
 
     for (auto& window: windows)
     {
         if (window->IsVisible()) window->Update();
-        window->ResetEvents();
     }
 }
 
