@@ -29,12 +29,14 @@ void RApplication::Update()
             if (window->IsVisible()) window->UpdateBounds();
         }
     }
+
+    PollEvents();
+
     for (auto& window: windows)
     {
         if (window->IsVisible()) window->Update();
+        window->ResetEvents();
     }
-
-    PollEvents();
 }
 
 void RApplication::Draw()

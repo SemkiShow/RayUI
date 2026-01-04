@@ -13,6 +13,7 @@ class RLayout : public RWidget
   public:
     virtual ~RLayout() = default;
 
+    void ResetEvents() override;
     bool PollEvents() override;
     void Update() override;
     void Draw() override;

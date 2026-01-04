@@ -11,6 +11,7 @@ class RWidget
   public:
     virtual ~RWidget() = default;
 
+    virtual void ResetEvents();
     virtual bool PollEvents();
     virtual void Update();
     virtual void Draw() {}
@@ -57,10 +58,23 @@ class RWidget
 
     bool IsVisible() { return visible; }
 
+    bool IsMouseHovered() { return isMouseHovered; }
+    bool IsMouseLeftDown() { return isMouseLeftDown; }
+    bool IsMouseLeftPressed() { return isMouseLeftPressed; }
+    bool IsMouseLeftReleased() { return isMouseLeftReleased; }
+    bool IsMouseRightDown() { return isMouseRightDown; }
+    bool IsMouseRightPressed() { return isMouseRightPressed; }
+    bool IsMouseRightReleased() { return isMouseRightReleased; }
+
   protected:
     bool updateBounds = false;
     RRectangle bounds{0, 0, -1, -1};
     RVector2 minSize{10, 10};
     RVector2 maxSize{-1, -1};
     bool visible = true;
+
+  private:
+    bool isMouseHovered = false, isMouseLeftDown = false, isMouseLeftPressed = false,
+         isMouseLeftReleased = false, isMouseRightDown = false, isMouseRightPressed = false,
+         isMouseRightReleased = false;
 };

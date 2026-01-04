@@ -10,22 +10,32 @@
 Vector2 windowSize{16 * 50, 9 * 50};
 std::shared_ptr<RApplication> app;
 
-class CustomPane : public RPane
+class MainWindow : public RWindow
 {
   public:
-    using RPane::RPane;
-    virtual ~CustomPane() = default;
-
-    bool PollEvents() override
+    MainWindow()
     {
-        if (PollLayoutEvents()) return true;
-        if (bounds.IsInside(rui::GetMousePosition()) &&
-            rui::IsMouseButtonReleased(rui::MouseButton::Left))
+        auto pane = std::make_shared<RPaneRounded>();
+        pane->SetMinSize({100, 100});
+        SetCentralWidget(pane);
+
+        auto layout = std::make_shared<RVBoxLayout>();
+        pane->SetLayout(layout);
+
+        auto colorLayout = std::make_shared<RHBoxLayout>();
+        RColor colors[] = {{255, 0, 0},     {0, 255, 0},   {0, 0, 255},
+                           {255, 255, 0},   {255, 0, 255}, {0, 255, 255},
+                           {255, 255, 255}, {0, 0, 0},     {127, 127, 127}};
+        for (auto& color: colors)
         {
-            std::cout << "Mouse clicked on " << color << '\n';
-            return true;
+            auto rec = std::make_shared<RPane>(color);
+            if (color == RColor{127, 127, 127}) rec->SetVisible(false);
+            rec->SetMaxSize({25, 25});
+            colorLayout->AddWidget(rec);
+            Connect([rec]() { return rec->IsMouseLeftPressed(); },
+                    [rec]() { std::cout << "Mouse clicked on " << rec->GetColor() << '\n'; });
         }
-        return RWidget::PollEvents();
+        layout->AddWidget(colorLayout);
     }
 };
 
@@ -33,29 +43,8 @@ void InitUI()
 {
     app = std::make_shared<RApplication>();
 
-    auto window = std::make_shared<RWindow>();
-
-    auto pane = std::make_shared<RPaneRounded>();
-    pane->SetMinSize({100, 100});
-
-    auto layout = std::make_shared<RVBoxLayout>();
-    pane->SetLayout(layout);
-
-    auto colorLayout = std::make_shared<RHBoxLayout>();
-    RColor colors[] = {{255, 0, 0},   {0, 255, 0},     {0, 0, 255}, {255, 255, 0},  {255, 0, 255},
-                       {0, 255, 255}, {255, 255, 255}, {0, 0, 0},   {127, 127, 127}};
-    for (auto& color: colors)
-    {
-        auto rec = std::make_shared<CustomPane>(color);
-        if (color == RColor{127, 127, 127}) rec->SetVisible(false);
-        rec->SetMaxSize({25, 25});
-        colorLayout->AddWidget(rec);
-    }
-    layout->AddWidget(colorLayout);
-
-    window->SetCentralWidget(pane);
-
-    app->AddWindow(window);
+    auto mainWindow = std::make_shared<MainWindow>();
+    app->AddWindow(mainWindow);
 }
 
 void DrawFrame()

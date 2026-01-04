@@ -5,6 +5,12 @@
 #include "Api.hpp"
 #include "Widgets/Panes/RPane.hpp"
 
+void RPane::ResetEvents()
+{
+    if (layout) layout->ResetEvents();
+    RWidget::ResetEvents();
+}
+
 bool RPane::PollEvents()
 {
     if (PollLayoutEvents()) return true;

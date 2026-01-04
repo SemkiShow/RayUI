@@ -5,6 +5,12 @@
 #include "Api.hpp"
 #include "Widgets/Windows/RWindow.hpp"
 
+void RWindow::ResetEvents()
+{
+    if (centralWidget) centralWidget->ResetEvents();
+    RWidget::ResetEvents();
+}
+
 bool RWindow::PollEvents()
 {
     if (PollCentralWidgetEvents()) return true;
@@ -30,6 +36,11 @@ void RWindow::Update()
         }
     }
     if (centralWidget && centralWidget->IsVisible()) centralWidget->Update();
+
+    for (auto& [event, func]: events)
+    {
+        if (event()) func();
+    }
 }
 
 void RWindow::Draw() { DrawCentralWidget(); }

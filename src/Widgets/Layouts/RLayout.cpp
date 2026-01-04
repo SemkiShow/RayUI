@@ -4,6 +4,13 @@
 
 #include "Widgets/Layouts/RLayout.hpp"
 
+void RLayout::ResetEvents()
+{
+    for (auto& widget: widgets)
+        widget->ResetEvents();
+    RWidget::ResetEvents();
+}
+
 bool RLayout::PollEvents()
 {
     if (PollWidgetsEvents()) return true;

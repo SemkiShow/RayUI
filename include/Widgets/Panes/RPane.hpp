@@ -14,6 +14,7 @@ class RPane : public RWidget
     RPane(RColor color = {127, 127, 127, 127}) : color(color) {}
     virtual ~RPane() = default;
 
+    void ResetEvents() override;
     bool PollEvents() override;
     void Update() override;
     void Draw() override;
