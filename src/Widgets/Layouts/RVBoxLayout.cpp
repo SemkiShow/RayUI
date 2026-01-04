@@ -21,7 +21,15 @@ void RVBoxLayout::ShrinkToContent()
     }
     totalHeight -= padding;
 
-    SetWidgetPositions();
+    float posY = GetPositionY() + margin;
+    for (auto& widget: widgets)
+    {
+        widget->SetPositionX(GetPositionX() + margin);
+        widget->SetPositionY(posY);
+        widget->UpdateBounds();
+        widget->Update();
+        posY += widget->GetHeight() + padding;
+    }
 
     RVector2 newSize{maxWidth, 2 * margin};
     if (visibleCount > 0) newSize.y += totalHeight;
@@ -74,8 +82,6 @@ void RVBoxLayout::Update()
         widget->SetBounds(
             ClampBounds(widget->GetBounds(), widget->GetMinSize(), widget->GetMaxSize()));
     }
-
-    SetWidgetPositions();
 
     for (auto& widget: widgets)
     {

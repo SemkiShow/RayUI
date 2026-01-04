@@ -13,18 +13,4 @@ class RVBoxLayout : public RLayout
 
     void ShrinkToContent() override;
     void Update() override;
-
-  protected:
-    void SetWidgetPositions()
-    {
-        float posY = GetPositionY() + margin;
-        for (auto& widget: widgets)
-        {
-            widget->SetPositionX(GetPositionX() + margin);
-            widget->SetPositionY(posY);
-            widget->UpdateBounds();
-            widget->Update();
-            posY += widget->GetHeight() + padding;
-        }
-    }
 };

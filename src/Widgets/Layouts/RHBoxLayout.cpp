@@ -21,7 +21,15 @@ void RHBoxLayout::ShrinkToContent()
     }
     totalWidth -= padding;
 
-    SetWidgetPositions();
+    float posX = GetPositionX() + margin;
+    for (auto& widget: widgets)
+    {
+        widget->SetPositionX(posX);
+        widget->SetPositionY(GetPositionY() + margin);
+        widget->UpdateBounds();
+        widget->Update();
+        posX += widget->GetWidth() + padding;
+    }
 
     RVector2 newSize{2 * margin, maxHeight + 2 * margin};
     if (visibleCount > 0) newSize.x += totalWidth;
@@ -74,8 +82,6 @@ void RHBoxLayout::Update()
         widget->SetBounds(
             ClampBounds(widget->GetBounds(), widget->GetMinSize(), widget->GetMaxSize()));
     }
-
-    SetWidgetPositions();
 
     for (auto& widget: widgets)
     {
