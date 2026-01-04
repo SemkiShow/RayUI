@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: MIT
 
 #include "Widgets/Layouts/RVBoxLayout.hpp"
+#include <cmath>
 
 void RVBoxLayout::Update()
 {
@@ -11,13 +12,25 @@ void RVBoxLayout::Update()
         updateBounds = false;
 
         float fixedHeight = 0;
+        int visibleCount = 0, dynamicCount = 0;
         for (auto& widget: widgets)
         {
-            if (widget->GetMaxHeight() >= 0 && widget->IsVisible())
-                fixedHeight += widget->GetMaxHeight();
+            if (widget->IsVisible())
+            {
+                if (widget->GetMaxHeight() < 0)
+                    dynamicCount++;
+                else
+                    fixedHeight += widget->GetMaxHeight();
+                visibleCount++;
+            }
         }
+
+        if (visibleCount == 0) return;
+
         float maxWidth = GetWidth() - 2 * margin;
-        float dynamicHeight = GetHeight() - 2 * margin - widgets.size() * padding - fixedHeight;
+        float dynamicHeight = GetHeight() - 2 * margin - (visibleCount - 1) * padding - fixedHeight;
+        dynamicHeight = fmax(0, dynamicHeight);
+        if (dynamicCount > 0) dynamicHeight /= dynamicCount;
         float posY = GetPositionY() + margin;
         for (auto& widget: widgets)
         {

@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: MIT
 
 #include "Widgets/Layouts/RHBoxLayout.hpp"
+#include <cmath>
 
 void RHBoxLayout::Update()
 {
@@ -11,13 +12,25 @@ void RHBoxLayout::Update()
         updateBounds = false;
 
         float fixedWidth = 0;
+        int visibleCount = 0, dynamicCount = 0;
         for (auto& widget: widgets)
         {
-            if (widget->GetMaxHeight() >= 0 && widget->IsVisible())
-                fixedWidth += widget->GetMaxWidth();
+            if (widget->IsVisible())
+            {
+                if (widget->GetMaxWidth() < 0)
+                    dynamicCount++;
+                else
+                    fixedWidth += widget->GetMaxWidth();
+                visibleCount++;
+            }
         }
+
+        if (visibleCount == 0) return;
+
         float maxHeight = GetHeight() - 2 * margin;
-        float dynamicWidth = GetHeight() - 2 * margin - widgets.size() * padding - fixedWidth;
+        float dynamicWidth = GetHeight() - 2 * margin - (visibleCount - 1) * padding - fixedWidth;
+        dynamicWidth = fmax(0, dynamicWidth);
+        if (dynamicCount > 0) dynamicWidth /= dynamicCount;
         float posX = GetPositionX() + margin;
         for (auto& widget: widgets)
         {
