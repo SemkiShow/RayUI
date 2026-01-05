@@ -7,15 +7,13 @@
 
 void RHBoxLayout::ShrinkToContent()
 {
-    int visibleCount = 0;
     float maxHeight = 0, totalWidth = 0;
     for (auto& widget: widgets)
     {
         if (widget->IsVisible())
         {
             widget->ShrinkToContent();
-            visibleCount++;
-            maxHeight = std::max(maxHeight, widget->GetHeight());
+            maxHeight = std::max(maxHeight, widget->GetHeight() + 2 * margin);
             totalWidth += widget->GetWidth() + padding;
         }
     }
@@ -26,14 +24,31 @@ void RHBoxLayout::ShrinkToContent()
     for (auto& widget: widgets)
     {
         if (!widget->IsVisible()) continue;
+
         if (widget->GetAlignH() == RAlign::HCenter) foundFirstCenter = true;
         if (widget->GetAlignH() == RAlign::Right) break;
         if (!foundFirstCenter) continue;
+        
         centerWidth += widget->GetWidth() + padding;
     }
     centerWidth -= padding;
 
     float posX = GetPositionX() + margin, widthLeft = totalWidth;
+    switch (GetAlignH())
+    {
+    case RAlign::Left:
+        break;
+    case RAlign::HCenter:
+        posX += (GetWidth() - 2 * margin - totalWidth) / 2;
+        break;
+    case RAlign::Right:
+        posX += (GetWidth() - 2 * margin - totalWidth);
+        break;
+    default:
+        throw std::runtime_error("Invalid alignH set!");
+        break;
+    }
+
     for (auto& widget: widgets)
     {
         float delta = widget->GetWidth() + padding;
@@ -78,9 +93,7 @@ void RHBoxLayout::ShrinkToContent()
         widget->Update();
     }
 
-    RVector2 newSize{2 * margin, maxHeight + 2 * margin};
-    if (visibleCount > 0) newSize.x += posX - margin - padding - GetPositionX();
-    SetSize(newSize);
+    SetHeight(maxHeight + 2 * margin);
 }
 
 void RHBoxLayout::Update()
@@ -110,7 +123,7 @@ void RHBoxLayout::Update()
     if (visibleCount == 0) return;
 
     float maxHeight = GetHeight() - 2 * margin;
-    float dynamicWidth = GetHeight() - 2 * margin - (visibleCount - 1) * padding - fixedWidth;
+    float dynamicWidth = GetWidth() - 2 * margin - (visibleCount - 1) * padding - fixedWidth;
     dynamicWidth = fmax(0, dynamicWidth);
     if (dynamicCount > 0) dynamicWidth /= dynamicCount;
     for (auto& widget: widgets)

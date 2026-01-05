@@ -7,15 +7,13 @@
 
 void RVBoxLayout::ShrinkToContent()
 {
-    int visibleCount = 0;
     float maxWidth = 0, totalHeight = 0;
     for (auto& widget: widgets)
     {
         if (widget->IsVisible())
         {
             widget->ShrinkToContent();
-            visibleCount++;
-            maxWidth = std::max(maxWidth, widget->GetWidth());
+            maxWidth = std::max(maxWidth, widget->GetWidth() + 2 * margin);
             totalHeight += widget->GetHeight() + padding;
         }
     }
@@ -26,14 +24,31 @@ void RVBoxLayout::ShrinkToContent()
     for (auto& widget: widgets)
     {
         if (!widget->IsVisible()) continue;
+
         if (widget->GetAlignV() == RAlign::VCenter) foundFirstCenter = true;
         if (widget->GetAlignV() == RAlign::Bottom) break;
         if (!foundFirstCenter) continue;
+        
         centerHeight += widget->GetHeight() + padding;
     }
     centerHeight -= padding;
 
     float posY = GetPositionY() + margin, heightLeft = totalHeight;
+    switch (GetAlignV())
+    {
+    case RAlign::Top:
+        break;
+    case RAlign::VCenter:
+        posY += (GetHeight() - 2 * margin - totalHeight) / 2;
+        break;
+    case RAlign::Bottom:
+        posY += (GetHeight() - 2 * margin - totalHeight);
+        break;
+    default:
+        throw std::runtime_error("Invalid alignV set!");
+        break;
+    }
+
     for (auto& widget: widgets)
     {
         if (!widget->IsVisible()) continue;
@@ -81,9 +96,7 @@ void RVBoxLayout::ShrinkToContent()
         widget->Update();
     }
 
-    RVector2 newSize{maxWidth, 2 * margin};
-    if (visibleCount > 0) newSize.y += posY - margin - padding - GetPositionY();
-    SetSize(newSize);
+    SetWidth(maxWidth + 2 * margin);
 }
 
 void RVBoxLayout::Update()

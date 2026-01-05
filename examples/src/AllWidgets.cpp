@@ -51,7 +51,6 @@ class MainWindow : public RWindow
             auto rec = std::make_shared<RPane>(color);
             if (color == RColor{127, 127, 127}) rec->SetVisible(false);
             if (color == RColor{255, 255, 0}) rec->SetAlignment(RAlign::HCenter);
-            if (color == RColor{255, 255, 255}) rec->SetAlignment(RAlign::Right);
             rec->SetMaxSize({25, 25});
             colorLayout->AddWidget(rec);
 
