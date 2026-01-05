@@ -17,6 +17,14 @@ class RApplication
     void UpdateBounds() { updateBounds = true; }
     void AddWindow(std::shared_ptr<RWindow> window) { windows.push_back(window); }
 
+    void SetFont(std::shared_ptr<RFont> font)
+    {
+        for (auto& window: windows)
+        {
+            window->SetFont(font);
+        }
+    }
+
   protected:
     bool updateBounds = true;
     std::vector<std::shared_ptr<RWindow>> windows;

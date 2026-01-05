@@ -18,6 +18,8 @@ class RLayout : public RWidget
     void Update() override;
     void Draw() override;
 
+    void SetFont(std::shared_ptr<RFont> font) override;
+
     void SetPadding(float val) { padding = val; }
     void SetMargin(float val) { margin = val; }
     void AddWidget(std::shared_ptr<RWidget> widget) { widgets.push_back(widget); }

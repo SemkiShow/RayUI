@@ -13,9 +13,8 @@
   - [ ] RSlider
     - [ ] RLabelSlider
     - [ ] RRectangleSlider
-  - [ ] RLabel
+  - [x] RLabel
     - [ ] RLinkLabel
-    - [ ] RButtonLabel
   - [ ] RTextbox
     - [ ] RNumberTextbox
   - [ ] RDropdown
@@ -31,6 +30,6 @@
 - [ ] Menu bar
 - [x] Alignment flags
 - [x] Events handling
-- [ ] Custom fonts
+- [x] Custom fonts
 - [ ] Translations
 - [ ] Themes

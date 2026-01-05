@@ -26,6 +26,9 @@ class MainWindow : public RWindow
         colorLayout->SetAlignment(RAlign::Left);
         layout->AddWidget(colorLayout);
 
+        auto label = std::make_shared<RLabel>("label");
+        colorLayout->AddWidget(label);
+
         auto bar = std::make_shared<RBar>();
         bar->SetAlignment(RAlign::VCenter);
         layout->AddWidget(bar);
@@ -64,14 +67,14 @@ class MainWindow : public RWindow
             rec3->SetMaxHeight(rec3->GetMaxHeight() * 3);
             colorLayout3->AddWidget(rec3);
 
-            Connect([rec]() { return rec->IsMouseLeftPressed(); },
-                    [rec]() { std::cout << "Mouse clicked on " << rec->GetColor() << '\n'; });
+            Connect([rec]() { return rec->IsMouseLeftDown(); },
+                    [rec]() { std::cout << "Mouse down on " << rec->GetColor() << '\n'; });
 
             Connect([rec2]() { return rec2->IsMouseLeftPressed(); },
-                    [rec2]() { std::cout << "Mouse clicked on " << rec2->GetColor() << '\n'; });
+                    [rec2]() { std::cout << "Mouse pressed on " << rec2->GetColor() << '\n'; });
 
-            Connect([rec3]() { return rec3->IsMouseLeftPressed(); },
-                    [rec3]() { std::cout << "Mouse clicked on " << rec3->GetColor() << '\n'; });
+            Connect([rec3]() { return rec3->IsMouseLeftReleased(); },
+                    [rec3]() { std::cout << "Mouse released on " << rec3->GetColor() << '\n'; });
         }
     }
 };

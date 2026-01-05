@@ -36,3 +36,9 @@ void RPane::Draw()
     rui::DrawRectangle(bounds, color);
     DrawLayout();
 }
+
+void RPane::SetFont(std::shared_ptr<RFont> font)
+{
+    if (layout) layout->SetFont(font);
+    RWidget::SetFont(font);
+}

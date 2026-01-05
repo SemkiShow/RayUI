@@ -11,6 +11,6 @@ class RVBoxLayout : public RLayout
   public:
     virtual ~RVBoxLayout() = default;
 
-    void ShrinkToContent() override;
+    void Shrink() override;
     void Update() override;
 };

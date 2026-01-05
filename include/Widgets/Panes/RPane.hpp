@@ -19,6 +19,8 @@ class RPane : public RWidget
     void Update() override;
     void Draw() override;
 
+    void SetFont(std::shared_ptr<RFont> font) override;
+
     void SetColor(RColor col) { color = col; }
 
     RColor GetColor() { return color; }

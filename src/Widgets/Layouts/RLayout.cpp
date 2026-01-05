@@ -37,3 +37,12 @@ void RLayout::Draw()
         if (widget->IsVisible()) widget->Draw();
     }
 }
+
+void RLayout::SetFont(std::shared_ptr<RFont> font)
+{
+    for (auto& widget: widgets)
+    {
+        widget->SetFont(font);
+    }
+    RWidget::SetFont(font);
+}

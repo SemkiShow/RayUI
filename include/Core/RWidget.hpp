@@ -5,6 +5,7 @@
 #pragma once
 
 #include "Utils.hpp"
+#include <memory>
 
 enum class RAlign
 {
@@ -23,7 +24,7 @@ class RWidget
 
     virtual void ResetEvents();
     virtual bool PollEvents();
-    virtual void ShrinkToContent() {}
+    virtual void Shrink() {}
     virtual void Update();
     virtual void Draw() {}
 
@@ -78,6 +79,14 @@ class RWidget
     RAlign GetAlignH() { return alignH; }
     RAlign GetAlignV() { return alignV; }
 
+    virtual void SetFont(std::shared_ptr<RFont> ptr)
+    {
+        font = ptr;
+        UpdateBounds();
+    }
+
+    std::shared_ptr<RFont> GetFont() { return font; }
+
     bool IsMouseHovered() { return isMouseHovered; }
     bool IsMouseLeftDown() { return isMouseLeftDown; }
     bool IsMouseLeftPressed() { return isMouseLeftPressed; }
@@ -93,6 +102,7 @@ class RWidget
     RVector2 maxSize{-1, -1};
     bool visible = true;
     RAlign alignH = RAlign::Left, alignV = RAlign::Top;
+    std::shared_ptr<RFont> font;
 
   private:
     bool isMouseHovered = false, isMouseLeftDown = false, isMouseLeftPressed = false,

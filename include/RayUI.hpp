@@ -19,6 +19,7 @@
 // Widgets/Dropdowns
 
 // Widgets/Labels
+#include "Widgets/Labels/RLabel.hpp" // IWYU pragma: export
 
 // Widgets/Layouts
 #include "Widgets/Layouts/RHBoxLayout.hpp" // IWYU pragma: export

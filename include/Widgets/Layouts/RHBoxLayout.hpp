@@ -11,6 +11,6 @@ class RHBoxLayout : public RLayout
   public:
     virtual ~RHBoxLayout() = default;
 
-    void ShrinkToContent() override;
+    void Shrink() override;
     void Update() override;
 };

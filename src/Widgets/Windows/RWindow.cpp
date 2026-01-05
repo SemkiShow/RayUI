@@ -2,8 +2,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include "Api.hpp"
 #include "Widgets/Windows/RWindow.hpp"
+#include "Api.hpp"
 
 void RWindow::ResetEvents()
 {
@@ -44,3 +44,9 @@ void RWindow::Update()
 }
 
 void RWindow::Draw() { DrawCentralWidget(); }
+
+void RWindow::SetFont(std::shared_ptr<RFont> font)
+{
+    if (centralWidget) centralWidget->SetFont(font);
+    RWidget::SetFont(font);
+}

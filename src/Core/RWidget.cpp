@@ -2,8 +2,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include "Api.hpp"
 #include "Core/RWidget.hpp"
+#include "Api.hpp"
 
 void RWidget::ResetEvents()
 {
@@ -22,12 +22,12 @@ bool RWidget::PollEvents()
     if (!isInside) return false;
 
     isMouseHovered = isInside;
-    isMouseLeftDown = rui::IsMouseButtonDown(rui::MouseButton::Left);
-    isMouseLeftPressed = rui::IsMouseButtonPressed(rui::MouseButton::Left);
-    isMouseLeftReleased = rui::IsMouseButtonReleased(rui::MouseButton::Left);
-    isMouseRightDown = rui::IsMouseButtonDown(rui::MouseButton::Right);
-    isMouseRightPressed = rui::IsMouseButtonPressed(rui::MouseButton::Right);
-    isMouseRightReleased = rui::IsMouseButtonReleased(rui::MouseButton::Right);
+    isMouseLeftDown = rui::IsMouseButtonDown(RMouseButton::Left);
+    isMouseLeftPressed = rui::IsMouseButtonPressed(RMouseButton::Left);
+    isMouseLeftReleased = rui::IsMouseButtonReleased(RMouseButton::Left);
+    isMouseRightDown = rui::IsMouseButtonDown(RMouseButton::Right);
+    isMouseRightPressed = rui::IsMouseButtonPressed(RMouseButton::Right);
+    isMouseRightReleased = rui::IsMouseButtonReleased(RMouseButton::Right);
     return true;
 }
 
@@ -36,5 +36,6 @@ void RWidget::Update()
     if (updateBounds)
     {
         updateBounds = false;
+        Shrink();
     }
 }

@@ -18,6 +18,8 @@ class RWindow : public RWidget
     void Update() override;
     void Draw() override;
 
+    void SetFont(std::shared_ptr<RFont> font) override;
+
     void SetMargin(float val) { margin = val; }
     void SetCentralWidget(std::shared_ptr<RWidget> widget) { centralWidget = widget; }
 

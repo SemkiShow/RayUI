@@ -5,14 +5,14 @@
 #include "Widgets/Layouts/RHBoxLayout.hpp"
 #include <cmath>
 
-void RHBoxLayout::ShrinkToContent()
+void RHBoxLayout::Shrink()
 {
     float maxHeight = 0, totalWidth = 0;
     for (auto& widget: widgets)
     {
         if (widget->IsVisible())
         {
-            widget->ShrinkToContent();
+            widget->Shrink();
             maxHeight = std::max(maxHeight, widget->GetHeight() + 2 * margin);
             totalWidth += widget->GetWidth() + padding;
         }
@@ -28,7 +28,7 @@ void RHBoxLayout::ShrinkToContent()
         if (widget->GetAlignH() == RAlign::HCenter) foundFirstCenter = true;
         if (widget->GetAlignH() == RAlign::Right) break;
         if (!foundFirstCenter) continue;
-        
+
         centerWidth += widget->GetWidth() + padding;
     }
     centerWidth -= padding;
@@ -150,5 +150,5 @@ void RHBoxLayout::Update()
 
     RLayout::UpdateWidgets();
 
-    ShrinkToContent();
+    Shrink();
 }

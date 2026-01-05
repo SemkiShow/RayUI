@@ -5,14 +5,14 @@
 #include "Widgets/Layouts/RVBoxLayout.hpp"
 #include <cmath>
 
-void RVBoxLayout::ShrinkToContent()
+void RVBoxLayout::Shrink()
 {
     float maxWidth = 0, totalHeight = 0;
     for (auto& widget: widgets)
     {
         if (widget->IsVisible())
         {
-            widget->ShrinkToContent();
+            widget->Shrink();
             maxWidth = std::max(maxWidth, widget->GetWidth() + 2 * margin);
             totalHeight += widget->GetHeight() + padding;
         }
@@ -28,7 +28,7 @@ void RVBoxLayout::ShrinkToContent()
         if (widget->GetAlignV() == RAlign::VCenter) foundFirstCenter = true;
         if (widget->GetAlignV() == RAlign::Bottom) break;
         if (!foundFirstCenter) continue;
-        
+
         centerHeight += widget->GetHeight() + padding;
     }
     centerHeight -= padding;
@@ -153,5 +153,5 @@ void RVBoxLayout::Update()
 
     RLayout::UpdateWidgets();
 
-    ShrinkToContent();
+    Shrink();
 }

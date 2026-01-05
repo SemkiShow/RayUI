@@ -46,6 +46,39 @@ struct RColor
     }
 };
 
+struct RTexture
+{
+    unsigned int id; // OpenGL texture id
+    int width;       // Texture base width
+    int height;      // Texture base height
+    int mipmaps;     // Mipmap levels, 1 by default
+    int format;      // Data format (PixelFormat type)
+};
+
+struct RFont
+{
+    typedef struct Rectangle Rectangle;
+    typedef struct GlyphInfo GlyphInfo;
+
+    int baseSize;      // Base size (default chars height)
+    int glyphCount;    // Number of glyph characters
+    int glyphPadding;  // Padding around the glyph characters
+    RTexture texture;  // Texture atlas containing the glyphs
+    Rectangle* recs;   // Rectangles in texture for the glyphs
+    GlyphInfo* glyphs; // Glyphs info data
+};
+
+enum class RMouseButton
+{
+    Left = 0,
+    Right = 1,
+    Middle = 2,
+    Side = 3,
+    Extra = 4,
+    Forward = 5,
+    Back = 6
+};
+
 float ClampWidth(float val, float min, float max);
 float ClampHeight(float val, float min, float max);
 RVector2 ClampSize(const RVector2& size, const RVector2& minSize, const RVector2& maxSize);
