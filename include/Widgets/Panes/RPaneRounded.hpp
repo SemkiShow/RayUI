@@ -10,21 +10,18 @@ class RPaneRounded : public RPane
 {
   public:
     using RPane::RPane;
-    RPaneRounded(float roundness = 0.1f, int segments = 16)
-        : roundness(roundness), segments(segments)
-    {
-    }
+    RPaneRounded(float radius = 20, int segments = 16) : radius(radius), segments(segments) {}
     virtual ~RPaneRounded() = default;
 
     void Draw() override;
 
-    void SetRoundness(float val) { roundness = val; }
+    void SetRadius(float val) { radius = val; }
     void SetSegments(int val) { segments = val; }
 
-    float GetRoundness() { return roundness; }
+    float GetRadius() { return radius; }
     int GetSegments() { return segments; }
 
   protected:
-    float roundness;
+    float radius;
     int segments;
 };
