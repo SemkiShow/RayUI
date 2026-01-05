@@ -31,3 +31,6 @@
 - [ ] Menu bar
 - [x] Alignment flags
 - [x] Events handling
+- [ ] Custom fonts
+- [ ] Translations
+- [ ] Themes

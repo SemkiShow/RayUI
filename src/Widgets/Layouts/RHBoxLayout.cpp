@@ -21,6 +21,18 @@ void RHBoxLayout::ShrinkToContent()
     }
     totalWidth -= padding;
 
+    bool foundFirstCenter = false;
+    float centerWidth = 0;
+    for (auto& widget: widgets)
+    {
+        if (!widget->IsVisible()) continue;
+        if (widget->GetAlignH() == RAlign::HCenter) foundFirstCenter = true;
+        if (widget->GetAlignH() == RAlign::Right) break;
+        if (!foundFirstCenter) continue;
+        centerWidth += widget->GetWidth() + padding;
+    }
+    centerWidth -= padding;
+
     float posX = GetPositionX() + margin, widthLeft = totalWidth;
     for (auto& widget: widgets)
     {
@@ -30,8 +42,8 @@ void RHBoxLayout::ShrinkToContent()
         case RAlign::Left:
             break;
         case RAlign::HCenter:
-            posX =
-                std::max(posX, GetPositionX() + margin + (GetWidth() - 2 * margin - widthLeft) / 2);
+            posX = std::max(posX,
+                            GetPositionX() + margin + (GetWidth() - 2 * margin - centerWidth) / 2);
             break;
         case RAlign::Right:
             posX = std::max(posX, GetPositionX() + margin + (GetWidth() - 2 * margin - widthLeft));
@@ -67,7 +79,7 @@ void RHBoxLayout::ShrinkToContent()
     }
 
     RVector2 newSize{2 * margin, maxHeight + 2 * margin};
-    if (visibleCount > 0) newSize.x += totalWidth;
+    if (visibleCount > 0) newSize.x += posX - margin - padding - GetPositionX();
     SetSize(newSize);
 }
 

@@ -21,9 +21,23 @@ void RVBoxLayout::ShrinkToContent()
     }
     totalHeight -= padding;
 
+    bool foundFirstCenter = false;
+    float centerHeight = 0;
+    for (auto& widget: widgets)
+    {
+        if (!widget->IsVisible()) continue;
+        if (widget->GetAlignV() == RAlign::VCenter) foundFirstCenter = true;
+        if (widget->GetAlignV() == RAlign::Bottom) break;
+        if (!foundFirstCenter) continue;
+        centerHeight += widget->GetHeight() + padding;
+    }
+    centerHeight -= padding;
+
     float posY = GetPositionY() + margin, heightLeft = totalHeight;
     for (auto& widget: widgets)
     {
+        if (!widget->IsVisible()) continue;
+
         switch (widget->GetAlignH())
         {
         case RAlign::Left:
@@ -48,8 +62,8 @@ void RVBoxLayout::ShrinkToContent()
         case RAlign::Top:
             break;
         case RAlign::VCenter:
-            posY = std::max(posY,
-                            GetPositionY() + margin + (GetHeight() - 2 * margin - heightLeft) / 2);
+            posY = std::max(posY, GetPositionY() + margin +
+                                      (GetHeight() - 2 * margin - centerHeight) / 2);
             break;
         case RAlign::Bottom:
             posY =
@@ -68,7 +82,7 @@ void RVBoxLayout::ShrinkToContent()
     }
 
     RVector2 newSize{maxWidth, 2 * margin};
-    if (visibleCount > 0) newSize.y += totalHeight;
+    if (visibleCount > 0) newSize.y += posY - margin - padding - GetPositionY();
     SetSize(newSize);
 }
 
