@@ -9,10 +9,9 @@
 class RBar : public RWidget
 {
   public:
-    RBar(float thickness = 1, RColor color = {127, 127, 127}) : thickness(thickness), color(color)
-    {
-        maxSize.y = thickness;
-    }
+    RBar() { Init(); }
+    RBar(float thickness) : thickness(thickness) { Init(); }
+    RBar(RColor tint) : RBar() { RWidget::SetTint(tint); }
     ~RBar() = default;
 
     void Draw() override;
@@ -22,6 +21,7 @@ class RBar : public RWidget
     float GetThickness() { return thickness; }
 
   protected:
-    float thickness;
-    RColor color;
+    float thickness = 1;
+
+    void Init() { maxSize.y = thickness; }
 };

@@ -46,3 +46,12 @@ void RLayout::SetFont(std::shared_ptr<RFont> font)
     }
     RWidget::SetFont(font);
 }
+
+void RLayout::SetTheme(std::shared_ptr<RTheme> theme)
+{
+    for (auto& widget: widgets)
+    {
+        widget->SetTheme(theme);
+    }
+    RWidget::SetTheme(theme);
+}

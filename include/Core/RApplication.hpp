@@ -11,19 +11,18 @@
 class RApplication
 {
   public:
+    virtual ~RApplication() = default;
+
     virtual void Update();
     virtual void Draw();
 
     void UpdateBounds() { updateBounds = true; }
+
     void AddWindow(std::shared_ptr<RWindow> window) { windows.push_back(window); }
 
-    void SetFont(std::shared_ptr<RFont> font)
-    {
-        for (auto& window: windows)
-        {
-            window->SetFont(font);
-        }
-    }
+    void SetFont(std::shared_ptr<RFont> font);
+
+    void SetTheme(std::shared_ptr<RTheme> theme);
 
   protected:
     bool updateBounds = true;

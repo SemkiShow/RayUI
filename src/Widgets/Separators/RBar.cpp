@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include "Api.hpp"
 #include "Widgets/Separators/RBar.hpp"
+#include "Api.hpp"
 
 void RBar::Draw() { rui::DrawRectangle(bounds, color); }

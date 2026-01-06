@@ -4,18 +4,9 @@
 
 #pragma once
 
+#include "Core/Themes.hpp"
 #include "Utils.hpp"
 #include <memory>
-
-enum class RAlign
-{
-    Left,
-    HCenter,
-    Right,
-    Top,
-    VCenter,
-    Bottom
-};
 
 class RWidget
 {
@@ -87,6 +78,44 @@ class RWidget
 
     std::shared_ptr<RFont> GetFont() { return font; }
 
+    virtual void SetTheme(std::shared_ptr<RTheme> val) { theme = val; }
+
+    void SetThemeList(RThemeList val)
+    {
+        themeList = val;
+        customColor = false;
+    }
+
+    void SetTint(RColor val)
+    {
+        tint = val;
+        customColor = true;
+    }
+
+    std::shared_ptr<RTheme> GetTheme() { return theme; }
+
+    RThemeList GetThemeList() { return themeList; }
+
+    RColor GetThemeColor(RThemeState state)
+    {
+        return theme->colors[static_cast<int>(themeList)][static_cast<int>(state)];
+    }
+    bool IsCustomColor() { return customColor; }
+
+    RColor GetColor() { return color; }
+
+    RColor GetTint() { return tint; }
+
+    void SetDisabled(bool val) { disabled = val; }
+
+    bool IsDisabled() { return disabled; }
+
+    void SetHighlighted(bool val) { highlighted = val; }
+
+    bool IsHighlighted() { return highlighted; }
+
+    void UpdateColors();
+
     bool IsMouseHovered() { return isMouseHovered; }
     bool IsMouseLeftDown() { return isMouseLeftDown; }
     bool IsMouseLeftPressed() { return isMouseLeftPressed; }
@@ -103,6 +132,11 @@ class RWidget
     bool visible = true;
     RAlign alignH = RAlign::Left, alignV = RAlign::Top;
     std::shared_ptr<RFont> font;
+    std::shared_ptr<RTheme> theme = std::make_shared<RThemeLight>();
+    RThemeList themeList = RThemeList::Primary;
+    RColor color = GetThemeColor(RThemeState::Default), tint;
+    bool customColor = false;
+    bool disabled = false, highlighted = false;
 
   private:
     bool isMouseHovered = false, isMouseLeftDown = false, isMouseLeftPressed = false,

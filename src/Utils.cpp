@@ -7,6 +7,29 @@
 #include <codecvt>
 #include <locale>
 
+char HexToChar(const char hexC)
+{
+    if (hexC >= '0' && hexC <= '9') return hexC - '0';
+    if (hexC >= 'A' && hexC <= 'F') return hexC - 'A' + 10;
+    if (hexC >= 'a' && hexC <= 'f') return hexC - 'a' + 10;
+    throw std::runtime_error("Invalid hexC!");
+}
+
+RColor HexToRgba(const std::string& hex)
+{
+    RColor color{0, 0, 0};
+    if (hex.size() != 1 + 2 * 3 && hex.size() != 1 + 2 * 4)
+        throw std::runtime_error("Invalid hex entered!");
+    color.r = HexToChar(hex[1]) * 16 + HexToChar(hex[2]);
+    color.g = HexToChar(hex[3]) * 16 + HexToChar(hex[4]);
+    color.b = HexToChar(hex[5]) * 16 + HexToChar(hex[6]);
+    if (hex.size() == 1 + 2 * 4)
+        color.a = HexToChar(hex[7]) * 16 + HexToChar(hex[8]);
+    else
+        color.a = 255;
+    return color;
+}
+
 float ClampWidth(float val, float min, float max)
 {
     if (min < 0) return -1;
@@ -149,6 +172,13 @@ bool operator==(const RRectangle& a, const RRectangle& b)
 }
 
 bool operator!=(const RRectangle& a, const RRectangle& b) { return !(a == b); }
+
+RColor MixColors(const RColor& a, const RColor& b)
+{
+    return {
+        static_cast<unsigned char>((a.r + b.r) / 2), static_cast<unsigned char>((a.g + b.g) / 2),
+        static_cast<unsigned char>((a.b + b.b) / 2), static_cast<unsigned char>((a.a + b.a) / 2)};
+}
 
 bool operator==(const RColor& a, const RColor& b)
 {

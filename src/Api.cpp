@@ -27,7 +27,10 @@ bool IsMouseButtonReleased(RMouseButton button)
     return ::IsMouseButtonReleased(static_cast<int>(button));
 }
 
-bool IsMouseButtonDown(RMouseButton button) { return ::IsMouseButtonDown(static_cast<int>(button)); }
+bool IsMouseButtonDown(RMouseButton button)
+{
+    return ::IsMouseButtonDown(static_cast<int>(button));
+}
 
 bool IsMouseButtonUp(RMouseButton button) { return ::IsMouseButtonUp(static_cast<int>(button)); }
 

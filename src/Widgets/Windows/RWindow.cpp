@@ -50,3 +50,9 @@ void RWindow::SetFont(std::shared_ptr<RFont> font)
     if (centralWidget) centralWidget->SetFont(font);
     RWidget::SetFont(font);
 }
+
+void RWindow::SetTheme(std::shared_ptr<RTheme> theme)
+{
+    if (centralWidget) centralWidget->SetTheme(theme);
+    RWidget::SetTheme(theme);
+}

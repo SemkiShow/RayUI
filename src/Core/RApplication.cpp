@@ -2,8 +2,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include "Api.hpp"
 #include "Core/RApplication.hpp"
+#include "Api.hpp"
 
 bool RApplication::PollEvents()
 {
@@ -47,5 +47,21 @@ void RApplication::Draw()
     for (auto& window: windows)
     {
         if (window->IsVisible()) window->Draw();
+    }
+}
+
+void RApplication::SetFont(std::shared_ptr<RFont> font)
+{
+    for (auto& window: windows)
+    {
+        window->SetFont(font);
+    }
+}
+
+void RApplication::SetTheme(std::shared_ptr<RTheme> theme)
+{
+    for (auto& window: windows)
+    {
+        window->SetTheme(theme);
     }
 }

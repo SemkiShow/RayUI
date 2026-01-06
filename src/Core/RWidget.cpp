@@ -33,9 +33,60 @@ bool RWidget::PollEvents()
 
 void RWidget::Update()
 {
+    UpdateColors();
     if (updateBounds)
     {
         updateBounds = false;
         Shrink();
+    }
+}
+
+void RWidget::UpdateColors()
+{
+    if (customColor)
+    {
+        if (IsMouseHovered())
+        {
+            color = MixColors(tint, GetTheme()->hoveredTint);
+            if (IsMouseLeftDown())
+            {
+                color = MixColors(tint, GetTheme()->clickedTint);
+            }
+        }
+        else if (disabled)
+        {
+            color = MixColors(tint, GetTheme()->disabledTint);
+        }
+        else if (highlighted)
+        {
+            color = MixColors(tint, GetTheme()->highlightedTint);
+        }
+        else
+        {
+            color = tint;
+        }
+    }
+    else
+    {
+        if (IsMouseHovered())
+        {
+            color = GetThemeColor(RThemeState::Hovered);
+            if (IsMouseLeftDown())
+            {
+                color = GetThemeColor(RThemeState::Clicked);
+            }
+        }
+        else if (disabled)
+        {
+            color = GetThemeColor(RThemeState::Disabled);
+        }
+        else if (highlighted)
+        {
+            color = GetThemeColor(RThemeState::Highlighted);
+        }
+        else
+        {
+            color = GetThemeColor(RThemeState::Default);
+        }
     }
 }

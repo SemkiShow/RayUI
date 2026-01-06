@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <array>
 #include <ostream>
 #include <vector>
 
@@ -36,14 +37,20 @@ struct RRectangle
     }
 };
 
+struct RColor;
+
+RColor HexToRgba(const std::string& hex);
+
 struct RColor
 {
     unsigned char r, g, b, a;
 
+    RColor() : r(0), g(0), b(0), a(255) {}
     RColor(unsigned char r, unsigned char g, unsigned char b, unsigned char a = 255)
         : r(r), g(g), b(b), a(a)
     {
     }
+    RColor(const std::string& hex) { *this = HexToRgba(hex); }
 };
 
 struct RTexture
@@ -68,6 +75,32 @@ struct RFont
     GlyphInfo* glyphs; // Glyphs info data
 };
 
+constexpr size_t R_THEME_LIST_SIZE = 5;
+enum class RThemeList
+{
+    Primary,
+    Secondary,
+    Border,
+    Text,
+    Background
+};
+
+constexpr size_t R_THEME_STATE_SIZE = 5;
+enum class RThemeState
+{
+    Default,
+    Hovered,
+    Clicked,
+    Disabled,
+    Highlighted
+};
+
+struct RTheme
+{
+    RColor hoveredTint, clickedTint, disabledTint, highlightedTint;
+    std::array<std::array<RColor, R_THEME_STATE_SIZE>, R_THEME_LIST_SIZE> colors;
+};
+
 enum class RMouseButton
 {
     Left = 0,
@@ -77,6 +110,16 @@ enum class RMouseButton
     Extra = 4,
     Forward = 5,
     Back = 6
+};
+
+enum class RAlign
+{
+    Left,
+    HCenter,
+    Right,
+    Top,
+    VCenter,
+    Bottom
 };
 
 float ClampWidth(float val, float min, float max);
@@ -116,5 +159,6 @@ bool operator!=(const RVector2& a, const RVector2& b);
 bool operator==(const RRectangle& a, const RRectangle& b);
 bool operator!=(const RRectangle& a, const RRectangle& b);
 
+RColor MixColors(const RColor& a, const RColor& b);
 bool operator==(const RColor& a, const RColor& b);
 bool operator!=(const RColor& a, const RColor& b);

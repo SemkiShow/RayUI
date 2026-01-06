@@ -2,8 +2,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include "Api.hpp"
 #include "Widgets/Panes/RPane.hpp"
+#include "Api.hpp"
 
 void RPane::ResetEvents()
 {
@@ -19,6 +19,9 @@ bool RPane::PollEvents()
 
 void RPane::Update()
 {
+    RWidget::UpdateColors();
+    if (customColor) color = tint;
+
     if (updateBounds)
     {
         updateBounds = false;
@@ -41,4 +44,10 @@ void RPane::SetFont(std::shared_ptr<RFont> font)
 {
     if (layout) layout->SetFont(font);
     RWidget::SetFont(font);
+}
+
+void RPane::SetTheme(std::shared_ptr<RTheme> theme)
+{
+    if (layout) layout->SetTheme(theme);
+    RWidget::SetTheme(theme);
 }

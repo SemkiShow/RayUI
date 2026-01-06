@@ -3,10 +3,10 @@
 ## v1.0.0
 
 - [x] RApplication
-- [x] RWindow
-  - [ ] RPopupWindow
-  - [ ] ROkCancelWindow
 - [x] RWidget
+  - [x] RWindow
+    - [ ] RPopupWindow
+    - [ ] ROkCancelWindow
   - [ ] RButton
     - [ ] RLabelButton
     - [ ] RImageButton
@@ -32,4 +32,4 @@
 - [x] Events handling
 - [x] Custom fonts
 - [ ] Translations
-- [ ] Themes
+- [x] Themes

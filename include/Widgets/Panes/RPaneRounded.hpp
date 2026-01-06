@@ -22,6 +22,6 @@ class RPaneRounded : public RPane
     int GetSegments() { return segments; }
 
   protected:
-    float radius;
-    int segments;
+    float radius = 20;
+    int segments = 16;
 };

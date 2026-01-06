@@ -9,10 +9,20 @@
 class RLabel : public RWidget
 {
   public:
-    RLabel(const std::string& text, float fontSize = 24, float fontSpacing = 3,
-           RColor color = {255, 255, 255})
-        : text(text), fontSize(fontSize), fontSpacing(fontSpacing), color(color)
+    RLabel() { Init(); }
+    RLabel(const std::string& text, float fontSize = 24, float fontSpacing = 0) : RLabel()
     {
+        this->text = text;
+        this->fontSize = fontSize;
+        this->fontSpacing = fontSpacing;
+    }
+    RLabel(const std::string& text, RColor tint, float fontSize = 24, float fontSpacing = 0)
+        : RLabel()
+    {
+        this->text = text;
+        this->fontSize = fontSize;
+        this->fontSpacing = fontSpacing;
+        RWidget::SetTint(tint);
     }
     virtual ~RLabel() = default;
 
@@ -43,16 +53,9 @@ class RLabel : public RWidget
 
     float GetFontSpacing() { return fontSpacing; }
 
-    void SetColor(RColor val)
-    {
-        color = val;
-        UpdateBounds();
-    }
-
-    RColor GetColor() { return color; }
-
   protected:
     std::string text;
-    float fontSize, fontSpacing;
-    RColor color;
+    float fontSize = 24, fontSpacing = 0;
+
+    void Init() { themeList = RThemeList::Text; }
 };

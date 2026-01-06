@@ -11,7 +11,8 @@
 class RPane : public RWidget
 {
   public:
-    RPane(RColor color = {127, 127, 127, 127}) : color(color) {}
+    RPane() { Init(); }
+    RPane(RColor tint) : RPane() { RWidget::SetTint(tint); }
     virtual ~RPane() = default;
 
     void ResetEvents() override;
@@ -21,15 +22,14 @@ class RPane : public RWidget
 
     void SetFont(std::shared_ptr<RFont> font) override;
 
-    void SetColor(RColor col) { color = col; }
-
-    RColor GetColor() { return color; }
+    void SetTheme(std::shared_ptr<RTheme> theme) override;
 
     void SetLayout(std::shared_ptr<RLayout> val) { layout = val; }
 
   protected:
-    RColor color;
     std::shared_ptr<RLayout> layout;
+
+    void Init() { themeList = RThemeList::Background; }
 
     bool PollLayoutEvents()
     {

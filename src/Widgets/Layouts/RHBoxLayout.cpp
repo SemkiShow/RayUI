@@ -7,18 +7,19 @@
 
 void RHBoxLayout::Shrink()
 {
-    float maxHeight = 0, totalWidth = 0;
+    // Calculate shrinked size
+    float newHeight = 0, totalWidth = 0;
     for (auto& widget: widgets)
     {
         if (widget->IsVisible())
         {
-            widget->Shrink();
-            maxHeight = std::max(maxHeight, widget->GetHeight() + 2 * margin);
+            newHeight = std::max(newHeight, widget->GetHeight() + 2 * margin);
             totalWidth += widget->GetWidth() + padding;
         }
     }
     totalWidth -= padding;
 
+    // Calculate center widgets' width
     bool foundFirstCenter = false;
     float centerWidth = 0;
     for (auto& widget: widgets)
@@ -33,6 +34,7 @@ void RHBoxLayout::Shrink()
     }
     centerWidth -= padding;
 
+    // Calculate posX offset
     float posX = GetPositionX() + margin, widthLeft = totalWidth;
     switch (GetAlignH())
     {
@@ -49,6 +51,7 @@ void RHBoxLayout::Shrink()
         break;
     }
 
+    // Set widgets' positions
     for (auto& widget: widgets)
     {
         float delta = widget->GetWidth() + padding;
@@ -93,7 +96,8 @@ void RHBoxLayout::Shrink()
         widget->Update();
     }
 
-    SetHeight(maxHeight + 2 * margin);
+    // Set shrinked size
+    SetHeight(newHeight + 2 * margin);
 }
 
 void RHBoxLayout::Update()
@@ -106,6 +110,7 @@ void RHBoxLayout::Update()
 
     updateBounds = false;
 
+    // Calculate widths
     float fixedWidth = 0;
     int visibleCount = 0, dynamicCount = 0;
     for (auto& widget: widgets)
@@ -122,6 +127,7 @@ void RHBoxLayout::Update()
 
     if (visibleCount == 0) return;
 
+    // Set widgets' sizes
     float maxHeight = GetHeight() - 2 * margin;
     float dynamicWidth = GetWidth() - 2 * margin - (visibleCount - 1) * padding - fixedWidth;
     dynamicWidth = fmax(0, dynamicWidth);
@@ -143,11 +149,11 @@ void RHBoxLayout::Update()
             ClampBounds(widget->GetBounds(), widget->GetMinSize(), widget->GetMaxSize()));
     }
 
+    // Update widgets
     for (auto& widget: widgets)
     {
         if (widget->IsVisible()) widget->UpdateBounds();
     }
-
     RLayout::UpdateWidgets();
 
     Shrink();

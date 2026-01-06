@@ -85,6 +85,8 @@ void InitUI()
 
     auto mainWindow = std::make_shared<MainWindow>();
     app->AddWindow(mainWindow);
+
+    // app->SetTheme(std::make_shared<RThemeDark>());
 }
 
 void DrawFrame()
