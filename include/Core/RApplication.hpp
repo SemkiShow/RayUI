@@ -24,6 +24,8 @@ class RApplication
 
     void SetTheme(std::shared_ptr<RTheme> theme);
 
+    void SetScale(float val);
+
   protected:
     bool updateBounds = true;
     std::vector<std::shared_ptr<RWindow>> windows;

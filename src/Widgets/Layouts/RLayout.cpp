@@ -55,3 +55,15 @@ void RLayout::SetTheme(std::shared_ptr<RTheme> theme)
     }
     RWidget::SetTheme(theme);
 }
+
+void RLayout::SetScale(float scale)
+{
+    for (auto& widget: widgets)
+    {
+        widget->SetScale(scale);
+    }
+    float delta = scale / this->scale;
+    margin *= delta;
+    padding *= delta;
+    RWidget::SetScale(scale);
+}

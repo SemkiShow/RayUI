@@ -29,6 +29,13 @@ class RLabel : public RWidget
     void Shrink() override;
     void Draw() override;
 
+    void SetScale(float val) override
+    {
+        float delta = val / scale;
+        fontSize *= delta;
+        RWidget::SetScale(val);
+    }
+
     void SetText(const std::string& val)
     {
         text = val;

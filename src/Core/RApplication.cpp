@@ -65,3 +65,11 @@ void RApplication::SetTheme(std::shared_ptr<RTheme> theme)
         window->SetTheme(theme);
     }
 }
+
+void RApplication::SetScale(float val)
+{
+    for (auto& window: windows)
+    {
+        window->SetScale(val);
+    }
+}

@@ -52,3 +52,9 @@ void RPane::SetTheme(std::shared_ptr<RTheme> theme)
     if (layout) layout->SetTheme(theme);
     RWidget::SetTheme(theme);
 }
+
+void RPane::SetScale(float scale)
+{
+    if (layout) layout->SetScale(scale);
+    RWidget::SetScale(scale);
+}

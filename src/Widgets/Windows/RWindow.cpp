@@ -56,3 +56,11 @@ void RWindow::SetTheme(std::shared_ptr<RTheme> theme)
     if (centralWidget) centralWidget->SetTheme(theme);
     RWidget::SetTheme(theme);
 }
+
+void RWindow::SetScale(float scale)
+{
+    if (centralWidget) centralWidget->SetScale(scale);
+    float delta = scale / this->scale;
+    margin *= delta;
+    RWidget::SetScale(scale);
+}

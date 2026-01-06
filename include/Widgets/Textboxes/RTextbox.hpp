@@ -19,6 +19,13 @@ class RTextbox : public RWidget
     void Update() override;
     void Draw() override;
 
+    void SetScale(float val) override
+    {
+        float delta = val / scale;
+        margin *= delta;
+        RWidget::SetScale(val);
+    }
+
     void SetPromptText(const std::string& val) { promptText = val; }
 
     std::string GetPromptText() { return promptText; }

@@ -22,6 +22,8 @@ class RLayout : public RWidget
 
     void SetTheme(std::shared_ptr<RTheme> theme) override;
 
+    void SetScale(float scale) override;
+
     void SetPadding(float val) { padding = val; }
     void SetMargin(float val) { margin = val; }
     void AddWidget(std::shared_ptr<RWidget> widget) { widgets.push_back(widget); }

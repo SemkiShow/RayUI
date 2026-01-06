@@ -24,6 +24,8 @@ class RPane : public RWidget
 
     void SetTheme(std::shared_ptr<RTheme> theme) override;
 
+    void SetScale(float scale) override;
+
     void SetLayout(std::shared_ptr<RLayout> val) { layout = val; }
 
   protected:

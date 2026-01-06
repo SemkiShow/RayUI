@@ -22,6 +22,8 @@ class RWindow : public RWidget
 
     void SetTheme(std::shared_ptr<RTheme> theme) override;
 
+    void SetScale(float scale) override;
+
     void SetMargin(float val) { margin = val; }
     void SetCentralWidget(std::shared_ptr<RWidget> widget) { centralWidget = widget; }
 

@@ -134,6 +134,20 @@ class RWidget
 
     void UpdateColors();
 
+    virtual void SetScale(float val)
+    {
+        float delta = val / scale;
+        if (minSize.x >= 0) minSize.x *= delta;
+        if (minSize.y >= 0) minSize.y *= delta;
+        if (maxSize.x >= 0) maxSize.x *= delta;
+        if (maxSize.y >= 0) maxSize.y *= delta;
+        borderThickness *= delta;
+        scale = val;
+        UpdateBounds();
+    }
+
+    float GetScale() { return scale; }
+
     bool IsMouseHovered() { return isMouseHovered; }
     bool IsMouseLeftDown() { return isMouseLeftDown; }
     bool IsMouseLeftPressed() { return isMouseLeftPressed; }
@@ -157,6 +171,7 @@ class RWidget
     bool customColor = false;
     bool disabled = false, highlighted = false;
     float borderThickness = 2;
+    float scale = 1;
 
   private:
     bool isMouseHovered = false, isMouseLeftDown = false, isMouseLeftPressed = false,

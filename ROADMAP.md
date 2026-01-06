@@ -34,4 +34,4 @@
 - [x] Custom fonts
 - [ ] Translations
 - [x] Themes
-- [ ] Scale
+- [x] Scale
