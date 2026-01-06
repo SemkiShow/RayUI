@@ -78,6 +78,14 @@ class RWidget
 
     std::shared_ptr<RFont> GetFont() { return font; }
 
+    void SetFontSpacing(float val)
+    {
+        fontSpacing = val;
+        UpdateBounds();
+    }
+
+    float GetFontSpacing() { return fontSpacing; }
+
     virtual void SetTheme(std::shared_ptr<RTheme> val) { theme = val; }
 
     void SetThemeList(RThemeList val)
@@ -100,6 +108,12 @@ class RWidget
     {
         return theme->colors[static_cast<int>(themeList)][static_cast<int>(state)];
     }
+
+    RColor GetThemeColor(RThemeList list, RThemeState state)
+    {
+        return theme->colors[static_cast<int>(list)][static_cast<int>(state)];
+    }
+
     bool IsCustomColor() { return customColor; }
 
     RColor GetColor() { return color; }
@@ -114,6 +128,10 @@ class RWidget
 
     bool IsHighlighted() { return highlighted; }
 
+    void SetBorderThickness(float val) { borderThickness = val; }
+
+    float GetBorderThickness() { return borderThickness; }
+
     void UpdateColors();
 
     bool IsMouseHovered() { return isMouseHovered; }
@@ -127,16 +145,18 @@ class RWidget
   protected:
     bool updateBounds = false;
     RRectangle bounds{0, 0, -1, -1};
-    RVector2 minSize{10, 10};
+    RVector2 minSize{30, 30};
     RVector2 maxSize{-1, -1};
     bool visible = true;
     RAlign alignH = RAlign::Left, alignV = RAlign::Top;
     std::shared_ptr<RFont> font;
+    float fontSpacing = 0;
     std::shared_ptr<RTheme> theme = std::make_shared<RThemeLight>();
     RThemeList themeList = RThemeList::Primary;
     RColor color = GetThemeColor(RThemeState::Default), tint;
     bool customColor = false;
     bool disabled = false, highlighted = false;
+    float borderThickness = 2;
 
   private:
     bool isMouseHovered = false, isMouseLeftDown = false, isMouseLeftPressed = false,

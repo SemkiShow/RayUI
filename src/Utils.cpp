@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: MIT
 
 #include "Utils.hpp"
+#include "Api.hpp"
 #include <algorithm>
 #include <codecvt>
 #include <locale>
@@ -116,6 +117,45 @@ std::vector<std::string> Split(const std::string& s, char delimiter)
         out.back() += s[i];
     }
     return out;
+}
+
+std::string GetCharsPressed()
+{
+    std::string out;
+    int codepoint = rui::GetCharPressed();
+
+    while (codepoint > 0)
+    {
+        // Convert the codepoint to a UTF-8 byte sequence
+        int byteSize = 0;
+        const char* utf8Char = rui::CodepointToUtf8(codepoint, &byteSize);
+
+        out += utf8Char;
+
+        codepoint = rui::GetCharPressed();
+    }
+    return out;
+}
+
+void Utf8PopBack(std::string& s)
+{
+    if (s.empty()) return;
+
+    int currentByteIndex = 0;
+    int lastCharByteIndex = 0;
+    int stringLength = (int)s.length();
+
+    while (currentByteIndex < stringLength)
+    {
+        lastCharByteIndex = currentByteIndex;
+        int codepointSize = 0;
+
+        rui::GetCodepointNext(&s[currentByteIndex], &codepointSize);
+
+        currentByteIndex += codepointSize;
+    }
+
+    s.erase(lastCharByteIndex);
 }
 
 std::ostream& operator<<(std::ostream& out, const RVector2& vec)

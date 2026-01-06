@@ -34,14 +34,46 @@ bool IsMouseButtonDown(RMouseButton button)
 
 bool IsMouseButtonUp(RMouseButton button) { return ::IsMouseButtonUp(static_cast<int>(button)); }
 
+bool IsKeyPressed(RKey key) { return ::IsKeyPressed(static_cast<int>(key)); }
+
+bool IsKeyReleased(RKey key) { return ::IsKeyReleased(static_cast<int>(key)); }
+
+bool IsKeyDown(RKey key) { return ::IsKeyDown(static_cast<int>(key)); }
+
+bool IsKeyUp(RKey key) { return ::IsKeyUp(static_cast<int>(key)); }
+
+const char* CodepointToUtf8(int codepoint, int* utf8Size)
+{
+    return ::CodepointToUTF8(codepoint, utf8Size);
+}
+
+int GetCharPressed() { return ::GetCharPressed(); }
+
+void GetCodepointNext(const char* text, int* codepointSize)
+{
+    ::GetCodepointNext(text, codepointSize);
+}
+
 void DrawRectangle(RRectangle rec, RColor color)
 {
     ::DrawRectangleRec(ToRaylib(rec), ToRaylib(color));
 }
 
+void DrawRectangleLines(RRectangle rec, float lineThickness, RColor color)
+{
+    ::DrawRectangleLinesEx(ToRaylib(rec), lineThickness, ToRaylib(color));
+}
+
 void DrawRectangleRounded(RRectangle rec, float roundness, int segments, RColor color)
 {
     ::DrawRectangleRounded(ToRaylib(rec), roundness, segments, ToRaylib(color));
+}
+
+void DrawRectangleRoundedLines(RRectangle rec, float roundness, int segments, float lineThickness,
+                               RColor color)
+{
+    ::DrawRectangleRoundedLinesEx(ToRaylib(rec), roundness, segments, lineThickness,
+                                  ToRaylib(color));
 }
 
 void DrawText(const std::string& text, RVector2 pos, float fontSize, RColor color)
@@ -66,5 +98,9 @@ RVector2 MeasureTextFont(RFont font, const std::string& text, float fontSize, fl
     auto res = ::MeasureTextEx(ToRaylib(font), text.c_str(), fontSize, spacing);
     return FromRaylib(res);
 }
+
+void BeginScissorMode(RRectangle rec) { ::BeginScissorMode(rec.x, rec.y, rec.width, rec.height); }
+
+void EndScissorMode() { ::EndScissorMode(); }
 
 } // namespace rui

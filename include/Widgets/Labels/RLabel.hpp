@@ -45,17 +45,9 @@ class RLabel : public RWidget
 
     float GetFontSize() { return fontSize; }
 
-    void SetFontSpacing(float val)
-    {
-        fontSpacing = val;
-        UpdateBounds();
-    }
-
-    float GetFontSpacing() { return fontSpacing; }
-
   protected:
     std::string text;
-    float fontSize = 24, fontSpacing = 0;
+    float fontSize = 24;
 
   private:
     void Init() { themeList = RThemeList::Text; }

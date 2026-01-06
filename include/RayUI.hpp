@@ -40,6 +40,7 @@
 // Widgets/Sliders
 
 // Widgets/Textboxes
+#include "Widgets/Textboxes/RTextbox.hpp" // IWYU pragma: export
 
 // Widgets/Windows
 #include "Widgets/Windows/RWindow.hpp" // IWYU pragma: export

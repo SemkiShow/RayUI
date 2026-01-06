@@ -9,5 +9,6 @@ void RPaneRounded::Draw()
 {
     float roundness = radius * 2 / std::min(bounds.width, bounds.height);
     rui::DrawRectangleRounded(bounds, roundness, segments, color);
+    rui::DrawRectangleRoundedLines(bounds, roundness, segments, borderThickness, color);
     RPane::DrawLayout();
 }

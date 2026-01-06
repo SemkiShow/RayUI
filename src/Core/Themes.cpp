@@ -39,7 +39,7 @@ RThemeLight::RThemeLight()
     hoveredTint = {"#7f7f7fff"};
     clickedTint = {"#ffffffff"};
     disabledTint = {"#000000ff"};
-    highlightedTint = {"#ff7f7fff"};
+    highlightedTint = {"#7fb0ffff"};
 
     linkTint = {"#56adffff"};
 
@@ -92,10 +92,10 @@ RThemeDark::RThemeDark()
 
     RThemeLight lightTheme;
 
-    hoveredTint = RColor{"#ffffff"} - lightTheme.hoveredTint;
-    clickedTint = RColor{"#ffffff"} - lightTheme.clickedTint;
-    disabledTint = RColor{"#ffffff"} - lightTheme.disabledTint;
-    highlightedTint = RColor{"#ffffff"} - lightTheme.highlightedTint;
+    hoveredTint = lightTheme.hoveredTint;
+    clickedTint = lightTheme.clickedTint;
+    disabledTint = lightTheme.disabledTint;
+    highlightedTint = lightTheme.highlightedTint;
 
     linkTint = lightTheme.linkTint;
 

@@ -15,7 +15,7 @@
     - [ ] RRectangleSlider
   - [x] RLabel
     - [x] RLinkLabel
-  - [ ] RTextbox
+  - [x] RTextbox
     - [ ] RNumberTextbox
   - [ ] RDropdown
   - [ ] RColorPicker
@@ -33,3 +33,4 @@
 - [x] Custom fonts
 - [ ] Translations
 - [x] Themes
+- [ ] Scale

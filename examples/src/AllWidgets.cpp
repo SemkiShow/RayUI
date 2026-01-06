@@ -26,6 +26,9 @@ class MainWindow : public RWindow
                                                  "https://github.com/SemkiShow/RayUI");
         layout->AddWidget(link);
 
+        auto textBox = std::make_shared<RTextbox>("Enter text...");
+        layout->AddWidget(textBox);
+
         auto colorLayout = std::make_shared<RHBoxLayout>();
         colorLayout->SetAlignment(RAlign::Left);
         layout->AddWidget(colorLayout);
