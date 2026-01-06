@@ -10,6 +10,9 @@ void RTextboxInt::Update()
     RWidget::Update();
     RTextbox::CheckEditing();
 
+    if (text.size() > 1 && text[0] == '0') text.erase(text.begin());
+    if (text.size() > 2 && text[0] == '-' && text[1] == '0') text.erase(text.begin() + 1);
+
     if (isSelected)
     {
         int key = rui::GetCharPressed();
