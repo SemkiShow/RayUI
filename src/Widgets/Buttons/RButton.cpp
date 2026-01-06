@@ -9,5 +9,6 @@ void RButton::Draw()
 {
     float roundness = radius * 2 / std::min(bounds.width, bounds.height);
     rui::DrawRectangleRounded(bounds, roundness, segments, color);
-    rui::DrawRectangleRoundedLines(bounds, roundness, segments, borderThickness, color);
+    rui::DrawRectangleRoundedLines(bounds, roundness, segments, borderThickness,
+                                   GetThemeColor(RThemeList::Border, themeState));
 }

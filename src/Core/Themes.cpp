@@ -55,11 +55,11 @@ RThemeLight::RThemeLight()
     colors[secondary][disabled] = MixColors(colors[secondary][defaultState], disabledTint);
     colors[secondary][highlighted] = MixColors(colors[secondary][defaultState], highlightedTint);
 
-    colors[border][defaultState] = colors[primary][defaultState];
-    colors[border][hovered] = MixColors(colors[primary][hovered], hoveredTint);
-    colors[border][clicked] = MixColors(colors[primary][clicked], clickedTint);
-    colors[border][disabled] = MixColors(colors[primary][defaultState], disabledTint);
-    colors[border][highlighted] = MixColors(colors[primary][highlighted], highlightedTint);
+    colors[border][defaultState] = {"#999999ff"};
+    colors[border][hovered] = MixColors(colors[border][hovered], hoveredTint);
+    colors[border][clicked] = MixColors(colors[border][clicked], clickedTint);
+    colors[border][disabled] = MixColors(colors[border][disabled], disabledTint);
+    colors[border][highlighted] = MixColors(colors[border][highlighted], highlightedTint);
 
     colors[text][defaultState] = {"#000000ff"};
     colors[text][hovered] = MixColors(colors[text][defaultState], hoveredTint);

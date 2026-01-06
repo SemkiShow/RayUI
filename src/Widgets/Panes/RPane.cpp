@@ -37,7 +37,7 @@ void RPane::Update()
 void RPane::Draw()
 {
     rui::DrawRectangle(bounds, color);
-    rui::DrawRectangleLines(bounds, borderThickness, color);
+    rui::DrawRectangleLines(bounds, borderThickness, GetThemeColor(RThemeList::Border, themeState));
     DrawLayout();
 }
 

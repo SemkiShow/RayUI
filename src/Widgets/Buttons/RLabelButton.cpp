@@ -7,9 +7,7 @@
 
 void RLabelButton::Draw()
 {
-    float roundness = radius * 2 / std::min(bounds.width, bounds.height);
-    rui::DrawRectangleRounded(bounds, roundness, segments, color);
-    rui::DrawRectangleRoundedLines(bounds, roundness, segments, borderThickness, color);
+    RButton::Draw();
 
     RRectangle labelBounds = AddMargin(bounds, margin);
     if (font)

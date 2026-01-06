@@ -9,10 +9,9 @@
     - [ ] ROkCancelWindow
   - [x] RButton
     - [x] RLabelButton
-    - [ ] RImageButton
+    - [ ] RIconButton
   - [ ] RSlider
     - [ ] RLabelSlider
-    - [ ] RRectangleSlider
   - [x] RLabel
     - [x] RLinkLabel
   - [x] RTextbox
