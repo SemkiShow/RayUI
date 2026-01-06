@@ -29,6 +29,12 @@ class MainWindow : public RWindow
         auto textBox = std::make_shared<RTextbox>("Enter text...");
         layout->AddWidget(textBox);
 
+        auto textBoxInt = std::make_shared<RTextboxInt>("Enter an int...");
+        layout->AddWidget(textBoxInt);
+
+        auto textBoxDouble = std::make_shared<RTextboxDouble>("Enter a double...");
+        layout->AddWidget(textBoxDouble);
+
         auto colorLayout = std::make_shared<RHBoxLayout>();
         colorLayout->SetAlignment(RAlign::Left);
         layout->AddWidget(colorLayout);

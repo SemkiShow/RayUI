@@ -19,6 +19,11 @@ void RTextbox::Update()
         isSelected = false;
         highlighted = false;
     }
+    if (rui::IsKeyPressed(RKey::Enter))
+    {
+        isSelected = false;
+        highlighted = false;
+    }
 
     if (isSelected)
     {

@@ -16,7 +16,8 @@
   - [x] RLabel
     - [x] RLinkLabel
   - [x] RTextbox
-    - [ ] RNumberTextbox
+    - [x] RTextboxInt
+    - [x] RTextboxDouble
   - [ ] RDropdown
   - [ ] RColorPicker
   - [x] RBar
