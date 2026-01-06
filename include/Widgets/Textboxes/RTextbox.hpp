@@ -46,12 +46,17 @@ class RTextbox : public RWidget
 
     float GetMargin() { return margin; }
 
+    void CheckEditing();
+
+    bool IsFinishedEditing() { return finishedEditing; }
+
   protected:
     std::string promptText, text;
     bool isSelected = false;
     float radius = 3;
     int segments = 16;
     float margin = 5;
+    bool finishedEditing = false;
 
   private:
     void Init() { maxSize.y = RWidget::minSize.y; }

@@ -8,22 +8,7 @@
 void RTextboxDouble::Update()
 {
     RWidget::Update();
-
-    if (IsMouseLeftReleased())
-    {
-        isSelected = true;
-        highlighted = true;
-    }
-    if (!IsMouseHovered() && rui::IsMouseButtonReleased(RMouseButton::Left))
-    {
-        isSelected = false;
-        highlighted = false;
-    }
-    if (rui::IsKeyPressed(RKey::Enter))
-    {
-        isSelected = false;
-        highlighted = false;
-    }
+    RTextbox::CheckEditing();
 
     if (isSelected)
     {

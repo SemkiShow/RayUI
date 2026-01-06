@@ -5,25 +5,31 @@
 #include "Widgets/Textboxes/RTextbox.hpp"
 #include "Api.hpp"
 
-void RTextbox::Update()
+void RTextbox::CheckEditing()
 {
-    RWidget::Update();
-
-    if (IsMouseLeftReleased())
+    auto beginEditing = [this]()
     {
         isSelected = true;
         highlighted = true;
-    }
-    if (!IsMouseHovered() && rui::IsMouseButtonReleased(RMouseButton::Left))
+    };
+
+    auto stopEditing = [this]()
     {
         isSelected = false;
         highlighted = false;
-    }
-    if (rui::IsKeyPressed(RKey::Enter))
-    {
-        isSelected = false;
-        highlighted = false;
-    }
+        finishedEditing = true;
+    };
+
+    if (finishedEditing) finishedEditing = false;
+    if (IsMouseLeftReleased()) beginEditing();
+    if (!IsMouseHovered() && rui::IsMouseButtonReleased(RMouseButton::Left)) stopEditing();
+    if (rui::IsKeyPressed(RKey::Enter)) stopEditing();
+}
+
+void RTextbox::Update()
+{
+    RWidget::Update();
+    CheckEditing();
 
     if (isSelected)
     {
