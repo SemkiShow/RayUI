@@ -98,6 +98,7 @@ enum class RThemeState
 struct RTheme
 {
     RColor hoveredTint, clickedTint, disabledTint, highlightedTint;
+    RColor linkTint;
     std::array<std::array<RColor, R_THEME_STATE_SIZE>, R_THEME_LIST_SIZE> colors;
 };
 

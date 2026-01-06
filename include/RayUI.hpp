@@ -11,6 +11,7 @@
 #include "Core/Native.hpp"       // IWYU pragma: export
 #include "Core/RApplication.hpp" // IWYU pragma: export
 #include "Core/RWidget.hpp"      // IWYU pragma: export
+#include "Core/Themes.hpp"       // IWYU pragma: export
 
 // Widgets/Buttons
 
@@ -19,7 +20,8 @@
 // Widgets/Dropdowns
 
 // Widgets/Labels
-#include "Widgets/Labels/RLabel.hpp" // IWYU pragma: export
+#include "Widgets/Labels/RLabel.hpp"     // IWYU pragma: export
+#include "Widgets/Labels/RLinkLabel.hpp" // IWYU pragma: export
 
 // Widgets/Layouts
 #include "Widgets/Layouts/RHBoxLayout.hpp" // IWYU pragma: export

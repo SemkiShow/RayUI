@@ -57,3 +57,5 @@ RColor ShowColorPicker(const std::string& title, const std::string& defaultRbgHe
 RColor ShowColorPicker(const std::string& title, const unsigned char defaultRgb[3]);
 std::string ShowColorPickerHex(const std::string& title, const std::string& defaultRbgHex);
 std::string ShowColorPickerHex(const std::string& title, const unsigned char defaultRgb[3]);
+
+void OpenLink(const std::string& url);

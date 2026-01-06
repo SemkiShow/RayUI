@@ -23,5 +23,6 @@ class RBar : public RWidget
   protected:
     float thickness = 1;
 
+  private:
     void Init() { maxSize.y = thickness; }
 };

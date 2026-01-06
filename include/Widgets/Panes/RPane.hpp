@@ -29,8 +29,6 @@ class RPane : public RWidget
   protected:
     std::shared_ptr<RLayout> layout;
 
-    void Init() { themeList = RThemeList::Background; }
-
     bool PollLayoutEvents()
     {
         if (layout && layout->IsVisible())
@@ -44,4 +42,7 @@ class RPane : public RWidget
     {
         if (layout && layout->IsVisible()) layout->Draw();
     }
+
+  private:
+    void Init() { themeList = RThemeList::Background; }
 };

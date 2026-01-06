@@ -57,5 +57,6 @@ class RLabel : public RWidget
     std::string text;
     float fontSize = 24, fontSpacing = 0;
 
+  private:
     void Init() { themeList = RThemeList::Text; }
 };

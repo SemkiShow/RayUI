@@ -274,3 +274,22 @@ std::string ShowColorPickerHex(const std::string& title, const unsigned char def
     return res;
 #endif
 }
+
+void OpenLink(const std::string& url)
+{
+#if defined(_WIN32) || defined(_WIN64)
+    std::string command = "start " + url;
+    std::system(command.c_str());
+
+#elif defined(__APPLE__)
+    std::string command = "open " + url;
+    std::system(command.c_str());
+
+#elif defined(__linux__)
+    std::string command = "xdg-open " + url;
+    std::system(command.c_str());
+
+#else
+#error "Unsupported platform for OpenLink"
+#endif
+}

@@ -22,6 +22,10 @@ class MainWindow : public RWindow
         auto layout = std::make_shared<RVBoxLayout>();
         pane->SetLayout(layout);
 
+        auto link = std::make_shared<RLinkLabel>("https://github.com/SemkiShow/RayUI",
+                                                 "https://github.com/SemkiShow/RayUI");
+        layout->AddWidget(link);
+
         auto colorLayout = std::make_shared<RHBoxLayout>();
         colorLayout->SetAlignment(RAlign::Left);
         layout->AddWidget(colorLayout);

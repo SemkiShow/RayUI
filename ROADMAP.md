@@ -14,7 +14,7 @@
     - [ ] RLabelSlider
     - [ ] RRectangleSlider
   - [x] RLabel
-    - [ ] RLinkLabel
+    - [x] RLinkLabel
   - [ ] RTextbox
     - [ ] RNumberTextbox
   - [ ] RDropdown

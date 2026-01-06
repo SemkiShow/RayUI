@@ -41,6 +41,8 @@ RThemeLight::RThemeLight()
     disabledTint = {"#000000ff"};
     highlightedTint = {"#ff7f7fff"};
 
+    linkTint = {"#56adffff"};
+
     colors[primary][defaultState] = {"#f0f0f0ff"};
     colors[primary][hovered] = MixColors(colors[primary][defaultState], hoveredTint);
     colors[primary][clicked] = MixColors(colors[primary][defaultState], clickedTint);
@@ -90,10 +92,12 @@ RThemeDark::RThemeDark()
 
     RThemeLight lightTheme;
 
-    hoveredTint = RColor{"#ffffff"} - lightTheme.colors[primary][hovered];
-    clickedTint = RColor{"#ffffff"} - lightTheme.colors[primary][clicked];
-    disabledTint = RColor{"#ffffff"} - lightTheme.colors[primary][disabled];
-    highlightedTint = RColor{"#ffffff"} - lightTheme.colors[primary][highlighted];
+    hoveredTint = RColor{"#ffffff"} - lightTheme.hoveredTint;
+    clickedTint = RColor{"#ffffff"} - lightTheme.clickedTint;
+    disabledTint = RColor{"#ffffff"} - lightTheme.disabledTint;
+    highlightedTint = RColor{"#ffffff"} - lightTheme.highlightedTint;
+
+    linkTint = lightTheme.linkTint;
 
     colors[primary][defaultState] = RColor{"#ffffff"} - lightTheme.colors[primary][defaultState];
     colors[primary][hovered] = RColor{"#ffffff"} - lightTheme.colors[primary][hovered];
