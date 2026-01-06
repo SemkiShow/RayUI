@@ -7,8 +7,8 @@
   - [x] RWindow
     - [ ] RPopupWindow
     - [ ] ROkCancelWindow
-  - [ ] RButton
-    - [ ] RLabelButton
+  - [x] RButton
+    - [x] RLabelButton
     - [ ] RImageButton
   - [ ] RSlider
     - [ ] RLabelSlider

@@ -13,14 +13,14 @@ class RLabel : public RWidget
     RLabel(const std::string& text, float fontSize = 24, float fontSpacing = 0) : RLabel()
     {
         this->text = text;
-        this->fontSize = fontSize;
+        this->maxSize.y = fontSize;
         this->fontSpacing = fontSpacing;
     }
     RLabel(const std::string& text, RColor tint, float fontSize = 24, float fontSpacing = 0)
         : RLabel()
     {
         this->text = text;
-        this->fontSize = fontSize;
+        this->maxSize.y = fontSize;
         this->fontSpacing = fontSpacing;
         RWidget::SetTint(tint);
     }
@@ -28,13 +28,6 @@ class RLabel : public RWidget
 
     void Shrink() override;
     void Draw() override;
-
-    void SetScale(float val) override
-    {
-        float delta = val / scale;
-        fontSize *= delta;
-        RWidget::SetScale(val);
-    }
 
     void SetText(const std::string& val)
     {
@@ -46,16 +39,19 @@ class RLabel : public RWidget
 
     void SetFontSize(float val)
     {
-        fontSize = val;
+        maxSize.y = val;
         UpdateBounds();
     }
 
-    float GetFontSize() { return fontSize; }
+    float GetFontSize() { return maxSize.y; }
 
   protected:
     std::string text;
-    float fontSize = 24;
 
   private:
-    void Init() { themeList = RThemeList::Text; }
+    void Init()
+    {
+        themeList = RThemeList::Text;
+        maxSize.y = 24;
+    }
 };

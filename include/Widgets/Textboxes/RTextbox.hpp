@@ -59,5 +59,5 @@ class RTextbox : public RWidget
     bool finishedEditing = false;
 
   private:
-    void Init() { maxSize.y = RWidget::minSize.y; }
+    void Init() { maxSize.y = minSize.y; }
 };

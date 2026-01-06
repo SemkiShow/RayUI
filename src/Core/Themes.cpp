@@ -43,7 +43,7 @@ RThemeLight::RThemeLight()
 
     linkTint = {"#56adffff"};
 
-    colors[primary][defaultState] = {"#f0f0f0ff"};
+    colors[primary][defaultState] = {"#dededeff"};
     colors[primary][hovered] = MixColors(colors[primary][defaultState], hoveredTint);
     colors[primary][clicked] = MixColors(colors[primary][defaultState], clickedTint);
     colors[primary][disabled] = MixColors(colors[primary][defaultState], disabledTint);

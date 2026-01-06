@@ -70,23 +70,24 @@ void RWidget::UpdateColors()
     {
         if (IsMouseHovered())
         {
-            color = GetThemeColor(RThemeState::Hovered);
+            themeState = RThemeState::Hovered;
             if (IsMouseLeftDown())
             {
-                color = GetThemeColor(RThemeState::Clicked);
+                themeState = RThemeState::Clicked;
             }
         }
         else if (disabled)
         {
-            color = GetThemeColor(RThemeState::Disabled);
+            themeState = RThemeState::Disabled;
         }
         else if (highlighted)
         {
-            color = GetThemeColor(RThemeState::Highlighted);
+            themeState = RThemeState::Highlighted;
         }
         else
         {
-            color = GetThemeColor(RThemeState::Default);
+            themeState = RThemeState::Default;
         }
+        color = GetThemeColor();
     }
 }

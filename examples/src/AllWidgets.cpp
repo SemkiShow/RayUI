@@ -35,6 +35,12 @@ class MainWindow : public RWindow
         auto textBoxDouble = std::make_shared<RTextboxDouble>("Enter a double...");
         layout->AddWidget(textBoxDouble);
 
+        auto button = std::make_shared<RLabelButton>("Click me");
+        layout->AddWidget(button);
+
+        Connect([button]() { return button->IsClicked(); },
+                []() { std::cout << "RLabelButton is clicked!\n"; });
+
         auto colorLayout = std::make_shared<RHBoxLayout>();
         colorLayout->SetAlignment(RAlign::Left);
         layout->AddWidget(colorLayout);

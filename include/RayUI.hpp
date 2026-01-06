@@ -14,6 +14,8 @@
 #include "Core/Themes.hpp"       // IWYU pragma: export
 
 // Widgets/Buttons
+#include "Widgets/Buttons/RButton.hpp" // IWYU pragma: export
+#include "Widgets/Buttons/RLabelButton.hpp" // IWYU pragma: export
 
 // Widgets/ColorPickers
 

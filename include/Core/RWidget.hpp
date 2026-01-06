@@ -104,9 +104,9 @@ class RWidget
 
     RThemeList GetThemeList() { return themeList; }
 
-    RColor GetThemeColor(RThemeState state)
+    RColor GetThemeColor()
     {
-        return theme->colors[static_cast<int>(themeList)][static_cast<int>(state)];
+        return theme->colors[static_cast<int>(themeList)][static_cast<int>(themeState)];
     }
 
     RColor GetThemeColor(RThemeList list, RThemeState state)
@@ -167,7 +167,8 @@ class RWidget
     float fontSpacing = 0;
     std::shared_ptr<RTheme> theme = std::make_shared<RThemeLight>();
     RThemeList themeList = RThemeList::Primary;
-    RColor color = GetThemeColor(RThemeState::Default), tint;
+    RThemeState themeState = RThemeState::Default;
+    RColor color = GetThemeColor(), tint;
     bool customColor = false;
     bool disabled = false, highlighted = false;
     float borderThickness = 2;

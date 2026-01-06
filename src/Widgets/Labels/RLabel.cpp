@@ -9,16 +9,16 @@ void RLabel::Shrink()
 {
     RVector2 size;
     if (font)
-        size = rui::MeasureTextFont(*font, text, fontSize, fontSpacing);
+        size = rui::MeasureTextFont(*font, text, maxSize.y, fontSpacing);
     else
-        size = rui::MeasureText(text, fontSize);
+        size = rui::MeasureText(text, maxSize.y);
     SetSize(size);
 }
 
 void RLabel::Draw()
 {
     if (font)
-        rui::DrawTextFont(*font, text, GetPosition(), fontSize, fontSpacing, color);
+        rui::DrawTextFont(*font, text, GetPosition(), maxSize.y, fontSpacing, color);
     else
-        rui::DrawText(text, GetPosition(), fontSize, color);
+        rui::DrawText(text, GetPosition(), maxSize.y, color);
 }
