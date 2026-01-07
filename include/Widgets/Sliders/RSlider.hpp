@@ -93,6 +93,9 @@ class RBaseSlider : public RWidget
 
     float GetMargin() { return margin; }
 
+    bool IsSelected() { return selected; }
+    bool IsValueChanged() { return valueChanged; }
+
   protected:
     T value = 0, minValue = 0, maxValue = 1;
     int segments = 16;
@@ -116,7 +119,8 @@ class RBaseSlider : public RWidget
     void DrawRectangle();
 
   private:
-    bool selected = false;
+    bool selected = false, valueChanged = false;
+    RVector2 lastMousePosition;
 };
 
 using RSlider = RBaseSlider<float>;

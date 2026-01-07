@@ -57,6 +57,9 @@ void RBaseSlider<T>::Update()
 
     if (selected)
     {
+        valueChanged = rui::GetMousePosition() != lastMousePosition;
+        lastMousePosition = rui::GetMousePosition();
+
         if (type == RSliderType::Regular) UpdateRegular();
         if (type == RSliderType::Rectangle) UpdateRectangle();
     }
