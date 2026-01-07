@@ -10,7 +10,7 @@ class RLinkLabel : public RLabel
 {
   public:
     using RLabel::RLabel;
-    RLinkLabel() { Init(); }
+    RLinkLabel() { SetTint(GetTheme()->linkTint); }
     RLinkLabel(const std::string& text, const std::string& link) : RLinkLabel()
     {
         this->text = text;
@@ -28,7 +28,4 @@ class RLinkLabel : public RLabel
 
   protected:
     std::string link;
-
-  private:
-    void Init() { SetTint(GetTheme()->linkTint); }
 };

@@ -9,7 +9,11 @@
 class RLabel : public RWidget
 {
   public:
-    RLabel() { Init(); }
+    RLabel()
+    {
+        themeList = RThemeList::Text;
+        maxSize.y = 24;
+    }
     RLabel(const std::string& text, float fontSize = 24, float fontSpacing = 0) : RLabel()
     {
         this->text = text;
@@ -47,11 +51,4 @@ class RLabel : public RWidget
 
   protected:
     std::string text;
-
-  private:
-    void Init()
-    {
-        themeList = RThemeList::Text;
-        maxSize.y = 24;
-    }
 };

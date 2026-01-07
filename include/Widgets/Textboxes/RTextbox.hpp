@@ -12,7 +12,7 @@ class RTextbox : public RWidget
     RTextbox(const std::string& promptText = "", const std::string& text = "")
         : promptText(promptText), text(text)
     {
-        Init();
+        maxSize.y = minSize.y;
     }
     virtual ~RTextbox() = default;
 
@@ -57,7 +57,4 @@ class RTextbox : public RWidget
     int segments = 16;
     float margin = 5;
     bool finishedEditing = false;
-
-  private:
-    void Init() { maxSize.y = minSize.y; }
 };

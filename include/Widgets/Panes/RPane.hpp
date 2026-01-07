@@ -11,7 +11,7 @@
 class RPane : public RWidget
 {
   public:
-    RPane() { Init(); }
+    RPane() { themeList = RThemeList::Background; }
     RPane(RColor tint) : RPane() { RWidget::SetTint(tint); }
     virtual ~RPane() = default;
 
@@ -44,7 +44,4 @@ class RPane : public RWidget
     {
         if (layout && layout->IsVisible()) layout->Draw();
     }
-
-  private:
-    void Init() { themeList = RThemeList::Background; }
 };

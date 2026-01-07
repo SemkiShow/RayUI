@@ -9,7 +9,7 @@
 class RButton : public RWidget
 {
   public:
-    RButton() { Init(); }
+    RButton() { maxSize.y = minSize.y; }
     RButton(float radius, int segments = 16) : RButton()
     {
         this->radius = radius;
@@ -24,7 +24,4 @@ class RButton : public RWidget
   protected:
     float radius = 5;
     int segments = 16;
-
-  private:
-    void Init() { maxSize.y = minSize.y; }
 };
