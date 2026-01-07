@@ -109,8 +109,12 @@ void RBaseSlider<T>::DrawRectangle()
     sliderPos.x = Map(value, minValue, maxValue, bounds.x + borderThickness,
                       bounds.x + bounds.width - borderThickness - sliderWidth);
     sliderPos.y = bounds.y + borderThickness;
-    rui::DrawRectangle({sliderPos.x, sliderPos.y, sliderWidth, bounds.height - borderThickness * 2},
-                       GetThemeColor(RThemeList::Secondary, themeState));
+    rui::DrawRectangleRounded(
+        {sliderPos.x, sliderPos.y, sliderWidth, bounds.height - borderThickness * 2}, roundness,
+        segments, GetThemeColor(RThemeList::Secondary, themeState));
+    rui::DrawRectangleRoundedLines(
+        {sliderPos.x, sliderPos.y, sliderWidth, bounds.height - borderThickness * 2}, roundness,
+        segments, borderThickness, GetThemeColor(RThemeList::Border, themeState));
 
     RVector2 textSize;
     if (font)

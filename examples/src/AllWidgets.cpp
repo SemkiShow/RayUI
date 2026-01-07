@@ -37,14 +37,14 @@ class MainWindow : public RWindow
         auto button = std::make_shared<RLabelButton>("Click me");
         layout->AddWidget(button);
 
+        Connect([button]() { return button->IsClicked(); },
+                []() { std::cout << "RLabelButton is clicked!\n"; });
+
         auto slider = std::make_shared<RSlider>(0, 0, 20, RSliderType::Rectangle);
         layout->AddWidget(slider);
 
         auto sliderInt = std::make_shared<RSliderInt>(0, 0, 20, RSliderType::Rectangle);
         layout->AddWidget(sliderInt);
-
-        Connect([button]() { return button->IsClicked(); },
-                []() { std::cout << "RLabelButton is clicked!\n"; });
 
         auto colorLayout = std::make_shared<RHBoxLayout>();
         colorLayout->SetAlignment(RAlign::Left);
@@ -52,6 +52,12 @@ class MainWindow : public RWindow
 
         auto label = std::make_shared<RLabel>("label");
         colorLayout->AddWidget(label);
+
+        auto iconButton = std::make_shared<RIconButton>(RIcon::Cpu);
+        colorLayout->AddWidget(iconButton);
+
+        Connect([iconButton]() { return iconButton->IsClicked(); },
+                []() { std::cout << "RIconButton is clicked!\n"; });
 
         auto bar = std::make_shared<RBar>();
         bar->SetAlignment(RAlign::VCenter);

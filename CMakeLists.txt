@@ -14,11 +14,15 @@ find_package(raylib REQUIRED)
 add_library(tinyfiledialogs thirdparty/tinyfiledialogs/tinyfiledialogs.c)
 target_include_directories(tinyfiledialogs PUBLIC thirdparty/tinyfiledialogs)
 
+# raygui_icons.h
+add_library(raygui_icons INTERFACE)
+target_include_directories(raygui_icons INTERFACE thirdparty/raygui_icons)
+
 file(GLOB_RECURSE SOURCES src/*.cpp)
 add_library(${PROJECT_NAME} ${SOURCES})
 target_include_directories(${PROJECT_NAME} PUBLIC include/)
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra)
-target_link_libraries(${PROJECT_NAME} PRIVATE raylib tinyfiledialogs)
+target_link_libraries(${PROJECT_NAME} PRIVATE raylib tinyfiledialogs raygui_icons)
 
 # Checks if OSX and links appropriate frameworks (Only required on MacOS)
 if (APPLE)

@@ -49,7 +49,7 @@ RThemeLight::RThemeLight()
     colors[primary][disabled] = MixColors(colors[primary][defaultState], disabledTint);
     colors[primary][highlighted] = MixColors(colors[primary][defaultState], highlightedTint);
 
-    colors[secondary][defaultState] = {"#c6c6c6ff"};
+    colors[secondary][defaultState] = {"#808080ff"};
     colors[secondary][hovered] = MixColors(colors[secondary][defaultState], hoveredTint);
     colors[secondary][clicked] = MixColors(colors[secondary][defaultState], clickedTint);
     colors[secondary][disabled] = MixColors(colors[secondary][defaultState], disabledTint);

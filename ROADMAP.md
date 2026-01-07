@@ -9,7 +9,7 @@
     - [ ] ROkCancelWindow
   - [x] RButton
     - [x] RLabelButton
-    - [ ] RIconButton
+    - [x] RIconButton
   - [x] RSlider
     - [x] RSliderInt
   - [x] RLabel
@@ -25,7 +25,7 @@
     - [x] RVBoxLayout
     - [x] RHBoxLayout
     - [ ] RGridLayout
-- [ ] raygui icons
+- [x] raygui icons
 - [x] Functions for native popups
 - [ ] Menu bar
 - [x] Alignment flags

@@ -8,6 +8,7 @@
 #include "Conversions.hpp" // IWYU pragma: export
 
 // Core
+#include "Core/Icons.hpp"        // IWYU pragma: export
 #include "Core/Native.hpp"       // IWYU pragma: export
 #include "Core/RApplication.hpp" // IWYU pragma: export
 #include "Core/RWidget.hpp"      // IWYU pragma: export
@@ -15,6 +16,7 @@
 
 // Widgets/Buttons
 #include "Widgets/Buttons/RButton.hpp"      // IWYU pragma: export
+#include "Widgets/Buttons/RIconButton.hpp"  // IWYU pragma: export
 #include "Widgets/Buttons/RLabelButton.hpp" // IWYU pragma: export
 
 // Widgets/ColorPickers
