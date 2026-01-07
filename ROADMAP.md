@@ -10,8 +10,8 @@
   - [x] RButton
     - [x] RLabelButton
     - [ ] RIconButton
-  - [ ] RSlider
-    - [ ] RLabelSlider
+  - [x] RSlider
+    - [x] RSliderInt
   - [x] RLabel
     - [x] RLinkLabel
   - [x] RTextbox

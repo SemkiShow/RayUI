@@ -9,13 +9,13 @@ void RTextbox::CheckEditing()
 {
     auto beginEditing = [this]()
     {
-        isSelected = true;
+        selected = true;
         highlighted = true;
     };
 
     auto stopEditing = [this]()
     {
-        isSelected = false;
+        selected = false;
         highlighted = false;
         finishedEditing = true;
     };
@@ -31,7 +31,7 @@ void RTextbox::Update()
     RWidget::Update();
     CheckEditing();
 
-    if (isSelected)
+    if (selected)
     {
         text += GetCharsPressed();
         if (rui::IsKeyPressed(RKey::Backspace))
@@ -53,7 +53,7 @@ void RTextbox::Draw()
     rui::BeginScissorMode(textBounds);
     if (font)
     {
-        if (text.empty() && !isSelected)
+        if (text.empty() && !selected)
         {
             rui::DrawTextFont(*font, promptText, textBounds.GetPosition(), textBounds.height,
                               fontSpacing, GetThemeColor(RThemeList::Text, RThemeState::Disabled));
@@ -69,7 +69,7 @@ void RTextbox::Draw()
     }
     else
     {
-        if (text.empty() && !isSelected)
+        if (text.empty() && !selected)
         {
             rui::DrawText(promptText, textBounds.GetPosition(), textBounds.height,
                           GetThemeColor(RThemeList::Text, RThemeState::Disabled));

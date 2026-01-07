@@ -158,6 +158,15 @@ void Utf8PopBack(std::string& s)
     s.erase(lastCharByteIndex);
 }
 
+float Map(float val, float oldMin, float oldMax, float newMin, float newMax)
+{
+    float newVal = std::max(oldMin, std::min(oldMax, val));
+    newVal -= oldMin;
+    newVal *= (newMax - newMin) / (oldMax - oldMin);
+    newVal += newMin;
+    return newVal;
+}
+
 std::ostream& operator<<(std::ostream& out, const RVector2& vec)
 {
     out << std::to_string(vec.x) << ' ' << std::to_string(vec.y);

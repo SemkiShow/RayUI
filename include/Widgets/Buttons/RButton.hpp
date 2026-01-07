@@ -19,6 +19,12 @@ class RButton : public RWidget
 
     void Draw() override;
 
+    void SetRadius(float val) { radius = val; }
+    void SetSegments(int val) { segments = val; }
+
+    float GetRadius() { return radius; }
+    int GetSegments() { return segments; }
+
     bool IsClicked() { return IsMouseLeftReleased(); }
 
   protected:

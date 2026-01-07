@@ -14,7 +14,7 @@
 #include "Core/Themes.hpp"       // IWYU pragma: export
 
 // Widgets/Buttons
-#include "Widgets/Buttons/RButton.hpp" // IWYU pragma: export
+#include "Widgets/Buttons/RButton.hpp"      // IWYU pragma: export
 #include "Widgets/Buttons/RLabelButton.hpp" // IWYU pragma: export
 
 // Widgets/ColorPickers
@@ -40,6 +40,7 @@
 #include "Widgets/Separators/RBar.hpp" // IWYU pragma: export
 
 // Widgets/Sliders
+#include "Widgets/Sliders/RSlider.hpp" // IWYU pragma: export
 
 // Widgets/Textboxes
 #include "Widgets/Textboxes/RTextbox.hpp"       // IWYU pragma: export

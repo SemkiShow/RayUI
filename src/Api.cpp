@@ -76,6 +76,17 @@ void DrawRectangleRoundedLines(RRectangle rec, float roundness, int segments, fl
                                   ToRaylib(color));
 }
 
+void DrawCircle(RVector2 pos, float radius, RColor color)
+{
+    ::DrawCircle(pos.x, pos.y, radius, ToRaylib(color));
+}
+
+void DrawCircleLines(RVector2 pos, float radius, float lineThickness, int segments, RColor color)
+{
+    ::DrawRing(ToRaylib(pos), radius - lineThickness / 2, radius + lineThickness / 2, 0, 360,
+                    segments, ToRaylib(color));
+}
+
 void DrawText(const std::string& text, RVector2 pos, float fontSize, RColor color)
 {
     ::DrawText(text.c_str(), pos.x, pos.y, fontSize, ToRaylib(color));

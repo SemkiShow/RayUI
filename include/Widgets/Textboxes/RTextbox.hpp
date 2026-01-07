@@ -52,7 +52,7 @@ class RTextbox : public RWidget
 
   protected:
     std::string promptText, text;
-    bool isSelected = false;
+    bool selected = false;
     float radius = 3;
     int segments = 16;
     float margin = 5;

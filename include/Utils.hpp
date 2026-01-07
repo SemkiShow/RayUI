@@ -264,6 +264,8 @@ std::vector<std::string> Split(const std::string& s, char delimiter = ' ');
 std::string GetCharsPressed();
 void Utf8PopBack(std::string& s);
 
+float Map(float val, float oldMin, float oldMax, float newMin, float newMax);
+
 std::ostream& operator<<(std::ostream& out, const RVector2& vec);
 std::ostream& operator<<(std::ostream& out, const RRectangle& rec);
 std::ostream& operator<<(std::ostream& out, const RColor& color);

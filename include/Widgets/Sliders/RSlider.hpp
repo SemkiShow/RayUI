@@ -1,0 +1,123 @@
+// SPDX-FileCopyrightText: 2026 SemkiShow
+//
+// SPDX-License-Identifier: MIT
+
+#pragma once
+
+#include "Core/RWidget.hpp"
+#include <iomanip>
+#include <sstream>
+
+enum class RSliderType
+{
+    Regular,
+    Rectangle
+};
+
+template <typename T>
+class RBaseSlider : public RWidget
+{
+  public:
+    RBaseSlider() { maxSize.y = minSize.y; }
+    RBaseSlider(T value, T minValue, T maxValue, RSliderType type = RSliderType::Regular)
+        : RBaseSlider()
+    {
+        this->value = value;
+        this->minValue = minValue;
+        this->maxValue = maxValue;
+        this->type = type;
+    }
+    virtual ~RBaseSlider() = default;
+
+    void Update() override;
+    void Draw() override;
+
+    void SetValue(float val) { value = val; }
+
+    float GetValue() { return value; }
+
+    std::string GetValueString()
+    {
+        std::stringstream ss;
+        ss << std::fixed << std::setprecision(1) << value;
+        return ss.str();
+    }
+
+    void SetMinValue(float val) { minValue = val; }
+
+    float GetMinValue() { return minValue; }
+
+    std::string GetMinValueString()
+    {
+        std::stringstream ss;
+        ss << std::fixed << std::setprecision(1) << minValue;
+        return ss.str();
+    }
+
+    void SetMaxValue(float val) { maxValue = val; }
+
+    float GetMaxValue() { return maxValue; }
+
+    std::string GetMaxValueString()
+    {
+        std::stringstream ss;
+        ss << std::fixed << std::setprecision(1) << maxValue;
+        return ss.str();
+    }
+
+    void SetSegments(int val) { segments = val; }
+
+    int GetSegments() { return segments; }
+
+    void SetType(RSliderType val) { type = val; }
+
+    RSliderType GetType() { return type; }
+
+    void SetRecHeightPercent(float val) { recHeightPercent = val; }
+
+    float GetRecHeightPercent() { return recHeightPercent; }
+
+    void SetPadding(float val) { padding = val; }
+
+    float GetPadding() { return padding; }
+
+    void SetRadius(float val) { radius = val; }
+
+    float GetRadius() { return radius; }
+
+    void SetSliderWidth(float val) { sliderWidth = val; }
+
+    float GetSliderWidth() { return sliderWidth; }
+
+    void SetMarging(float val) { margin = val; }
+
+    float GetMargin() { return margin; }
+
+  protected:
+    T value = 0, minValue = 0, maxValue = 1;
+    int segments = 16;
+    RSliderType type = RSliderType::Regular;
+
+    // RSliderType::Regular
+    float recHeightPercent = 0.25f;
+    float padding = 5;
+
+    // RSliderType::Rectangle
+    float radius = 5;
+    float sliderWidth = 10;
+    float margin = 5;
+
+    void CheckSelected();
+
+    void UpdateRegular();
+    void UpdateRectangle();
+
+    void DrawRegular();
+    void DrawRectangle();
+
+  private:
+    bool selected = false;
+};
+
+using RSlider = RBaseSlider<float>;
+using RSliderInt = RBaseSlider<int>;

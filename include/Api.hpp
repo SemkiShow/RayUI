@@ -30,9 +30,13 @@ void GetCodepointNext(const char* text, int* codepointSize);
 
 void DrawRectangle(RRectangle rec, RColor color);
 void DrawRectangleLines(RRectangle rec, float lineThickness, RColor color);
+
 void DrawRectangleRounded(RRectangle rec, float roundness, int segments, RColor color);
 void DrawRectangleRoundedLines(RRectangle rec, float roundness, int segments, float lineThickness,
                                RColor color);
+
+void DrawCircle(RVector2 pos, float radius, RColor color);
+void DrawCircleLines(RVector2 pos, float radius, float lineThickness, int segments, RColor color);
 
 void DrawText(const std::string& text, RVector2 pos, float fontSize, RColor color);
 void DrawTextFont(RFont font, const std::string& text, RVector2 pos, float fontSize, float spacing,

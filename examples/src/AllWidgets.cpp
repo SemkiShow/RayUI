@@ -5,7 +5,6 @@
 #include <RayUI.hpp>
 #include <iostream>
 #include <raylib.h>
-#include <raymath.h>
 
 Vector2 windowSize{16 * 50, 9 * 50};
 std::shared_ptr<RApplication> app;
@@ -37,6 +36,12 @@ class MainWindow : public RWindow
 
         auto button = std::make_shared<RLabelButton>("Click me");
         layout->AddWidget(button);
+
+        auto slider = std::make_shared<RSlider>(0, 0, 20, RSliderType::Rectangle);
+        layout->AddWidget(slider);
+
+        auto sliderInt = std::make_shared<RSliderInt>(0, 0, 20, RSliderType::Rectangle);
+        layout->AddWidget(sliderInt);
 
         Connect([button]() { return button->IsClicked(); },
                 []() { std::cout << "RLabelButton is clicked!\n"; });
