@@ -25,6 +25,7 @@ void RPane::Update()
     if (updateBounds)
     {
         updateBounds = false;
+        bounds = ClampBounds(bounds, minSize, maxSize);
         if (layout && layout->IsVisible())
         {
             layout->SetBounds(GetBounds());

@@ -23,14 +23,16 @@ void RWindow::Update()
     {
         updateBounds = false;
 
-        SetSize(rui::GetWindowSize());
+        auto windowSize = rui::GetWindowSize();
+        SetSize(GetMaxSize());
+        if (maxSize.x < 0) SetWidth(windowSize.x);
+        if (maxSize.y < 0) SetHeight(windowSize.y);
+        bounds = ClampBounds(bounds, minSize, maxSize);
 
         if (centralWidget && centralWidget->IsVisible())
         {
             auto centralWidgetBounds = GetBounds();
             centralWidgetBounds = AddMargin(centralWidgetBounds, margin);
-            centralWidgetBounds = ClampBounds(centralWidgetBounds, centralWidget->GetMinSize(),
-                                              centralWidget->GetMaxSize());
             centralWidget->SetBounds(centralWidgetBounds);
             centralWidget->UpdateBounds();
         }

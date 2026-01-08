@@ -98,6 +98,7 @@ void RHBoxLayout::Shrink()
 
     // Set shrinked size
     SetHeight(newHeight + 2 * margin);
+    bounds = ClampBounds(bounds, minSize, maxSize);
 }
 
 void RHBoxLayout::Update()
@@ -145,8 +146,6 @@ void RHBoxLayout::Update()
             widget->SetWidth(widget->GetMaxWidth());
         }
         widget->SetHeight(maxHeight);
-        widget->SetBounds(
-            ClampBounds(widget->GetBounds(), widget->GetMinSize(), widget->GetMaxSize()));
     }
 
     // Update widgets

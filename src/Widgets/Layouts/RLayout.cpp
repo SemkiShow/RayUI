@@ -22,6 +22,7 @@ void RLayout::Update()
     if (updateBounds)
     {
         updateBounds = false;
+        bounds = ClampBounds(bounds, minSize, maxSize);
         for (auto& widget: widgets)
         {
             if (widget->IsVisible()) widget->UpdateBounds();

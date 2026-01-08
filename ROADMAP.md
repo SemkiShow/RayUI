@@ -5,7 +5,7 @@
 - [x] RApplication
 - [x] RWidget
   - [x] RWindow
-    - [ ] RPopupWindow
+    - [x] RPopupWindow
     - [ ] ROkCancelWindow
   - [x] RButton
     - [x] RLabelButton

@@ -101,6 +101,7 @@ void RVBoxLayout::Shrink()
 
     // Set shrinked size
     SetWidth(newWidth + 2 * margin);
+    bounds = ClampBounds(bounds, minSize, maxSize);
 }
 
 void RVBoxLayout::Update()
@@ -148,8 +149,6 @@ void RVBoxLayout::Update()
             widget->SetHeight(widget->GetMaxHeight());
         }
         widget->SetWidth(maxWidth);
-        widget->SetBounds(
-            ClampBounds(widget->GetBounds(), widget->GetMinSize(), widget->GetMaxSize()));
     }
 
     // Update widgets

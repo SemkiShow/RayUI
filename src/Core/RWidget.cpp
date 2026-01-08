@@ -37,6 +37,7 @@ void RWidget::Update()
     if (updateBounds)
     {
         updateBounds = false;
+        bounds = ClampBounds(bounds, minSize, maxSize);
         Shrink();
     }
 }

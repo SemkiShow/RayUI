@@ -35,6 +35,7 @@ float ClampWidth(float val, float min, float max)
 {
     if (min < 0) return -1;
     if (max < 0) return std::max(min, val);
+    if (val < 0) return max;
     return std::min(max, val);
 }
 

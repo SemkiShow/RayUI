@@ -8,6 +8,7 @@
 
 Vector2 windowSize{16 * 50, 9 * 50};
 std::shared_ptr<RApplication> app;
+std::shared_ptr<RWindow> popupWindow;
 
 class MainWindow : public RWindow
 {
@@ -57,7 +58,11 @@ class MainWindow : public RWindow
         colorLayout->AddWidget(iconButton);
 
         Connect([iconButton]() { return iconButton->IsClicked(); },
-                []() { std::cout << "RIconButton is clicked!\n"; });
+                []()
+                {
+                    std::cout << "RIconButton is clicked!\n";
+                    popupWindow->SetVisible(true);
+                });
 
         auto bar = std::make_shared<RBar>();
         bar->SetAlignment(RAlign::VCenter);
@@ -109,12 +114,30 @@ class MainWindow : public RWindow
     }
 };
 
+class PopupWindow : public RPopupWindow
+{
+  public:
+    PopupWindow()
+    {
+        auto layout = std::make_shared<RVBoxLayout>();
+        SetCentralWidget(layout);
+
+        auto label =
+            std::make_shared<RLabel>("This is a popup window\nYou can drag it by the title bar!");
+        layout->AddWidget(label);
+    }
+};
+
 void InitUI()
 {
     app = std::make_shared<RApplication>();
 
     auto mainWindow = std::make_shared<MainWindow>();
     app->AddWindow(mainWindow);
+
+    popupWindow = std::make_shared<PopupWindow>();
+    popupWindow->SetVisible(false);
+    app->AddWindow(popupWindow);
 
     // app->SetTheme(std::make_shared<RThemeDark>());
 }
