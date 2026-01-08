@@ -73,6 +73,10 @@ class RBaseSlider : public RWidget
 
     RSliderType GetType() { return type; }
 
+    void SetShowValue(bool val) { showValue = val; }
+
+    bool IsShowValue() { return showValue; }
+
     void SetRecHeightPercent(float val) { recHeightPercent = val; }
 
     float GetRecHeightPercent() { return recHeightPercent; }
@@ -100,6 +104,7 @@ class RBaseSlider : public RWidget
     T value = 0, minValue = 0, maxValue = 1;
     int segments = 16;
     RSliderType type = RSliderType::Regular;
+    float showValue = true;
 
     // RSliderType::Regular
     float recHeightPercent = 0.25f;
