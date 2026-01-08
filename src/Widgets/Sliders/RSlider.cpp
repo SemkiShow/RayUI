@@ -83,6 +83,13 @@ void RBaseSlider<T>::DrawRegular()
     RVector2 circlePos;
     circlePos.x = Map(value, minValue, maxValue, recBounds.x, recBounds.x + recBounds.width);
     circlePos.y = recBounds.y + recBounds.height / 2;
+
+    RRectangle highlightBounds = {recBounds.x, recBounds.y, circlePos.x - recBounds.x,
+                                  recBounds.height};
+    rui::DrawRectangleRoundedBorder(highlightBounds, 1, segments, borderThickness,
+                                    GetThemeColor(themeList, RThemeState::Highlighted), *theme,
+                                    themeState);
+
     rui::DrawCircleBorder(circlePos, bounds.height / 2, borderThickness, segments, color, *theme,
                           themeState);
 
@@ -105,6 +112,13 @@ void RBaseSlider<T>::DrawRectangle()
     sliderPos.x = Map(value, minValue, maxValue, bounds.x + borderThickness,
                       bounds.x + bounds.width - borderThickness - sliderWidth);
     sliderPos.y = bounds.y + borderThickness;
+
+    RRectangle highlightBounds = {bounds.x, bounds.y, sliderPos.x - bounds.x + sliderWidth,
+                                  bounds.height};
+    rui::DrawRectangleRoundedBorder(highlightBounds, roundness, segments, borderThickness,
+                                    GetThemeColor(themeList, RThemeState::Highlighted), *theme,
+                                    themeState);
+
     rui::DrawRectangleRoundedBorder(
         {sliderPos.x, sliderPos.y, sliderWidth, bounds.height - borderThickness * 2}, roundness,
         segments, borderThickness, color, *theme, themeState);
