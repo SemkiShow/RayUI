@@ -132,3 +132,8 @@ RThemeDark::RThemeDark()
     colors[background][highlighted] =
         RColor{"#ffffff"} - lightTheme.colors[background][highlighted];
 }
+
+RColor GetThemeColor(RTheme theme, RThemeList themeList, RThemeState themeState)
+{
+    return theme.colors[static_cast<int>(themeList)][static_cast<int>(themeState)];
+}

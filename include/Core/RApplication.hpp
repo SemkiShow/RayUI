@@ -26,10 +26,15 @@ class RApplication
 
     void SetScale(float val);
 
+    bool IsWindowSizeChanged() { return windowSizeChanged; }
+
   protected:
     bool updateBounds = true;
     std::vector<std::shared_ptr<RWindow>> windows;
     RVector2 lastWindowSize{-1, -1};
 
     virtual bool PollEvents();
+
+  private:
+    bool windowSizeChanged = false;
 };

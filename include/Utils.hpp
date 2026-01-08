@@ -4,7 +4,6 @@
 
 #pragma once
 
-#include <array>
 #include <ostream>
 #include <vector>
 
@@ -73,33 +72,6 @@ struct RFont
     RTexture texture;  // Texture atlas containing the glyphs
     Rectangle* recs;   // Rectangles in texture for the glyphs
     GlyphInfo* glyphs; // Glyphs info data
-};
-
-constexpr size_t R_THEME_LIST_SIZE = 5;
-enum class RThemeList
-{
-    Primary,
-    Secondary,
-    Border,
-    Text,
-    Background
-};
-
-constexpr size_t R_THEME_STATE_SIZE = 5;
-enum class RThemeState
-{
-    Default,
-    Hovered,
-    Clicked,
-    Disabled,
-    Highlighted
-};
-
-struct RTheme
-{
-    RColor hoveredTint, clickedTint, disabledTint, highlightedTint;
-    RColor linkTint;
-    std::array<std::array<RColor, R_THEME_STATE_SIZE>, R_THEME_LIST_SIZE> colors;
 };
 
 enum class RMouseButton

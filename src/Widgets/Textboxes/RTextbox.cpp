@@ -44,44 +44,24 @@ void RTextbox::Update()
 void RTextbox::Draw()
 {
     float roundness = radius * 2 / std::min(bounds.width, bounds.height);
-    rui::DrawRectangleRounded(bounds, roundness, segments, color);
-    rui::DrawRectangleRoundedLines(bounds, roundness, segments, borderThickness,
-                                   GetThemeColor(RThemeList::Border, themeState));
+    rui::DrawRectangleRoundedBorder(bounds, roundness, segments, borderThickness, color, *theme,
+                                    themeState);
 
     RRectangle textBounds = bounds;
     textBounds = AddMargin(textBounds, margin);
     rui::BeginScissorMode(textBounds);
-    if (font)
+    if (text.empty() && !selected)
     {
-        if (text.empty() && !selected)
-        {
-            rui::DrawTextFont(*font, promptText, textBounds.GetPosition(), textBounds.height,
-                              fontSpacing, GetThemeColor(RThemeList::Text, RThemeState::Disabled));
-        }
-        else
-        {
-            RVector2 textSize = rui::MeasureTextFont(*font, text, textBounds.height, fontSpacing);
-            RVector2 pos = textBounds.GetPosition();
-            if (textSize.x > textBounds.width) pos.x += textBounds.width - textSize.x;
-            rui::DrawTextFont(*font, text, pos, textBounds.height, fontSpacing,
-                              GetThemeColor(RThemeList::Text, RThemeState::Default));
-        }
+        rui::DrawText(font, promptText, textBounds.GetPosition(), textBounds.height, fontSpacing,
+                      GetThemeColor(RThemeList::Text, RThemeState::Disabled));
     }
     else
     {
-        if (text.empty() && !selected)
-        {
-            rui::DrawText(promptText, textBounds.GetPosition(), textBounds.height,
-                          GetThemeColor(RThemeList::Text, RThemeState::Disabled));
-        }
-        else
-        {
-            RVector2 textSize = rui::MeasureText(text, textBounds.height);
-            RVector2 pos = textBounds.GetPosition();
-            if (textSize.x > textBounds.width) pos.x += textBounds.width - textSize.x;
-            rui::DrawText(text, pos, textBounds.height,
-                          GetThemeColor(RThemeList::Text, RThemeState::Default));
-        }
+        RVector2 textSize = rui::MeasureText(font, text, textBounds.height, fontSpacing);
+        RVector2 pos = textBounds.GetPosition();
+        if (textSize.x > textBounds.width) pos.x += textBounds.width - textSize.x;
+        rui::DrawText(font, text, pos, textBounds.height, fontSpacing,
+                      GetThemeColor(RThemeList::Text, RThemeState::Default));
     }
     rui::EndScissorMode();
 }

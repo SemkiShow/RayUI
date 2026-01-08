@@ -16,10 +16,12 @@ bool RApplication::PollEvents()
 
 void RApplication::Update()
 {
+    if (windowSizeChanged) windowSizeChanged = false;
     if (rui::GetWindowSize() != lastWindowSize)
     {
         lastWindowSize = rui::GetWindowSize();
         updateBounds = true;
+        windowSizeChanged = true;
     }
     if (updateBounds)
     {

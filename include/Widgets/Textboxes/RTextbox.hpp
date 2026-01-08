@@ -48,6 +48,7 @@ class RTextbox : public RWidget
 
     void CheckEditing();
 
+    bool IsSelected() { return selected; }
     bool IsFinishedEditing() { return finishedEditing; }
 
   protected:

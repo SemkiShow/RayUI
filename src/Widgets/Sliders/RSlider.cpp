@@ -21,11 +21,7 @@ void RBaseSlider<T>::CheckSelected()
 template <typename T>
 void RBaseSlider<T>::UpdateRegular()
 {
-    RVector2 textSize;
-    if (font)
-        textSize = rui::MeasureTextFont(*font, GetMaxValueString(), bounds.height, fontSpacing);
-    else
-        textSize = rui::MeasureText(GetMaxValueString(), bounds.height);
+    RVector2 textSize = rui::MeasureText(font, GetMaxValueString(), bounds.height, fontSpacing);
 
     RRectangle recBounds = {
         bounds.x + bounds.height / 2, bounds.y + bounds.height * (1 - recHeightPercent) / 2,
@@ -68,67 +64,45 @@ void RBaseSlider<T>::Update()
 template <typename T>
 void RBaseSlider<T>::DrawRegular()
 {
-    RVector2 textSize;
-    if (font)
-        textSize = rui::MeasureTextFont(*font, GetMaxValueString(), bounds.height, fontSpacing);
-    else
-        textSize = rui::MeasureText(GetMaxValueString(), bounds.height);
+    RVector2 textSize = rui::MeasureText(font, GetMaxValueString(), bounds.height, fontSpacing);
 
     RRectangle recBounds = {
         bounds.x + bounds.height / 2, bounds.y + bounds.height * (1 - recHeightPercent) / 2,
         bounds.width - bounds.height - padding - textSize.x, bounds.height * recHeightPercent};
-    rui::DrawRectangleRounded(recBounds, 1, recBounds.height, color);
-    rui::DrawRectangleRoundedLines(recBounds, 1, recBounds.height, borderThickness,
-                                   GetThemeColor(RThemeList::Border, themeState));
+    rui::DrawRectangleRoundedBorder(recBounds, 1, recBounds.height, borderThickness, color, *theme,
+                                    themeState);
 
     RVector2 circlePos;
     circlePos.x = Map(value, minValue, maxValue, recBounds.x, recBounds.x + recBounds.width);
     circlePos.y = recBounds.y + recBounds.height / 2;
-    rui::DrawCircle(circlePos, bounds.height / 2, color);
-    rui::DrawCircleLines(circlePos, bounds.height / 2, borderThickness, segments,
-                         GetThemeColor(RThemeList::Border, themeState));
+    rui::DrawCircleBorder(circlePos, bounds.height / 2, borderThickness, segments, color, *theme,
+                          themeState);
 
     RVector2 textPos{recBounds.x + recBounds.width + bounds.height / 2 + padding, bounds.y};
-    if (font)
-        rui::DrawTextFont(*font, GetValueString(), textPos, bounds.height, fontSpacing,
-                          GetThemeColor(RThemeList::Text, themeState));
-    else
-        rui::DrawText(GetValueString(), textPos, bounds.height,
-                      GetThemeColor(RThemeList::Text, themeState));
+    rui::DrawText(font, GetValueString(), textPos, bounds.height, fontSpacing,
+                  GetThemeColor(RThemeList::Text, themeState));
 }
 
 template <typename T>
 void RBaseSlider<T>::DrawRectangle()
 {
     float roundness = radius * 2 / std::min(bounds.width, bounds.height);
-    rui::DrawRectangleRounded(bounds, roundness, bounds.height, color);
-    rui::DrawRectangleRoundedLines(bounds, roundness, bounds.height, borderThickness,
-                                   GetThemeColor(RThemeList::Border, themeState));
+    rui::DrawRectangleRoundedBorder(bounds, roundness, bounds.height, borderThickness, color,
+                                    *theme, themeState);
 
     RVector2 sliderPos;
     sliderPos.x = Map(value, minValue, maxValue, bounds.x + borderThickness,
                       bounds.x + bounds.width - borderThickness - sliderWidth);
     sliderPos.y = bounds.y + borderThickness;
-    rui::DrawRectangleRounded(
+    rui::DrawRectangleRoundedBorder(
         {sliderPos.x, sliderPos.y, sliderWidth, bounds.height - borderThickness * 2}, roundness,
-        segments, GetThemeColor(RThemeList::Secondary, themeState));
-    rui::DrawRectangleRoundedLines(
-        {sliderPos.x, sliderPos.y, sliderWidth, bounds.height - borderThickness * 2}, roundness,
-        segments, borderThickness, GetThemeColor(RThemeList::Border, themeState));
+        segments, borderThickness, color, *theme, themeState);
 
-    RVector2 textSize;
-    if (font)
-        textSize = rui::MeasureTextFont(*font, GetMaxValueString(), bounds.height, fontSpacing);
-    else
-        textSize = rui::MeasureText(GetMaxValueString(), bounds.height);
+    RVector2 textSize = rui::MeasureText(font, GetMaxValueString(), bounds.height, fontSpacing);
 
     RVector2 textPos{bounds.x + (bounds.width - textSize.x) / 2, bounds.y + margin};
-    if (font)
-        rui::DrawTextFont(*font, GetValueString(), textPos, bounds.height - 2 * margin, fontSpacing,
-                          GetThemeColor(RThemeList::Text, themeState));
-    else
-        rui::DrawText(GetValueString(), textPos, bounds.height - 2 * margin,
-                      GetThemeColor(RThemeList::Text, themeState));
+    rui::DrawText(font, GetValueString(), textPos, bounds.height - 2 * margin, fontSpacing,
+                  GetThemeColor(RThemeList::Text, themeState));
 }
 
 template <typename T>

@@ -7,18 +7,8 @@
 
 void RLabel::Shrink()
 {
-    RVector2 size;
-    if (font)
-        size = rui::MeasureTextFont(*font, text, maxSize.y, fontSpacing);
-    else
-        size = rui::MeasureText(text, maxSize.y);
+    RVector2 size = rui::MeasureText(font, text, maxSize.y, fontSpacing);
     SetSize(size);
 }
 
-void RLabel::Draw()
-{
-    if (font)
-        rui::DrawTextFont(*font, text, GetPosition(), maxSize.y, fontSpacing, color);
-    else
-        rui::DrawText(text, GetPosition(), maxSize.y, color);
-}
+void RLabel::Draw() { rui::DrawText(font, text, GetPosition(), maxSize.y, fontSpacing, color); }

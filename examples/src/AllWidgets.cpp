@@ -43,7 +43,7 @@ class MainWindow : public RWindow
         auto slider = std::make_shared<RSlider>(0, 0, 20, RSliderType::Rectangle);
         layout->AddWidget(slider);
 
-        auto sliderInt = std::make_shared<RSliderInt>(0, 0, 20, RSliderType::Rectangle);
+        auto sliderInt = std::make_shared<RSliderInt>(0, 0, 20);
         layout->AddWidget(sliderInt);
 
         auto colorLayout = std::make_shared<RHBoxLayout>();
