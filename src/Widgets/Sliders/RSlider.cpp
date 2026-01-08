@@ -90,8 +90,8 @@ void RBaseSlider<T>::DrawRegular()
                                     GetThemeColor(themeList, RThemeState::Highlighted), *theme,
                                     themeState);
 
-    rui::DrawCircleBorder(circlePos, bounds.height / 2, borderThickness, segments, color, *theme,
-                          themeState);
+    rui::DrawCircleBorder(circlePos, bounds.height / 2, borderThickness, segments,
+                          GetThemeColor(RThemeList::Secondary, themeState), *theme, themeState);
 
     if (showValue)
     {
@@ -121,7 +121,8 @@ void RBaseSlider<T>::DrawRectangle()
 
     rui::DrawRectangleRoundedBorder(
         {sliderPos.x, sliderPos.y, sliderWidth, bounds.height - borderThickness * 2}, roundness,
-        segments, borderThickness, color, *theme, themeState);
+        segments, borderThickness, GetThemeColor(RThemeList::Secondary, themeState), *theme,
+        themeState);
 
     if (showValue)
     {
