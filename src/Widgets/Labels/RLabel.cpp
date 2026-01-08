@@ -3,7 +3,6 @@
 // SPDX-License-Identifier: MIT
 
 #include "Widgets/Labels/RLabel.hpp"
-#include "Api.hpp"
 
 void RLabel::Shrink()
 {

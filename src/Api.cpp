@@ -64,13 +64,6 @@ void DrawRectangleLines(RRectangle rec, float lineThickness, RColor color)
     ::DrawRectangleLinesEx(ToRaylib(rec), lineThickness, ToRaylib(color));
 }
 
-void DrawRectangleBorder(RRectangle rec, float borderThickness, RColor color, RTheme theme,
-                         RThemeState themeState)
-{
-    DrawRectangle(rec, color);
-    DrawRectangleLines(rec, borderThickness, GetThemeColor(theme, RThemeList::Border, themeState));
-}
-
 void DrawRectangleRounded(RRectangle rec, float roundness, int segments, RColor color)
 {
     ::DrawRectangleRounded(ToRaylib(rec), roundness, segments, ToRaylib(color));
@@ -83,15 +76,6 @@ void DrawRectangleRoundedLines(RRectangle rec, float roundness, int segments, fl
                                   ToRaylib(color));
 }
 
-void DrawRectangleRoundedBorder(RRectangle rec, float roundness, int segments,
-                                float borderThickness, RColor color, RTheme theme,
-                                RThemeState themeState)
-{
-    DrawRectangleRounded(rec, roundness, segments, color);
-    DrawRectangleRoundedLines(rec, roundness, segments, borderThickness,
-                              GetThemeColor(theme, RThemeList::Border, themeState));
-}
-
 void DrawCircle(RVector2 pos, float radius, RColor color)
 {
     ::DrawCircle(pos.x, pos.y, radius, ToRaylib(color));
@@ -101,13 +85,6 @@ void DrawCircleLines(RVector2 pos, float radius, float lineThickness, int segmen
 {
     ::DrawRing(ToRaylib(pos), radius - lineThickness / 2, radius + lineThickness / 2, 0, 360,
                segments, ToRaylib(color));
-}
-void DrawCircleBorder(RVector2 pos, float radius, float borderThickness, int segments, RColor color,
-                      RTheme theme, RThemeState themeState)
-{
-    DrawCircle(pos, radius, color);
-    DrawCircleLines(pos, radius, borderThickness, segments,
-                    GetThemeColor(theme, RThemeList::Border, themeState));
 }
 
 void DrawText(const std::string& text, RVector2 pos, float fontSize, RColor color)
@@ -121,19 +98,6 @@ void DrawTextFont(RFont font, const std::string& text, RVector2 pos, float fontS
     ::DrawTextEx(ToRaylib(font), text.c_str(), ToRaylib(pos), fontSize, spacing, ToRaylib(color));
 }
 
-void DrawText(std::shared_ptr<RFont> font, const std::string& text, RVector2 pos, float fontSize,
-              float spacing, RColor color)
-{
-    if (font)
-    {
-        DrawTextFont(*font, text, pos, fontSize, spacing, color);
-    }
-    else
-    {
-        DrawText(text, pos, fontSize, color);
-    }
-}
-
 RVector2 MeasureText(const std::string& text, float fontSize)
 {
     auto res = ::MeasureText(text.c_str(), fontSize);
@@ -144,26 +108,6 @@ RVector2 MeasureTextFont(RFont font, const std::string& text, float fontSize, fl
 {
     auto res = ::MeasureTextEx(ToRaylib(font), text.c_str(), fontSize, spacing);
     return FromRaylib(res);
-}
-
-RVector2 MeasureText(std::shared_ptr<RFont> font, const std::string& text, float fontSize,
-                     float spacing)
-{
-    RVector2 size;
-    if (font)
-    {
-        size = MeasureTextFont(*font, text, fontSize, spacing);
-        auto split = Split(text, '\n');
-        size.y *= split.size();
-        size.y += (split.size() - 1) * spacing;
-    }
-    else
-    {
-        size = MeasureText(text, fontSize);
-        auto split = Split(text, '\n');
-        size.y *= split.size();
-    }
-    return size;
 }
 
 void BeginScissorMode(RRectangle rec) { ::BeginScissorMode(rec.x, rec.y, rec.width, rec.height); }

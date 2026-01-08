@@ -3,7 +3,6 @@
 // SPDX-License-Identifier: MIT
 
 #include "Widgets/Panes/RPane.hpp"
-#include "Api.hpp"
 
 void RPane::ResetEvents()
 {

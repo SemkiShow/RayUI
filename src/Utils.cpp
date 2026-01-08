@@ -4,6 +4,7 @@
 
 #include "Utils.hpp"
 #include "Api.hpp"
+#include "Core/Themes.hpp"
 #include <algorithm>
 #include <codecvt>
 #include <locale>
@@ -167,6 +168,68 @@ float Map(float val, float oldMin, float oldMax, float newMin, float newMax)
     newVal += newMin;
     return newVal;
 }
+
+namespace rui
+{
+
+void DrawRectangleBorder(RRectangle rec, float borderThickness, RColor color, RTheme theme,
+                         RThemeState themeState)
+{
+    DrawRectangle(rec, color);
+    DrawRectangleLines(rec, borderThickness, GetThemeColor(theme, RThemeList::Border, themeState));
+}
+
+void DrawRectangleRoundedBorder(RRectangle rec, float roundness, int segments,
+                                float borderThickness, RColor color, RTheme theme,
+                                RThemeState themeState)
+{
+    DrawRectangleRounded(rec, roundness, segments, color);
+    DrawRectangleRoundedLines(rec, roundness, segments, borderThickness,
+                              GetThemeColor(theme, RThemeList::Border, themeState));
+}
+
+void DrawCircleBorder(RVector2 pos, float radius, float borderThickness, int segments, RColor color,
+                      RTheme theme, RThemeState themeState)
+{
+    DrawCircle(pos, radius, color);
+    DrawCircleLines(pos, radius, borderThickness, segments,
+                    GetThemeColor(theme, RThemeList::Border, themeState));
+}
+
+void DrawText(std::shared_ptr<RFont> font, const std::string& text, RVector2 pos, float fontSize,
+              float spacing, RColor color)
+{
+    if (font)
+    {
+        DrawTextFont(*font, text, pos, fontSize, spacing, color);
+    }
+    else
+    {
+        DrawText(text, pos, fontSize, color);
+    }
+}
+
+RVector2 MeasureText(std::shared_ptr<RFont> font, const std::string& text, float fontSize,
+                     float spacing)
+{
+    RVector2 size;
+    if (font)
+    {
+        size = MeasureTextFont(*font, text, fontSize, spacing);
+        auto split = Split(text, '\n');
+        size.y *= split.size();
+        size.y += (split.size() - 1) * spacing;
+    }
+    else
+    {
+        size = MeasureText(text, fontSize);
+        auto split = Split(text, '\n');
+        size.y *= split.size();
+    }
+    return size;
+}
+
+} // namespace rui
 
 std::ostream& operator<<(std::ostream& out, const RVector2& vec)
 {

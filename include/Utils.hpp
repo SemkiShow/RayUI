@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <memory>
 #include <ostream>
 #include <vector>
 
@@ -237,6 +238,30 @@ std::string GetCharsPressed();
 void Utf8PopBack(std::string& s);
 
 float Map(float val, float oldMin, float oldMax, float newMin, float newMax);
+
+enum class RThemeState;
+struct RTheme;
+
+namespace rui
+{
+
+void DrawRectangleBorder(RRectangle rec, float borderThickness, RColor color, RTheme theme,
+                         RThemeState themeState);
+
+void DrawRectangleRoundedBorder(RRectangle rec, float roundness, int segments,
+                                float borderThickness, RColor color, RTheme theme,
+                                RThemeState themeState);
+
+void DrawCircleBorder(RVector2 pos, float radius, float borderThickness, int segments, RColor color,
+                      RTheme theme, RThemeState themeState);
+
+void DrawText(std::shared_ptr<RFont> font, const std::string& text, RVector2 pos, float fontSize,
+              float spacing, RColor color);
+
+RVector2 MeasureText(std::shared_ptr<RFont> font, const std::string& text, float fontSize,
+                     float spacing);
+
+} // namespace rui
 
 std::ostream& operator<<(std::ostream& out, const RVector2& vec);
 std::ostream& operator<<(std::ostream& out, const RRectangle& rec);

@@ -3,7 +3,6 @@
 // SPDX-License-Identifier: MIT
 
 #include "Widgets/Panes/RPaneRounded.hpp"
-#include "Api.hpp"
 
 void RPaneRounded::Draw()
 {
