@@ -4,6 +4,7 @@
 
 #include "Widgets/Windows/RPopupWindow.hpp"
 #include "Api.hpp"
+#include <algorithm>
 
 void RPopupWindow::ResetEvents()
 {
@@ -53,6 +54,12 @@ void RPopupWindow::Update()
         if (maxSize.x < 0) SetWidth(windowSize.x);
         if (maxSize.y < 0) SetHeight(windowSize.y);
         bounds = ClampBounds(bounds, minSize, maxSize);
+
+        float outOfWindowMargin = 2 * titleBarHeight;
+        bounds.x = std::clamp(bounds.x, outOfWindowMargin - bounds.width,
+                              windowSize.x - outOfWindowMargin);
+        bounds.y = std::clamp(bounds.y, outOfWindowMargin - bounds.height,
+                              windowSize.y - outOfWindowMargin);
 
         closeButton.SetPosition({bounds.x + bounds.width - titleBarHeight, bounds.y});
         closeButton.UpdateBounds();

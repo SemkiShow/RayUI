@@ -25,7 +25,13 @@ class RLayout : public RWidget
     void SetScale(float scale) override;
 
     void SetPadding(float val) { padding = val; }
+
+    float GetPadding() { return padding; }
+
     void SetMargin(float val) { margin = val; }
+
+    float GetMargin() { return margin; }
+
     void AddWidget(std::shared_ptr<RWidget> widget) { widgets.push_back(widget); }
 
   protected:

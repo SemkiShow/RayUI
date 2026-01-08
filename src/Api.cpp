@@ -149,14 +149,21 @@ RVector2 MeasureTextFont(RFont font, const std::string& text, float fontSize, fl
 RVector2 MeasureText(std::shared_ptr<RFont> font, const std::string& text, float fontSize,
                      float spacing)
 {
+    RVector2 size;
     if (font)
     {
-        return MeasureTextFont(*font, text, fontSize, spacing);
+        size = MeasureTextFont(*font, text, fontSize, spacing);
+        auto split = Split(text, '\n');
+        size.y *= split.size();
+        size.y += (split.size() - 1) * spacing;
     }
     else
     {
-        return MeasureText(text, fontSize);
+        size = MeasureText(text, fontSize);
+        auto split = Split(text, '\n');
+        size.y *= split.size();
     }
+    return size;
 }
 
 void BeginScissorMode(RRectangle rec) { ::BeginScissorMode(rec.x, rec.y, rec.width, rec.height); }

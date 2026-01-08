@@ -9,6 +9,8 @@
 Vector2 windowSize{16 * 50, 9 * 50};
 std::shared_ptr<RApplication> app;
 std::shared_ptr<RWindow> popupWindow;
+std::shared_ptr<ROkCancelWindow> okCancelWindow;
+bool shouldClose = false;
 
 class MainWindow : public RWindow
 {
@@ -125,6 +127,12 @@ class PopupWindow : public RPopupWindow
         auto label =
             std::make_shared<RLabel>("This is a popup window\nYou can drag it by the title bar!");
         layout->AddWidget(label);
+
+        auto button = std::make_shared<RLabelButton>("Show ok cancel window");
+        layout->AddWidget(button);
+
+        Connect([button]() { return button->IsClicked(); },
+                []() { okCancelWindow->SetVisible(true); });
     }
 };
 
@@ -138,6 +146,13 @@ void InitUI()
     popupWindow = std::make_shared<PopupWindow>();
     popupWindow->SetVisible(false);
     app->AddWindow(popupWindow);
+
+    okCancelWindow = std::make_shared<ROkCancelWindow>(
+        "Would you like to close the app?\nLine 2\nLine 3", "Yes", "No");
+    okCancelWindow->SetVisible(false);
+    okCancelWindow->Connect([]() { return okCancelWindow->IsOkClicked(); },
+                            []() { shouldClose = true; });
+    app->AddWindow(okCancelWindow);
 
     // app->SetTheme(std::make_shared<RThemeDark>());
 }
@@ -166,7 +181,7 @@ int main()
 
     InitUI();
 
-    while (!WindowShouldClose())
+    while (!shouldClose && !WindowShouldClose())
     {
         DrawFrame();
     }

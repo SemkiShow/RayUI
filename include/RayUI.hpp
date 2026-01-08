@@ -50,5 +50,6 @@
 #include "Widgets/Textboxes/RTextboxInt.hpp"    // IWYU pragma: export
 
 // Widgets/Windows
-#include "Widgets/Windows/RPopupWindow.hpp" // IWYU pragma: export
-#include "Widgets/Windows/RWindow.hpp"      // IWYU pragma: export
+#include "Widgets/Windows/ROkCancelWindow.hpp" // IWYU pragma: export
+#include "Widgets/Windows/RPopupWindow.hpp"    // IWYU pragma: export
+#include "Widgets/Windows/RWindow.hpp"         // IWYU pragma: export
