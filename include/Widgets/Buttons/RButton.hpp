@@ -17,6 +17,7 @@ class RButton : public RWidget
     }
     virtual ~RButton() = default;
 
+    void Update() override;
     void Draw() override;
 
     void SetRadius(float val) { radius = val; }
@@ -25,9 +26,12 @@ class RButton : public RWidget
     float GetRadius() { return radius; }
     int GetSegments() { return segments; }
 
-    bool IsClicked() { return IsMouseLeftReleased(); }
+    bool IsClicked() { return IsMouseLeftReleased() && wasSelected; }
 
   protected:
     float radius = 5;
     int segments = 16;
+
+  private:
+    bool selected = false, wasSelected = false;
 };

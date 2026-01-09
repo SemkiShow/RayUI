@@ -3,6 +3,22 @@
 // SPDX-License-Identifier: MIT
 
 #include "Widgets/Buttons/RButton.hpp"
+#include "Api.hpp"
+
+void RButton::Update()
+{
+    if (wasSelected) wasSelected = false;
+    if (IsMouseLeftPressed())
+    {
+        selected = true;
+    }
+    if (rui::IsMouseButtonReleased(RMouseButton::Left))
+    {
+        if (selected) wasSelected = true;
+        selected = false;
+    }
+    RWidget::Update();
+}
 
 void RButton::Draw()
 {
