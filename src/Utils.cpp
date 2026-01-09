@@ -212,21 +212,14 @@ void DrawText(std::shared_ptr<RFont> font, const std::string& text, RVector2 pos
 RVector2 MeasureText(std::shared_ptr<RFont> font, const std::string& text, float fontSize,
                      float spacing)
 {
-    RVector2 size;
     if (font)
     {
-        size = MeasureTextFont(*font, text, fontSize, spacing);
-        auto split = Split(text, '\n');
-        size.y *= split.size();
-        size.y += (split.size() - 1) * spacing;
+        return MeasureTextFont(*font, text, fontSize, spacing);
     }
     else
     {
-        size = MeasureText(text, fontSize);
-        auto split = Split(text, '\n');
-        size.y *= split.size();
+        return MeasureText(text, fontSize);
     }
-    return size;
 }
 
 } // namespace rui
