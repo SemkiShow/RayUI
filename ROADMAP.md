@@ -24,7 +24,8 @@
   - [x] RLayout
     - [x] RVBoxLayout
     - [x] RHBoxLayout
-    - [ ] RGridLayout
+    - [x] RGridLayout
+  - [ ] RToggle
 - [x] raygui icons
 - [x] Functions for native popups
 - [ ] Menu bar

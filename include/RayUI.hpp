@@ -28,6 +28,7 @@
 #include "Widgets/Labels/RLinkLabel.hpp" // IWYU pragma: export
 
 // Widgets/Layouts
+#include "Widgets/Layouts/RGridLayout.hpp" // IWYU pragma: export
 #include "Widgets/Layouts/RHBoxLayout.hpp" // IWYU pragma: export
 #include "Widgets/Layouts/RLayout.hpp"     // IWYU pragma: export
 #include "Widgets/Layouts/RVBoxLayout.hpp" // IWYU pragma: export
