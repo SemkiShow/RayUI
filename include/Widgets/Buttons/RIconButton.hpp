@@ -19,6 +19,10 @@ class RIconButton : public RButton
 
     void Draw() override;
 
+    void SetIcon(RIcon val) { icon = val; }
+
+    RIcon GetIcon() { return icon; }
+
   protected:
     RIcon icon;
 };

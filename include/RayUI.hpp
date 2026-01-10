@@ -19,6 +19,9 @@
 #include "Widgets/Buttons/RIconButton.hpp"  // IWYU pragma: export
 #include "Widgets/Buttons/RLabelButton.hpp" // IWYU pragma: export
 
+// Widgets/Checkboxes
+#include "Widgets/Checkboxes/RCheckbox.hpp" // IWYU pragma: export
+
 // Widgets/ColorPickers
 
 // Widgets/Dropdowns

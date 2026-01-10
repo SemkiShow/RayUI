@@ -157,8 +157,8 @@ class SettingsWindow : public RPopupWindow
         auto label3 = std::make_shared<RLabel>("label3");
         layout->AddWidget(label3);
 
-        auto label4 = std::make_shared<RLabel>("label4");
-        layout->AddWidget(label4);
+        auto checkbox = std::make_shared<RCheckbox>();
+        layout->AddWidget(checkbox);
     }
 };
 
