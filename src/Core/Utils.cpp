@@ -2,8 +2,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include "Utils.hpp"
-#include "Api.hpp"
+#include "Core/Utils.hpp"
+#include "Core/Api.hpp"
 #include "Core/Themes.hpp"
 #include <algorithm>
 #include <codecvt>

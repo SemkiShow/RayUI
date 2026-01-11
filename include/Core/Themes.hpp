@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "Utils.hpp"
+#include "Core/Utils.hpp"
 #include <array>
 
 constexpr size_t R_THEME_LIST_SIZE = 5;

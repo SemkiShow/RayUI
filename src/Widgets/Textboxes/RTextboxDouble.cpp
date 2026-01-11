@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: MIT
 
 #include "Widgets/Textboxes/RTextboxDouble.hpp"
-#include "Api.hpp"
+#include "Core/Api.hpp"
 
 void RTextboxDouble::Update()
 {
@@ -11,7 +11,8 @@ void RTextboxDouble::Update()
     RTextbox::CheckEditing();
 
     if (value.size() > 1 && value[0] == '0' && value[1] != '.') value.erase(value.begin());
-    if (value.size() > 2 && value[0] == '-' && value[1] == '0' && value[2] != '.') value.erase(value.begin() + 1);
+    if (value.size() > 2 && value[0] == '-' && value[1] == '0' && value[2] != '.')
+        value.erase(value.begin() + 1);
 
     if (selected)
     {

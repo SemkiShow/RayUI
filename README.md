@@ -15,7 +15,7 @@ cd ..
 ```
 2. Add RayUI to you CMakeLists.txt
 ```cmake
-add_subdirectory(${CMAKE_SOURCE_DIR}/thirdparty/RayUI ${CMAKE_BINARY_DIR}/_deps/RayUI-build)
+add_subdirectory(${CMAKE_SOURCE_DIR}/thirdparty/RayUI ${CMAKE_BINARY_DIR}/_deps/RayUI-build SYSTEM)
 ```
 
 ## Examples

@@ -2,8 +2,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include "Api.hpp"
-#include "Conversions.hpp"
+#include "Core/Api.hpp"
+#include "Core/Conversions.hpp"
 #include <raylib.h>
 
 namespace rui

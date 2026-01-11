@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "Utils.hpp"
+#include "Core/Utils.hpp"
 
 typedef struct Vector2 Vector2;
 typedef struct Rectangle Rectangle;

@@ -4,10 +4,9 @@
 
 #pragma once
 
-#include "Api.hpp"         // IWYU pragma: export
-#include "Conversions.hpp" // IWYU pragma: export
-
 // Core
+#include "Core/Api.hpp"          // IWYU pragma: export
+#include "Core/Conversions.hpp"  // IWYU pragma: export
 #include "Core/Icons.hpp"        // IWYU pragma: export
 #include "Core/Native.hpp"       // IWYU pragma: export
 #include "Core/RApplication.hpp" // IWYU pragma: export
