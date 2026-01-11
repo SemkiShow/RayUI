@@ -97,6 +97,8 @@ void RGridLayout::Shrink()
         }
 
         widget->SetPosition(widgetPos);
+        widget->UpdateBounds();
+        widget->Update();
 
         column++;
         pos.x += cellSize.x + padding + additionalWidth;
