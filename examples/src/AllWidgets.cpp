@@ -6,6 +6,8 @@
 #include <iostream>
 #include <raylib.h>
 
+#define _(s) (s)
+
 Vector2 windowSize{16 * 50, 9 * 50};
 std::shared_ptr<RApplication> app;
 std::shared_ptr<RWindow> popupWindow, settingsWindow;

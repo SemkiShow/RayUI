@@ -55,9 +55,9 @@ class ROkCancelWindow : public RPopupWindow
 
     virtual void UpdateLabels() override
     {
-        messageLabel->SetLabel(_(messageLabel->GetLabelId()));
-        okButton->SetLabel(_(okButton->GetLabelId()));
-        cancelButton->SetLabel(_(cancelButton->GetLabelId()));
+        messageLabel->SetLabel(GetText(messageLabel->GetLabelId()));
+        okButton->SetLabel(GetText(okButton->GetLabelId()));
+        cancelButton->SetLabel(GetText(cancelButton->GetLabelId()));
         RWindow::UpdateLabels();
     }
 

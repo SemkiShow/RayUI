@@ -10,5 +10,3 @@
 std::string GetText(const std::string& id);
 void SetLanguage(const std::string& domain, const std::filesystem::path& localePath,
                  const std::string& language);
-
-#define _(a) GetText(a)

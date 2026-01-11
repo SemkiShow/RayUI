@@ -67,4 +67,4 @@ void RTextbox::Draw()
     rui::EndScissorMode();
 }
 
-void RTextbox::UpdateLabels() { promptText = _(promptTextId); }
+void RTextbox::UpdateLabels() { promptText = GetText(promptTextId); }

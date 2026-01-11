@@ -19,4 +19,4 @@ void RLabelButton::Draw()
                   GetThemeColor(RThemeList::Text, themeState));
 }
 
-void RLabelButton::UpdateLabels() { label = _(labelId); }
+void RLabelButton::UpdateLabels() { label = GetText(labelId); }
