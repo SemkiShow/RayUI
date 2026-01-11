@@ -10,10 +10,6 @@ void RCheckbox::Update()
 
     if (IsClicked())
     {
-        checked = !checked;
-        if (checked)
-            SetIcon(RIcon::Cross);
-        else
-            SetIcon(RIcon::None);
+        SetValue(!value);
     }
 }

@@ -14,10 +14,14 @@ class RCheckbox : public RIconButton
 
     void Update() override;
 
-    void SetChecked(bool val) { checked = val; }
+    void SetValue(bool val)
+    {
+        value = val;
+        icon = (value ? RIcon::Cross : RIcon::None);
+    }
 
-    bool IsChecked() { return checked; }
+    bool GetValue() { return value; }
 
   private:
-    bool checked = false;
+    bool value = false;
 };
