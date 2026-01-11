@@ -49,6 +49,9 @@ class MainWindow : public RWindow
         auto sliderInt = std::make_shared<RSliderInt>(0, 0, 20);
         layout->AddWidget(sliderInt);
 
+        progressBar = std::make_shared<RProgressBar>(0, 0, 100);
+        layout->AddWidget(progressBar);
+
         auto colorLayout = std::make_shared<RHBoxLayout>();
         colorLayout->SetAlignment(RAlign::Left);
         layout->AddWidget(colorLayout);
@@ -120,6 +123,17 @@ class MainWindow : public RWindow
                     [rec3] { std::cout << "Mouse released on " << rec3->GetColor() << '\n'; });
         }
     }
+
+    void Update() override
+    {
+        RWindow::Update();
+
+        progressBar->SetValue(progressBar->GetValue() + 5 * GetFrameTime());
+        if (progressBar->GetValue() > progressBar->GetMaxValue()) progressBar->SetValue(0);
+    }
+
+  protected:
+    std::shared_ptr<RProgressBar> progressBar;
 };
 
 class PopupWindow : public RPopupWindow

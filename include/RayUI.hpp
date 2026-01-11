@@ -40,6 +40,9 @@
 #include "Widgets/Panes/RPane.hpp"        // IWYU pragma: export
 #include "Widgets/Panes/RPaneRounded.hpp" // IWYU pragma: export
 
+// Widgets/ProgressBars
+#include "Widgets/ProgressBars/RProgressBar.hpp" // IWYU pragma: export
+
 // Widgets/ScrollAreas
 
 // Widgets/Separators

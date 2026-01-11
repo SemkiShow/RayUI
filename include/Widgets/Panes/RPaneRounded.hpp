@@ -16,9 +16,11 @@ class RPaneRounded : public RPane
     void Draw() override;
 
     void SetRadius(float val) { radius = val; }
+    
+    float GetRadius() { return radius; }
+
     void SetSegments(int val) { segments = val; }
 
-    float GetRadius() { return radius; }
     int GetSegments() { return segments; }
 
   protected:

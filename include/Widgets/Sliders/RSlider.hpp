@@ -32,9 +32,9 @@ class RBaseSlider : public RWidget
     void Update() override;
     void Draw() override;
 
-    void SetValue(float val) { value = val; }
+    void SetValue(T val) { value = val; }
 
-    float GetValue() { return value; }
+    T GetValue() { return value; }
 
     std::string GetValueString()
     {
@@ -43,9 +43,9 @@ class RBaseSlider : public RWidget
         return ss.str();
     }
 
-    void SetMinValue(float val) { minValue = val; }
+    void SetMinValue(T val) { minValue = val; }
 
-    float GetMinValue() { return minValue; }
+    T GetMinValue() { return minValue; }
 
     std::string GetMinValueString()
     {
@@ -54,9 +54,9 @@ class RBaseSlider : public RWidget
         return ss.str();
     }
 
-    void SetMaxValue(float val) { maxValue = val; }
+    void SetMaxValue(T val) { maxValue = val; }
 
-    float GetMaxValue() { return maxValue; }
+    T GetMaxValue() { return maxValue; }
 
     std::string GetMaxValueString()
     {

@@ -26,6 +26,7 @@
     - [x] RHBoxLayout
     - [x] RGridLayout
   - [x] RCheckbox
+  - [x] RProgressBar
 - [x] raygui icons
 - [x] Functions for native popups
 - [ ] Menu bar
