@@ -110,7 +110,8 @@ void RGridLayout::Shrink()
     }
 
     // Set shrinked size
-    SetSize(newSize);
+    SetWidth(std::max(bounds.width, newSize.x));
+    SetHeight(std::max(bounds.height, newSize.y));
     bounds = ClampBounds(bounds, minSize, maxSize);
 }
 

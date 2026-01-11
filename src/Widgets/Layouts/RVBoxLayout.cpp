@@ -100,7 +100,7 @@ void RVBoxLayout::Shrink()
     }
 
     // Set shrinked size
-    SetWidth(newWidth + 2 * margin);
+    SetWidth(std::max(bounds.width, newWidth + 2 * margin));
     SetHeight(posY - bounds.y + margin);
     bounds = ClampBounds(bounds, minSize, maxSize);
 }

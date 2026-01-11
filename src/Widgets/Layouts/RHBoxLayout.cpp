@@ -98,7 +98,7 @@ void RHBoxLayout::Shrink()
 
     // Set shrinked size
     SetWidth(posX - bounds.x + margin);
-    SetHeight(newHeight + 2 * margin);
+    SetHeight(std::max(bounds.height, newHeight + 2 * margin));
     bounds = ClampBounds(bounds, minSize, maxSize);
 }
 
