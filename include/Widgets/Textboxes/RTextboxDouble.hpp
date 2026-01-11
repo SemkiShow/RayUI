@@ -12,7 +12,7 @@ class RTextboxDouble : public RTextbox
   public:
     RTextboxDouble(const std::string& promptText = "", double number = 0)
     {
-        this->promptText = promptText;
+        this->promptTextId = promptText;
         SetNumber(number);
     }
     virtual ~RTextboxDouble() = default;
@@ -23,14 +23,14 @@ class RTextboxDouble : public RTextbox
     {
         std::stringstream ss;
         ss << val;
-        text = ss.str();
+        value = ss.str();
     }
 
     double GetNumber()
     {
         try
         {
-            return std::stod(text);
+            return std::stod(value);
         }
         catch (const std::exception&)
         {

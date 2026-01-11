@@ -9,15 +9,18 @@
 class RTextbox : public RWidget
 {
   public:
-    RTextbox(const std::string& promptText = "", const std::string& text = "")
-        : promptText(promptText), text(text)
+    RTextbox(const std::string& promptText = "", const std::string& value = "")
+        : promptTextId(promptText), value(value)
     {
+        UpdateLabels();
         maxSize.y = minSize.y;
     }
     virtual ~RTextbox() = default;
 
     void Update() override;
     void Draw() override;
+
+    void UpdateLabels() override;
 
     void SetScale(float val) override
     {
@@ -26,13 +29,19 @@ class RTextbox : public RWidget
         RWidget::SetScale(val);
     }
 
-    void SetPromptText(const std::string& val) { promptText = val; }
+    void SetPromptText(const std::string& val)
+    {
+        promptTextId = val;
+        UpdateLabels();
+    }
 
     std::string GetPromptText() { return promptText; }
 
-    void SetText(const std::string& val) { text = val; }
+    std::string GetPromptTextId() { return promptTextId; }
 
-    std::string GetText() { return text; }
+    void SetValue(const std::string& val) { value = val; }
+
+    std::string GetValue() { return value; }
 
     void SetRadius(float val) { radius = val; }
 
@@ -52,7 +61,7 @@ class RTextbox : public RWidget
     bool IsFinishedEditing() { return finishedEditing; }
 
   protected:
-    std::string promptText, text;
+    std::string promptText, promptTextId, value;
     bool selected = false;
     float radius = 3;
     int segments = 16;

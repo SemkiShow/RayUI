@@ -47,6 +47,12 @@ void RWindow::Update()
 
 void RWindow::Draw() { DrawCentralWidget(); }
 
+void RWindow::UpdateLabels()
+{
+    if (centralWidget) centralWidget->UpdateLabels();
+    RWidget::UpdateLabels();
+}
+
 void RWindow::SetFont(std::shared_ptr<RFont> font)
 {
     if (centralWidget) centralWidget->SetFont(font);

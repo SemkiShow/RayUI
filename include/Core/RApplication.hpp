@@ -5,6 +5,7 @@
 #pragma once
 
 #include "Widgets/Windows/RWindow.hpp"
+#include <filesystem>
 #include <memory>
 #include <vector>
 
@@ -15,6 +16,10 @@ class RApplication
 
     virtual void Update();
     virtual void Draw();
+
+    virtual void SetLanguage(const std::string& domain, const std::filesystem::path& localePath,
+                             const std::string& language);
+    virtual void UpdateLabels();
 
     void UpdateBounds() { updateBounds = true; }
 

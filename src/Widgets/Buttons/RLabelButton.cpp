@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: MIT
 
 #include "Widgets/Buttons/RLabelButton.hpp"
+#include "Core/Translations.hpp"
 
 void RLabelButton::Draw()
 {
@@ -17,3 +18,5 @@ void RLabelButton::Draw()
     rui::DrawText(font, label, labelBounds.GetPosition(), labelBounds.height, fontSpacing,
                   GetThemeColor(RThemeList::Text, themeState));
 }
+
+void RLabelButton::UpdateLabels() { label = _(labelId); }

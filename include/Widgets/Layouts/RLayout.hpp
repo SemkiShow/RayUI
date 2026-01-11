@@ -18,6 +18,8 @@ class RLayout : public RWidget
     void Update() override;
     void Draw() override;
 
+    void UpdateLabels() override;
+
     void SetFont(std::shared_ptr<RFont> font) override;
 
     void SetTheme(std::shared_ptr<RTheme> theme) override;

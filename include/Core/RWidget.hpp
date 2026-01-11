@@ -19,6 +19,8 @@ class RWidget
     virtual void Update();
     virtual void Draw() {}
 
+    virtual void UpdateLabels() {}
+
     void SetBounds(RRectangle rec) { bounds = rec; }
     void SetPosition(RVector2 vec) { bounds.SetPosition(vec); }
     void SetPositionX(float val) { bounds.x = val; }

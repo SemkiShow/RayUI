@@ -3,22 +3,27 @@
 set -e
 
 PrintHelp() {
-    echo "Usage: ./run.sh [OPTION] <EXAMPLE-NAME>"
+    echo "Usage: $0 [OPTION] <EXAMPLE-NAME>"
     echo "Compile and run the example"
     echo ""
     echo "With no OPTION, compile and run the release build"
     echo ""
-    echo "-d, --debug      Compile the debug build and run it with gdb"
-    echo "-w, --windows    Compile the Windows build and run it with Wine"
-    echo "-p, --profile    Compile the profile build, profile it with perf and display the data with hotspot"
+    echo "-h, --help           Print help"
+    echo "-d, --debug          Compile the debug build and run it with gdb"
+    echo "-w, --windows        Compile the Windows build and run it with Wine"
+    echo "-p, --profile        Compile the profile build, profile it with perf and display the data with hotspot"
     echo "-m, --memory-leak    Compile the memory leak build and run it"
     echo ""
     echo "Available EXAMPLE-NAMEs"
     for f in src/*.cpp; do echo "$(basename ${f%.*})"; done
 }
 
+# Help info
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+    PrintHelp
+
 # Debug build
-if [ "$1" == "-d" ] || [ "$1" == "--debug" ]; then
+elif [ "$1" == "-d" ] || [ "$1" == "--debug" ]; then
     if [ -z "$2" ]; then
         PrintHelp
         exit 1
@@ -73,9 +78,4 @@ else
     cmake --build build -j$(nproc)
     cp build/compile_commands.json ../build
     ./build/bin/$1
-fi
-
-# Help info
-if [ "$1" == "--help" ]; then
-    PrintHelp
 fi

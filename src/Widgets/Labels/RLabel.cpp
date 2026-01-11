@@ -3,11 +3,14 @@
 // SPDX-License-Identifier: MIT
 
 #include "Widgets/Labels/RLabel.hpp"
+#include "Core/Translations.hpp"
 
 void RLabel::Shrink()
 {
-    RVector2 size = rui::MeasureText(font, text, maxSize.y, fontSpacing);
+    RVector2 size = rui::MeasureText(font, label, maxSize.y, fontSpacing);
     SetSize(size);
 }
 
-void RLabel::Draw() { rui::DrawText(font, text, GetPosition(), maxSize.y, fontSpacing, color); }
+void RLabel::Draw() { rui::DrawText(font, label, GetPosition(), maxSize.y, fontSpacing, color); }
+
+void RLabel::UpdateLabels() { label = _(labelId); }

@@ -4,6 +4,7 @@
 
 #include "Widgets/Textboxes/RTextbox.hpp"
 #include "Api.hpp"
+#include "Core/Translations.hpp"
 
 void RTextbox::CheckEditing()
 {
@@ -33,10 +34,10 @@ void RTextbox::Update()
 
     if (selected)
     {
-        text += GetCharsPressed();
+        value += GetCharsPressed();
         if (rui::IsKeyPressed(RKey::Backspace))
         {
-            Utf8PopBack(text);
+            Utf8PopBack(value);
         }
     }
 }
@@ -50,18 +51,20 @@ void RTextbox::Draw()
     RRectangle textBounds = bounds;
     textBounds = AddMargin(textBounds, margin);
     rui::BeginScissorMode(textBounds);
-    if (text.empty() && !selected)
+    if (value.empty() && !selected)
     {
         rui::DrawText(font, promptText, textBounds.GetPosition(), textBounds.height, fontSpacing,
                       GetThemeColor(RThemeList::Text, RThemeState::Disabled));
     }
     else
     {
-        RVector2 textSize = rui::MeasureText(font, text, textBounds.height, fontSpacing);
+        RVector2 textSize = rui::MeasureText(font, value, textBounds.height, fontSpacing);
         RVector2 pos = textBounds.GetPosition();
         if (textSize.x > textBounds.width) pos.x += textBounds.width - textSize.x;
-        rui::DrawText(font, text, pos, textBounds.height, fontSpacing,
+        rui::DrawText(font, value, pos, textBounds.height, fontSpacing,
                       GetThemeColor(RThemeList::Text, RThemeState::Default));
     }
     rui::EndScissorMode();
 }
+
+void RTextbox::UpdateLabels() { promptText = _(promptTextId); }

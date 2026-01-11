@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include "Core/Translations.hpp"
 #include "Widgets/Buttons/RLabelButton.hpp"
 #include "Widgets/Labels/RLabel.hpp"
 #include "Widgets/Layouts/RHBoxLayout.hpp"
@@ -52,9 +53,19 @@ class ROkCancelWindow : public RPopupWindow
     }
     virtual ~ROkCancelWindow() = default;
 
-    void SetMessageText(const std::string& val) { messageLabel->SetText(val); }
+    virtual void UpdateLabels() override
+    {
+        messageLabel->SetLabel(_(messageLabel->GetLabelId()));
+        okButton->SetLabel(_(okButton->GetLabelId()));
+        cancelButton->SetLabel(_(cancelButton->GetLabelId()));
+        RWindow::UpdateLabels();
+    }
 
-    std::string GetMessageText() { return messageLabel->GetText(); }
+    void SetMessageText(const std::string& val) { messageLabel->SetLabel(val); }
+
+    std::string GetMessageText() { return messageLabel->GetLabel(); }
+
+    std::string GetMessageTextId() { return messageLabel->GetLabelId(); }
 
     void SetOkText(const std::string& val) { okButton->SetLabel(val); }
 

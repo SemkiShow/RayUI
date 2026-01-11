@@ -10,8 +10,8 @@ void RTextboxDouble::Update()
     RWidget::Update();
     RTextbox::CheckEditing();
 
-    if (text.size() > 1 && text[0] == '0' && text[1] != '.') text.erase(text.begin());
-    if (text.size() > 2 && text[0] == '-' && text[1] == '0' && text[2] != '.') text.erase(text.begin() + 1);
+    if (value.size() > 1 && value[0] == '0' && value[1] != '.') value.erase(value.begin());
+    if (value.size() > 2 && value[0] == '-' && value[1] == '0' && value[2] != '.') value.erase(value.begin() + 1);
 
     if (selected)
     {
@@ -19,14 +19,14 @@ void RTextboxDouble::Update()
         while (key > 0)
         {
             bool isDigit = (key >= '0' && key <= '9');
-            bool isMinus = (key == '-' && text.empty());
+            bool isMinus = (key == '-' && value.empty());
 
             // Check if it's a dot and if we don't already have one
-            bool isDot = (key == '.' && text.find('.') == std::string::npos);
+            bool isDot = (key == '.' && value.find('.') == std::string::npos);
 
             if (isDigit || isMinus || isDot)
             {
-                text += (char)key;
+                value += (char)key;
             }
 
             key = rui::GetCharPressed();
@@ -34,7 +34,7 @@ void RTextboxDouble::Update()
 
         if (rui::IsKeyPressed(RKey::Backspace))
         {
-            Utf8PopBack(text);
+            Utf8PopBack(value);
         }
     }
 }

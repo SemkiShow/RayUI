@@ -14,16 +14,18 @@ class RLabel : public RWidget
         themeList = RThemeList::Text;
         maxSize.y = 24;
     }
-    RLabel(const std::string& text, float fontSize = 24, float fontSpacing = 0) : RLabel()
+    RLabel(const std::string& label, float fontSize = 24, float fontSpacing = 0) : RLabel()
     {
-        this->text = text;
+        this->labelId = label;
+        UpdateLabels();
         this->maxSize.y = fontSize;
         this->fontSpacing = fontSpacing;
     }
-    RLabel(const std::string& text, RColor tint, float fontSize = 24, float fontSpacing = 0)
+    RLabel(const std::string& label, RColor tint, float fontSize = 24, float fontSpacing = 0)
         : RLabel()
     {
-        this->text = text;
+        this->labelId = label;
+        UpdateLabels();
         this->maxSize.y = fontSize;
         this->fontSpacing = fontSpacing;
         RWidget::SetTint(tint);
@@ -33,13 +35,18 @@ class RLabel : public RWidget
     void Shrink() override;
     void Draw() override;
 
-    void SetText(const std::string& val)
+    void UpdateLabels() override;
+
+    void SetLabel(const std::string& val)
     {
-        text = val;
+        labelId = val;
+        UpdateLabels();
         UpdateBounds();
     }
 
-    std::string GetText() { return text; }
+    std::string GetLabel() { return label; }
+
+    std::string GetLabelId() { return labelId; }
 
     void SetFontSize(float val)
     {
@@ -50,5 +57,5 @@ class RLabel : public RWidget
     float GetFontSize() { return maxSize.y; }
 
   protected:
-    std::string text;
+    std::string label, labelId;
 };

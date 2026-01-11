@@ -28,16 +28,16 @@ class MainWindow : public RWindow
                                                  "https://github.com/SemkiShow/RayUI");
         layout->AddWidget(link);
 
-        auto textBox = std::make_shared<RTextbox>("Enter text...");
+        auto textBox = std::make_shared<RTextbox>(_("Enter text..."));
         layout->AddWidget(textBox);
 
-        auto textBoxInt = std::make_shared<RTextboxInt>("Enter an int...");
+        auto textBoxInt = std::make_shared<RTextboxInt>(_("Enter an int..."));
         layout->AddWidget(textBoxInt);
 
-        auto textBoxDouble = std::make_shared<RTextboxDouble>("Enter a double...");
+        auto textBoxDouble = std::make_shared<RTextboxDouble>(_("Enter a double..."));
         layout->AddWidget(textBoxDouble);
 
-        auto button = std::make_shared<RLabelButton>("Click me");
+        auto button = std::make_shared<RLabelButton>(_("Click me"));
         layout->AddWidget(button);
 
         Connect([button] { return button->IsClicked(); },
@@ -53,7 +53,7 @@ class MainWindow : public RWindow
         colorLayout->SetAlignment(RAlign::Left);
         layout->AddWidget(colorLayout);
 
-        auto label = std::make_shared<RLabel>("label");
+        auto label = std::make_shared<RLabel>(_("label"));
         colorLayout->AddWidget(label);
 
         auto iconButton = std::make_shared<RIconButton>(RIcon::Cpu);
@@ -67,6 +67,7 @@ class MainWindow : public RWindow
                 });
 
         auto settingsButton = std::make_shared<RIconButton>(RIcon::Gear);
+        colorLayout->AddWidget(settingsButton);
 
         Connect([settingsButton] { return settingsButton->IsClicked(); },
                 [] { settingsWindow->SetVisible(true); });
@@ -129,11 +130,11 @@ class PopupWindow : public RPopupWindow
         auto layout = std::make_shared<RVBoxLayout>();
         SetCentralWidget(layout);
 
-        auto label =
-            std::make_shared<RLabel>("This is a popup window\nYou can drag it by the title bar!");
+        auto label = std::make_shared<RLabel>(
+            _("This is a popup window\nYou can drag it by the title bar!"));
         layout->AddWidget(label);
 
-        auto button = std::make_shared<RLabelButton>("Show ok cancel window");
+        auto button = std::make_shared<RLabelButton>(_("Show ok cancel window"));
         layout->AddWidget(button);
 
         Connect([button] { return button->IsClicked(); }, [] { okCancelWindow->SetVisible(true); });
@@ -148,13 +149,13 @@ class SettingsWindow : public RPopupWindow
         auto layout = std::make_shared<RGridLayout>(2);
         SetCentralWidget(layout);
 
-        auto label = std::make_shared<RLabel>("label1");
+        auto label = std::make_shared<RLabel>(_("label1"));
         layout->AddWidget(label);
 
-        auto label2 = std::make_shared<RLabel>("label2");
+        auto label2 = std::make_shared<RLabel>(_("label2"));
         layout->AddWidget(label2);
 
-        auto label3 = std::make_shared<RLabel>("label3");
+        auto label3 = std::make_shared<RLabel>(_("label3"));
         layout->AddWidget(label3);
 
         auto checkbox = std::make_shared<RCheckbox>();
@@ -165,6 +166,7 @@ class SettingsWindow : public RPopupWindow
 void InitUI()
 {
     app = std::make_shared<RApplication>();
+    // app->SetLanguage("RayUI", "resources/locales", "pl");
 
     auto mainWindow = std::make_shared<MainWindow>();
     app->AddWindow(mainWindow);
@@ -174,10 +176,11 @@ void InitUI()
     app->AddWindow(popupWindow);
 
     settingsWindow = std::make_shared<SettingsWindow>();
+    settingsWindow->SetVisible(false);
     app->AddWindow(settingsWindow);
 
     okCancelWindow = std::make_shared<ROkCancelWindow>(
-        "Would you like to close the app?\nLine 2\nLine 3", "Yes", "No");
+        _("Would you like to close the app?\nLine 2\nLine 3"), _("Yes"), _("No"));
     okCancelWindow->SetVisible(false);
     okCancelWindow->Connect([] { return okCancelWindow->IsOkClicked(); },
                             [] { shouldClose = true; });

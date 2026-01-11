@@ -39,6 +39,15 @@ void RLayout::Draw()
     }
 }
 
+void RLayout::UpdateLabels()
+{
+    for (auto& widget: widgets)
+    {
+        widget->UpdateLabels();
+    }
+    RWidget::UpdateLabels();
+}
+
 void RLayout::SetFont(std::shared_ptr<RFont> font)
 {
     for (auto& widget: widgets)

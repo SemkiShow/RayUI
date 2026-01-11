@@ -18,13 +18,13 @@ class RTextboxInt : public RTextbox
 
     void Update() override;
 
-    void SetNumber(int64_t val) { text = std::to_string(val); }
+    void SetNumber(int64_t val) { value = std::to_string(val); }
 
     int64_t GetNumber()
     {
         try
         {
-            return std::stoll(text);
+            return std::stoll(value);
         }
         catch (const std::exception&)
         {

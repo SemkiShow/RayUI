@@ -18,11 +18,14 @@ target_include_directories(tinyfiledialogs PUBLIC thirdparty/tinyfiledialogs)
 add_library(raygui_icons INTERFACE)
 target_include_directories(raygui_icons INTERFACE thirdparty/raygui_icons)
 
+# libintl-lite
+add_subdirectory(thirdparty/libintl-lite ${CMAKE_BINARY_DIR}/_deps/libintl-lite-build)
+
 file(GLOB_RECURSE SOURCES src/*.cpp)
 add_library(${PROJECT_NAME} ${SOURCES})
 target_include_directories(${PROJECT_NAME} PUBLIC include/)
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra)
-target_link_libraries(${PROJECT_NAME} PRIVATE raylib tinyfiledialogs raygui_icons)
+target_link_libraries(${PROJECT_NAME} PRIVATE raylib tinyfiledialogs raygui_icons intl)
 
 # Checks if OSX and links appropriate frameworks (Only required on MacOS)
 if (APPLE)

@@ -1,0 +1,81 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-01-10 23:27+0100\n"
+"PO-Revision-Date: 2026-01-11 14:38+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#: examples/src/AllWidgets.cpp:31
+msgid "Enter text..."
+msgstr "Wpisz tekst..."
+
+#: examples/src/AllWidgets.cpp:34
+msgid "Enter an int..."
+msgstr "Wpisz liczbę całkowitą..."
+
+#: examples/src/AllWidgets.cpp:37
+msgid "Enter a double..."
+msgstr "Wpisz liczbę zmiennoprzecinkową..."
+
+#: examples/src/AllWidgets.cpp:40
+msgid "Click me"
+msgstr "Kliknij mnie"
+
+#: examples/src/AllWidgets.cpp:56
+msgid "label"
+msgstr "etykieta"
+
+#: examples/src/AllWidgets.cpp:133
+msgid ""
+"This is a popup window\n"
+"You can drag it by the title bar!"
+msgstr ""
+"To jest okno wyskakujące\n"
+"Możesz je przeciągnąć za pasek tytułu!"
+
+#: examples/src/AllWidgets.cpp:136
+msgid "Show ok cancel window"
+msgstr "Pokaż okno OK/Anuluj"
+
+#: examples/src/AllWidgets.cpp:151
+msgid "label1"
+msgstr "etykieta1"
+
+#: examples/src/AllWidgets.cpp:154
+msgid "label2"
+msgstr "etykieta2"
+
+#: examples/src/AllWidgets.cpp:157
+msgid "label3"
+msgstr "etykieta3"
+
+#: examples/src/AllWidgets.cpp:180
+msgid ""
+"Would you like to close the app?\n"
+"Line 2\n"
+"Line 3"
+msgstr ""
+"Czy chcesz zamknąć aplikację?\n"
+"Linia 2\n"
+"Linia 3"
+
+#: examples/src/AllWidgets.cpp:180
+msgid "Yes"
+msgstr "Tak"
+
+#: examples/src/AllWidgets.cpp:180
+msgid "No"
+msgstr "Nie"

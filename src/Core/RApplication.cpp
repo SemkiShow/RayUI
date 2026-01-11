@@ -4,6 +4,7 @@
 
 #include "Core/RApplication.hpp"
 #include "Api.hpp"
+#include "Core/Translations.hpp"
 
 bool RApplication::PollEvents()
 {
@@ -50,6 +51,21 @@ void RApplication::Draw()
     {
         if (window->IsVisible()) window->Draw();
     }
+}
+
+void RApplication::UpdateLabels()
+{
+    for (auto& window: windows)
+    {
+        window->UpdateLabels();
+    }
+}
+
+void RApplication::SetLanguage(const std::string& domain, const std::filesystem::path& localePath,
+                               const std::string& language)
+{
+    ::SetLanguage(domain, localePath, language);
+    UpdateLabels();
 }
 
 void RApplication::SetFont(std::shared_ptr<RFont> font)

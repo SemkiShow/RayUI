@@ -32,6 +32,6 @@
 - [x] Alignment flags
 - [x] Events handling
 - [x] Custom fonts
-- [ ] Translations
+- [x] Translations
 - [x] Themes
 - [x] Scale

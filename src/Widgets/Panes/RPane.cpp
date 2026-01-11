@@ -34,6 +34,12 @@ void RPane::Update()
     if (layout && layout->IsVisible()) layout->Update();
 }
 
+void RPane::UpdateLabels()
+{
+    if (layout) layout->UpdateLabels();
+    RWidget::UpdateLabels();
+}
+
 void RPane::Draw()
 {
     rui::DrawRectangleBorder(bounds, borderThickness, color, *theme, themeState);

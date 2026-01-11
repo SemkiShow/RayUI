@@ -13,6 +13,7 @@
 #include "Core/RApplication.hpp" // IWYU pragma: export
 #include "Core/RWidget.hpp"      // IWYU pragma: export
 #include "Core/Themes.hpp"       // IWYU pragma: export
+#include "Core/Translations.hpp" // IWYU pragma: export
 
 // Widgets/Buttons
 #include "Widgets/Buttons/RButton.hpp"      // IWYU pragma: export

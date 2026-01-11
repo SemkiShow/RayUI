@@ -10,8 +10,8 @@ void RTextboxInt::Update()
     RWidget::Update();
     RTextbox::CheckEditing();
 
-    if (text.size() > 1 && text[0] == '0') text.erase(text.begin());
-    if (text.size() > 2 && text[0] == '-' && text[1] == '0') text.erase(text.begin() + 1);
+    if (value.size() > 1 && value[0] == '0') value.erase(value.begin());
+    if (value.size() > 2 && value[0] == '-' && value[1] == '0') value.erase(value.begin() + 1);
 
     if (selected)
     {
@@ -22,11 +22,11 @@ void RTextboxInt::Update()
             bool isDigit = (key >= '0' && key <= '9');
 
             // Allow minus sign ONLY if it's the first character
-            bool isMinus = (key == '-' && text.empty());
+            bool isMinus = (key == '-' && value.empty());
 
             if (isDigit || isMinus)
             {
-                text += (char)key;
+                value += (char)key;
             }
 
             key = rui::GetCharPressed();
@@ -34,7 +34,7 @@ void RTextboxInt::Update()
 
         if (rui::IsKeyPressed(RKey::Backspace))
         {
-            Utf8PopBack(text);
+            Utf8PopBack(value);
         }
     }
 }

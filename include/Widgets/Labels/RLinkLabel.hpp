@@ -11,9 +11,10 @@ class RLinkLabel : public RLabel
   public:
     using RLabel::RLabel;
     RLinkLabel() { SetTint(GetTheme()->linkTint); }
-    RLinkLabel(const std::string& text, const std::string& link) : RLinkLabel()
+    RLinkLabel(const std::string& label, const std::string& link) : RLinkLabel()
     {
-        this->text = text;
+        this->labelId = label;
+        UpdateLabels();
         this->link = link;
     }
     virtual ~RLinkLabel() = default;
