@@ -23,6 +23,6 @@ void RButton::Update()
 void RButton::Draw()
 {
     float roundness = radius * 2 / std::min(bounds.width, bounds.height);
-    rui::DrawRectangleRoundedBorder(bounds, roundness, segments, borderThickness, color, *theme,
-                                    themeState);
+    rui::DrawRectangleRoundedBorder(bounds, roundness, segments, drawBorder, borderThickness, color,
+                                    *theme, themeState);
 }

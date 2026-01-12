@@ -45,8 +45,8 @@ void RTextbox::Update()
 void RTextbox::Draw()
 {
     float roundness = radius * 2 / std::min(bounds.width, bounds.height);
-    rui::DrawRectangleRoundedBorder(bounds, roundness, segments, borderThickness, color, *theme,
-                                    themeState);
+    rui::DrawRectangleRoundedBorder(bounds, roundness, segments, drawBorder, borderThickness, color,
+                                    *theme, themeState);
 
     RRectangle textBounds = bounds;
     textBounds = AddMargin(textBounds, margin);

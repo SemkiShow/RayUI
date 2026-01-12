@@ -172,28 +172,38 @@ float Map(float val, float oldMin, float oldMax, float newMin, float newMax)
 namespace rui
 {
 
-void DrawRectangleBorder(RRectangle rec, float borderThickness, RColor color, RTheme theme,
-                         RThemeState themeState)
+void DrawRectangleBorder(RRectangle rec, bool drawBorder, float borderThickness, RColor color,
+                         RTheme theme, RThemeState themeState)
 {
     DrawRectangle(rec, color);
-    DrawRectangleLines(rec, borderThickness, GetThemeColor(theme, RThemeList::Border, themeState));
+    if (drawBorder)
+    {
+        DrawRectangleLines(rec, borderThickness,
+                           GetThemeColor(theme, RThemeList::Border, themeState));
+    }
 }
 
-void DrawRectangleRoundedBorder(RRectangle rec, float roundness, int segments,
+void DrawRectangleRoundedBorder(RRectangle rec, float roundness, int segments, bool drawBorder,
                                 float borderThickness, RColor color, RTheme theme,
                                 RThemeState themeState)
 {
     DrawRectangleRounded(rec, roundness, segments, color);
-    DrawRectangleRoundedLines(rec, roundness, segments, borderThickness,
-                              GetThemeColor(theme, RThemeList::Border, themeState));
+    if (drawBorder)
+    {
+        DrawRectangleRoundedLines(rec, roundness, segments, borderThickness,
+                                  GetThemeColor(theme, RThemeList::Border, themeState));
+    }
 }
 
-void DrawCircleBorder(RVector2 pos, float radius, float borderThickness, int segments, RColor color,
-                      RTheme theme, RThemeState themeState)
+void DrawCircleBorder(RVector2 pos, float radius, bool drawBorder, float borderThickness,
+                      int segments, RColor color, RTheme theme, RThemeState themeState)
 {
     DrawCircle(pos, radius, color);
-    DrawCircleLines(pos, radius, borderThickness, segments,
-                    GetThemeColor(theme, RThemeList::Border, themeState));
+    if (drawBorder)
+    {
+        DrawCircleLines(pos, radius, borderThickness, segments,
+                        GetThemeColor(theme, RThemeList::Border, themeState));
+    }
 }
 
 void DrawText(std::shared_ptr<RFont> font, const std::string& text, RVector2 pos, float fontSize,

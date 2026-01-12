@@ -77,8 +77,8 @@ void RBaseSlider<T>::DrawRegular()
         RVector2 textSize = rui::MeasureText(font, GetMaxValueString(), bounds.height, fontSpacing);
         recBounds.width -= padding + textSize.x;
     }
-    rui::DrawRectangleRoundedBorder(recBounds, 1, recBounds.height, borderThickness, color, *theme,
-                                    themeState);
+    rui::DrawRectangleRoundedBorder(recBounds, 1, recBounds.height, drawBorder, borderThickness,
+                                    color, *theme, themeState);
 
     RVector2 circlePos;
     circlePos.x = Map(value, minValue, maxValue, recBounds.x, recBounds.x + recBounds.width);
@@ -86,11 +86,11 @@ void RBaseSlider<T>::DrawRegular()
 
     RRectangle highlightBounds = {recBounds.x, recBounds.y, circlePos.x - recBounds.x,
                                   recBounds.height};
-    rui::DrawRectangleRoundedBorder(highlightBounds, 1, segments, borderThickness,
+    rui::DrawRectangleRoundedBorder(highlightBounds, 1, segments, drawBorder, borderThickness,
                                     GetThemeColor(themeList, RThemeState::Highlighted), *theme,
                                     themeState);
 
-    rui::DrawCircleBorder(circlePos, bounds.height / 2, borderThickness, segments,
+    rui::DrawCircleBorder(circlePos, bounds.height / 2, drawBorder, borderThickness, segments,
                           GetThemeColor(RThemeList::Secondary, themeState), *theme, themeState);
 
     if (showValue)
@@ -105,8 +105,8 @@ template <typename T>
 void RBaseSlider<T>::DrawRectangle()
 {
     float roundness = radius * 2 / std::min(bounds.width, bounds.height);
-    rui::DrawRectangleRoundedBorder(bounds, roundness, bounds.height, borderThickness, color,
-                                    *theme, themeState);
+    rui::DrawRectangleRoundedBorder(bounds, roundness, bounds.height, drawBorder, borderThickness,
+                                    color, *theme, themeState);
 
     RVector2 sliderPos;
     sliderPos.x = Map(value, minValue, maxValue, bounds.x + borderThickness,
@@ -115,14 +115,14 @@ void RBaseSlider<T>::DrawRectangle()
 
     RRectangle highlightBounds = {bounds.x, bounds.y, sliderPos.x - bounds.x + sliderWidth,
                                   bounds.height};
-    rui::DrawRectangleRoundedBorder(highlightBounds, roundness, segments, borderThickness,
-                                    GetThemeColor(themeList, RThemeState::Highlighted), *theme,
-                                    themeState);
+    rui::DrawRectangleRoundedBorder(
+        highlightBounds, roundness, segments, drawBorder, borderThickness,
+        GetThemeColor(themeList, RThemeState::Highlighted), *theme, themeState);
 
     rui::DrawRectangleRoundedBorder(
         {sliderPos.x, sliderPos.y, sliderWidth, bounds.height - borderThickness * 2}, roundness,
-        segments, borderThickness, GetThemeColor(RThemeList::Secondary, themeState), *theme,
-        themeState);
+        segments, drawBorder, borderThickness, GetThemeColor(RThemeList::Secondary, themeState),
+        *theme, themeState);
 
     if (showValue)
     {

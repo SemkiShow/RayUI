@@ -19,7 +19,6 @@ bool RPane::PollEvents()
 void RPane::Update()
 {
     RWidget::UpdateColors();
-    if (customColor) color = tint;
 
     if (updateBounds)
     {
@@ -42,7 +41,7 @@ void RPane::UpdateLabels()
 
 void RPane::Draw()
 {
-    rui::DrawRectangleBorder(bounds, borderThickness, color, *theme, themeState);
+    rui::DrawRectangleBorder(bounds, drawBorder, borderThickness, color, *theme, themeState);
     DrawLayout();
 }
 

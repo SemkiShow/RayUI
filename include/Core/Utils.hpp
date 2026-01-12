@@ -245,15 +245,15 @@ struct RTheme;
 namespace rui
 {
 
-void DrawRectangleBorder(RRectangle rec, float borderThickness, RColor color, RTheme theme,
-                         RThemeState themeState);
+void DrawRectangleBorder(RRectangle rec, bool drawBorder, float borderThickness, RColor color,
+                         RTheme theme, RThemeState themeState);
 
-void DrawRectangleRoundedBorder(RRectangle rec, float roundness, int segments,
+void DrawRectangleRoundedBorder(RRectangle rec, float roundness, int segments, bool drawBorder,
                                 float borderThickness, RColor color, RTheme theme,
                                 RThemeState themeState);
 
-void DrawCircleBorder(RVector2 pos, float radius, float borderThickness, int segments, RColor color,
-                      RTheme theme, RThemeState themeState);
+void DrawCircleBorder(RVector2 pos, float radius, bool drawBorder, float borderThickness,
+                      int segments, RColor color, RTheme theme, RThemeState themeState);
 
 void DrawText(std::shared_ptr<RFont> font, const std::string& text, RVector2 pos, float fontSize,
               float spacing, RColor color);

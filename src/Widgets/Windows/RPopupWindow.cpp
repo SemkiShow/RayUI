@@ -88,15 +88,15 @@ void RPopupWindow::Update()
 void RPopupWindow::Draw()
 {
     float roundness = radius * 2 / std::min(bounds.width, bounds.height);
-    rui::DrawRectangleRoundedBorder(bounds, roundness, segments, borderThickness, color, *theme,
-                                    themeState);
+    rui::DrawRectangleRoundedBorder(bounds, roundness, segments, drawBorder, borderThickness, color,
+                                    *theme, themeState);
 
     RRectangle titleBarBounds = bounds;
     titleBarBounds.height = titleBarHeight;
     float titleBarRoundness = radius * 2 / std::min(titleBarBounds.width, titleBarBounds.height);
-    rui::DrawRectangleRoundedBorder(titleBarBounds, titleBarRoundness, segments, borderThickness,
-                                    GetThemeColor(RThemeList::Secondary, themeState), *theme,
-                                    themeState);
+    rui::DrawRectangleRoundedBorder(
+        titleBarBounds, titleBarRoundness, segments, drawBorder, borderThickness,
+        GetThemeColor(RThemeList::Secondary, themeState), *theme, themeState);
 
     closeButton.Draw();
 

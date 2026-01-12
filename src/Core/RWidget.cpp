@@ -46,13 +46,13 @@ void RWidget::UpdateColors()
 {
     if (customColor)
     {
-        if (IsMouseHovered())
+        if (IsMouseLeftDown() && isAnimated && isClickable)
+        {
+            color = MixColors(tint, GetTheme()->clickedTint);
+        }
+        else if (IsMouseHovered() && isAnimated && isHoverable)
         {
             color = MixColors(tint, GetTheme()->hoveredTint);
-            if (IsMouseLeftDown())
-            {
-                color = MixColors(tint, GetTheme()->clickedTint);
-            }
         }
         else if (disabled)
         {
@@ -69,13 +69,13 @@ void RWidget::UpdateColors()
     }
     else
     {
-        if (IsMouseHovered())
+        if (IsMouseLeftDown() && isAnimated && isClickable)
+        {
+            themeState = RThemeState::Clicked;
+        }
+        else if (IsMouseHovered() && isAnimated && isHoverable)
         {
             themeState = RThemeState::Hovered;
-            if (IsMouseLeftDown())
-            {
-                themeState = RThemeState::Clicked;
-            }
         }
         else if (disabled)
         {

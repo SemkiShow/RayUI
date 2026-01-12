@@ -11,7 +11,11 @@
 class RPane : public RWidget
 {
   public:
-    RPane() { themeList = RThemeList::Background; }
+    RPane()
+    {
+        themeList = RThemeList::Background;
+        SetAnimated(false);
+    }
     RPane(RColor tint) : RPane() { RWidget::SetTint(tint); }
     virtual ~RPane() = default;
 

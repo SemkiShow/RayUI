@@ -130,6 +130,10 @@ class RWidget
 
     bool IsHighlighted() { return highlighted; }
 
+    void SetDrawBorder(bool val) { drawBorder = val; }
+
+    bool IsDrawBorder() { return drawBorder; }
+
     void SetBorderThickness(float val) { borderThickness = val; }
 
     float GetBorderThickness() { return borderThickness; }
@@ -149,6 +153,14 @@ class RWidget
     }
 
     float GetScale() { return scale; }
+
+    void SetAnimated(bool val) { isAnimated = val; }
+    void SetHoverable(bool val) { isHoverable = val; }
+    void SetClickable(bool val) { isClickable = val; }
+
+    bool IsAnimated() { return isAnimated; }
+    bool IsHoverable() { return isHoverable; }
+    bool IsClickablew() { return isClickable; }
 
     bool IsMouseHovered() { return isMouseHovered; }
     bool IsMouseLeftDown() { return isMouseLeftDown; }
@@ -173,8 +185,10 @@ class RWidget
     RColor color = GetThemeColor(), tint;
     bool customColor = false;
     bool disabled = false, highlighted = false;
+    bool drawBorder = true;
     float borderThickness = 2;
     float scale = 1;
+    bool isAnimated = true, isHoverable = true, isClickable = true;
 
   private:
     bool isMouseHovered = false, isMouseLeftDown = false, isMouseLeftPressed = false,

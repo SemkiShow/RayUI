@@ -38,7 +38,7 @@ class RProgressBar : public RWidget
     float GetMargin() { return margin; }
 
     void SetRadius(float val) { radius = val; }
-    
+
     float GetRadius() { return radius; }
 
     void SetSegments(int val) { segments = val; }
