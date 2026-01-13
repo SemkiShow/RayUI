@@ -66,6 +66,7 @@ void RGridLayout::Shrink()
         auto widgetPos = pos;
         RVector2 cellSize = {widths[column], heights[row]};
 
+        widgetPos.x = std::max(widgetPos.x, widget->GetPositionX());
         switch (widget->GetAlignH())
         {
         case RAlign::Left:
@@ -163,8 +164,8 @@ void RGridLayout::Update()
     if (dynamicHeightCount > 0) dynamicHeight /= dynamicHeightCount;
 
     // Calculate widths
-    std::vector<float> fixedWidths(columns, 0);
-    std::vector<int> dynamicWidthCounts(columns, 0);
+    std::vector<float> fixedWidths(rowsCount, 0);
+    std::vector<int> dynamicWidthCounts(rowsCount, 0);
     {
         int idx = 0;
         for (auto& widget: widgets)
@@ -177,7 +178,7 @@ void RGridLayout::Update()
                 fixedWidths[idx] += widget->GetMaxWidth();
 
             idx++;
-            idx %= columns;
+            idx %= rowsCount;
         }
     }
     float fixedWidth = *std::max_element(fixedWidths.begin(), fixedWidths.end());
@@ -186,6 +187,8 @@ void RGridLayout::Update()
     dynamicWidth = fmax(0, dynamicWidth);
     if (dynamicWidthCount > 0) dynamicWidth /= dynamicWidthCount;
 
+    float posX = GetPositionX() + margin;
+    int counter = 0;
     for (auto& widget: widgets)
     {
         if (widget->GetMaxHeight() < 0)
@@ -197,6 +200,16 @@ void RGridLayout::Update()
             widget->SetWidth(dynamicWidth);
         else
             widget->SetWidth(widget->GetMaxWidth());
+
+        widget->SetPositionX(posX);
+        posX += widget->GetWidth() + padding;
+
+        counter++;
+        if (counter >= columns)
+        {
+            counter = 0;
+            posX = GetPositionX() + margin;
+        }
     }
 
     // Update widgets
