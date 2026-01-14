@@ -25,5 +25,5 @@ class RPaneRounded : public RPane
 
   protected:
     float radius = 20;
-    int segments = 16;
+    int segments = 5;
 };

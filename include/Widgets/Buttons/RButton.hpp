@@ -30,7 +30,7 @@ class RButton : public RWidget
 
   protected:
     float radius = 5;
-    int segments = 16;
+    int segments = 5;
 
   private:
     bool selected = false, wasSelected = false;

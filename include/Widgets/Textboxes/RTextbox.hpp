@@ -63,8 +63,8 @@ class RTextbox : public RWidget
   protected:
     std::string promptText, promptTextId, value;
     bool selected = false;
-    float radius = 3;
-    int segments = 16;
+    float radius = 5;
+    int segments = 5;
     float margin = 5;
     bool finishedEditing = false;
 };
