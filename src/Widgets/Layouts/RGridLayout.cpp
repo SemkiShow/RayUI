@@ -137,6 +137,7 @@ void RGridLayout::Update()
         rowsCount++;
     }
     rowsCount = std::ceil(rowsCount * 1.0f / columns);
+    rowsCount = std::max(1, rowsCount);
 
     // Calculate heights
     std::vector<float> fixedHeights(columns, 0);
