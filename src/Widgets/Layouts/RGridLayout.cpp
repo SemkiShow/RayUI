@@ -137,7 +137,6 @@ void RGridLayout::Update()
         rowsCount++;
     }
     rowsCount = std::ceil(rowsCount * 1.0f / columns);
-    rowsCount = std::max(1, rowsCount);
 
     // Calculate heights
     std::vector<float> fixedHeights(columns, 0);
@@ -182,8 +181,12 @@ void RGridLayout::Update()
             idx %= rowsCount;
         }
     }
-    float fixedWidth = *std::max_element(fixedWidths.begin(), fixedWidths.end());
-    int dynamicWidthCount = *std::max_element(dynamicWidthCounts.begin(), dynamicWidthCounts.end());
+    float fixedWidth = 0;
+    if (!fixedWidths.empty())
+        fixedWidth = *std::max_element(fixedWidths.begin(), fixedWidths.end());
+    int dynamicWidthCount = 0;
+    if (!dynamicWidthCounts.empty())
+        dynamicWidthCount = *std::max_element(dynamicWidthCounts.begin(), dynamicWidthCounts.end());
     float dynamicWidth = GetWidth() - 2 * margin - (columns - 1) * padding - fixedWidth;
     dynamicWidth = fmax(0, dynamicWidth);
     if (dynamicWidthCount > 0) dynamicWidth /= dynamicWidthCount;
