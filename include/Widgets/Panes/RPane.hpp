@@ -5,7 +5,6 @@
 #pragma once
 
 #include "Core/RWidget.hpp"
-#include "Widgets/Layouts/RLayout.hpp"
 #include <memory>
 
 class RPane : public RWidget
@@ -32,22 +31,26 @@ class RPane : public RWidget
 
     void SetScale(float scale) override;
 
-    void SetLayout(std::shared_ptr<RLayout> val) { layout = val; }
+    void SetCentralWidget(std::shared_ptr<RWidget> widget) { centralWidget = widget; }
+
+    void UnsetCentralWidget() { centralWidget.reset(); }
+
+    std::shared_ptr<RWidget> GetCentralWidget() { return centralWidget; }
 
   protected:
-    std::shared_ptr<RLayout> layout;
+    std::shared_ptr<RWidget> centralWidget;
 
-    bool PollLayoutEvents()
+    bool PollCentralWidgetEvents()
     {
-        if (layout && layout->IsVisible())
+        if (centralWidget && centralWidget->IsVisible())
         {
-            if (layout->PollEvents()) return true;
+            if (centralWidget->PollEvents()) return true;
         }
         return false;
     }
 
-    void DrawLayout()
+    void DrawCentralWidget()
     {
-        if (layout && layout->IsVisible()) layout->Draw();
+        if (centralWidget && centralWidget->IsVisible()) centralWidget->Draw();
     }
 };

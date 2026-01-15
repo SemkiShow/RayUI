@@ -6,13 +6,13 @@
 
 void RPane::ResetEvents()
 {
-    if (layout) layout->ResetEvents();
+    if (centralWidget) centralWidget->ResetEvents();
     RWidget::ResetEvents();
 }
 
 bool RPane::PollEvents()
 {
-    if (PollLayoutEvents()) return true;
+    if (PollCentralWidgetEvents()) return true;
     return RWidget::PollEvents();
 }
 
@@ -24,41 +24,41 @@ void RPane::Update()
     {
         updateBounds = false;
         bounds = ClampBounds(bounds, minSize, maxSize);
-        if (layout && layout->IsVisible())
+        if (centralWidget && centralWidget->IsVisible())
         {
-            layout->SetBounds(GetBounds());
-            layout->UpdateBounds();
+            centralWidget->SetBounds(GetBounds());
+            centralWidget->UpdateBounds();
         }
     }
-    if (layout && layout->IsVisible()) layout->Update();
+    if (centralWidget && centralWidget->IsVisible()) centralWidget->Update();
 }
 
 void RPane::UpdateLabels()
 {
-    if (layout) layout->UpdateLabels();
+    if (centralWidget) centralWidget->UpdateLabels();
     RWidget::UpdateLabels();
 }
 
 void RPane::Draw()
 {
     rui::DrawRectangleBorder(bounds, drawBorder, borderThickness, color, *theme, themeState);
-    DrawLayout();
+    DrawCentralWidget();
 }
 
 void RPane::SetFont(std::shared_ptr<RFont> font)
 {
-    if (layout) layout->SetFont(font);
+    if (centralWidget) centralWidget->SetFont(font);
     RWidget::SetFont(font);
 }
 
 void RPane::SetTheme(std::shared_ptr<RTheme> theme)
 {
-    if (layout) layout->SetTheme(theme);
+    if (centralWidget) centralWidget->SetTheme(theme);
     RWidget::SetTheme(theme);
 }
 
 void RPane::SetScale(float scale)
 {
-    if (layout) layout->SetScale(scale);
+    if (centralWidget) centralWidget->SetScale(scale);
     RWidget::SetScale(scale);
 }

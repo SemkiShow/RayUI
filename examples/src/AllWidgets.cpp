@@ -24,7 +24,7 @@ class MainWindow : public RWindow
         SetCentralWidget(pane);
 
         auto layout = std::make_shared<RVBoxLayout>();
-        pane->SetLayout(layout);
+        pane->SetCentralWidget(layout);
 
         auto link = std::make_shared<RLinkLabel>("https://github.com/SemkiShow/RayUI",
                                                  "https://github.com/SemkiShow/RayUI");

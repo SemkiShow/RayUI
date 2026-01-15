@@ -36,6 +36,32 @@ class RLayout : public RWidget
 
     void AddWidget(std::shared_ptr<RWidget> widget) { widgets.push_back(widget); }
 
+    void InsertWidget(size_t idx, std::shared_ptr<RWidget> widget)
+    {
+        if (idx > widgets.size()) throw std::runtime_error("Invalid idx in InsertWidget!");
+        widgets.insert(widgets.begin() + idx, widget);
+    }
+
+    void EraseWidget(size_t idx)
+    {
+        if (idx >= widgets.size()) throw std::runtime_error("Invalid idx in EraseWidget!");
+        widgets.erase(widgets.begin() + idx);
+    }
+
+    void PopBack()
+    {
+        if (widgets.empty()) throw std::runtime_error("PopBack is called on an empty RLayout!");
+        widgets.pop_back();
+    }
+
+    void ClearWidgets() { widgets.clear(); }
+
+    std::shared_ptr<RWidget> GetWidget(size_t idx)
+    {
+        if (idx >= widgets.size()) throw std::runtime_error("Invalid idx in GetWidget!");
+        return widgets[idx];
+    }
+
   protected:
     float padding = 5, margin = 10;
     std::vector<std::shared_ptr<RWidget>> widgets;

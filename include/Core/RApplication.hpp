@@ -25,6 +25,33 @@ class RApplication
 
     void AddWindow(std::shared_ptr<RWindow> window) { windows.push_back(window); }
 
+    void InsertWindow(size_t idx, std::shared_ptr<RWindow> window)
+    {
+        if (idx > windows.size()) throw std::runtime_error("Invalid idx in InsertWindow!");
+        windows.insert(windows.begin() + idx, window);
+    }
+
+    void EraseWindow(size_t idx)
+    {
+        if (idx >= windows.size()) throw std::runtime_error("Invalid idx in EraseWindow!");
+        windows.erase(windows.begin() + idx);
+    }
+
+    void PopBack()
+    {
+        if (windows.empty())
+            throw std::runtime_error("PopBack is called on an empty RApplication!");
+        windows.pop_back();
+    }
+
+    void ClearWindows() { windows.clear(); }
+
+    std::shared_ptr<RWindow> GetWindow(size_t idx)
+    {
+        if (idx >= windows.size()) throw std::runtime_error("Invalid idx in GetWindow!");
+        return windows[idx];
+    }
+
     void SetFont(std::shared_ptr<RFont> font);
 
     void SetTheme(std::shared_ptr<RTheme> theme);
