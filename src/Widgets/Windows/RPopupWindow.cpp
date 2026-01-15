@@ -76,13 +76,12 @@ void RPopupWindow::Update()
         }
     }
     if (centralWidget && centralWidget->IsVisible()) centralWidget->Update();
+    closeButton.Update();
 
     for (auto& [event, func]: events)
     {
         if (event()) func();
     }
-
-    closeButton.Update();
 }
 
 void RPopupWindow::Draw()

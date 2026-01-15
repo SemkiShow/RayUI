@@ -20,7 +20,7 @@ class RPopupWindow : public RWindow
         bounds.SetPosition((rui::GetWindowSize() - maxSize) / 2);
         closeButton.SetMaxSize({titleBarHeight, titleBarHeight});
 
-        Connect([this]() { return closeButton.IsClicked(); }, [this]() { visible = false; });
+        Connect([this]() { return closeButton.IsClicked(); }, [this]() { SetVisible(false); });
     }
     virtual ~RPopupWindow() = default;
 
