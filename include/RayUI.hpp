@@ -5,58 +5,58 @@
 #pragma once
 
 // Core
-#include "Core/Api.hpp"          // IWYU pragma: export
-#include "Core/Conversions.hpp"  // IWYU pragma: export
-#include "Core/Icons.hpp"        // IWYU pragma: export
-#include "Core/Native.hpp"       // IWYU pragma: export
-#include "Core/RApplication.hpp" // IWYU pragma: export
-#include "Core/RWidget.hpp"      // IWYU pragma: export
-#include "Core/Themes.hpp"       // IWYU pragma: export
-#include "Core/Translations.hpp" // IWYU pragma: export
+#include "RCore/Api.hpp"          // IWYU pragma: export
+#include "RCore/Conversions.hpp"  // IWYU pragma: export
+#include "RCore/Icons.hpp"        // IWYU pragma: export
+#include "RCore/Native.hpp"       // IWYU pragma: export
+#include "RCore/RApplication.hpp" // IWYU pragma: export
+#include "RCore/RWidget.hpp"      // IWYU pragma: export
+#include "RCore/Themes.hpp"       // IWYU pragma: export
+#include "RCore/Translations.hpp" // IWYU pragma: export
 
 // Widgets/Buttons
-#include "Widgets/Buttons/RButton.hpp"      // IWYU pragma: export
-#include "Widgets/Buttons/RIconButton.hpp"  // IWYU pragma: export
-#include "Widgets/Buttons/RLabelButton.hpp" // IWYU pragma: export
+#include "RWidgets/Buttons/RButton.hpp"      // IWYU pragma: export
+#include "RWidgets/Buttons/RIconButton.hpp"  // IWYU pragma: export
+#include "RWidgets/Buttons/RLabelButton.hpp" // IWYU pragma: export
 
 // Widgets/Checkboxes
-#include "Widgets/Checkboxes/RCheckbox.hpp" // IWYU pragma: export
+#include "RWidgets/Checkboxes/RCheckbox.hpp" // IWYU pragma: export
 
 // Widgets/ColorPickers
 
 // Widgets/Dropdowns
 
 // Widgets/Labels
-#include "Widgets/Labels/RLabel.hpp"     // IWYU pragma: export
-#include "Widgets/Labels/RLinkLabel.hpp" // IWYU pragma: export
+#include "RWidgets/Labels/RLabel.hpp"     // IWYU pragma: export
+#include "RWidgets/Labels/RLinkLabel.hpp" // IWYU pragma: export
 
 // Widgets/Layouts
-#include "Widgets/Layouts/RGridLayout.hpp" // IWYU pragma: export
-#include "Widgets/Layouts/RHBoxLayout.hpp" // IWYU pragma: export
-#include "Widgets/Layouts/RLayout.hpp"     // IWYU pragma: export
-#include "Widgets/Layouts/RVBoxLayout.hpp" // IWYU pragma: export
+#include "RWidgets/Layouts/RGridLayout.hpp" // IWYU pragma: export
+#include "RWidgets/Layouts/RHBoxLayout.hpp" // IWYU pragma: export
+#include "RWidgets/Layouts/RLayout.hpp"     // IWYU pragma: export
+#include "RWidgets/Layouts/RVBoxLayout.hpp" // IWYU pragma: export
 
 // Widgets/Panes
-#include "Widgets/Panes/RPane.hpp"        // IWYU pragma: export
-#include "Widgets/Panes/RPaneRounded.hpp" // IWYU pragma: export
+#include "RWidgets/Panes/RPane.hpp"        // IWYU pragma: export
+#include "RWidgets/Panes/RPaneRounded.hpp" // IWYU pragma: export
 
 // Widgets/ProgressBars
-#include "Widgets/ProgressBars/RProgressBar.hpp" // IWYU pragma: export
+#include "RWidgets/ProgressBars/RProgressBar.hpp" // IWYU pragma: export
 
 // Widgets/ScrollAreas
 
 // Widgets/Separators
-#include "Widgets/Separators/RBar.hpp" // IWYU pragma: export
+#include "RWidgets/Separators/RBar.hpp" // IWYU pragma: export
 
 // Widgets/Sliders
-#include "Widgets/Sliders/RSlider.hpp" // IWYU pragma: export
+#include "RWidgets/Sliders/RSlider.hpp" // IWYU pragma: export
 
 // Widgets/Textboxes
-#include "Widgets/Textboxes/RTextbox.hpp"       // IWYU pragma: export
-#include "Widgets/Textboxes/RTextboxDouble.hpp" // IWYU pragma: export
-#include "Widgets/Textboxes/RTextboxInt.hpp"    // IWYU pragma: export
+#include "RWidgets/Textboxes/RTextbox.hpp"       // IWYU pragma: export
+#include "RWidgets/Textboxes/RTextboxDouble.hpp" // IWYU pragma: export
+#include "RWidgets/Textboxes/RTextboxInt.hpp"    // IWYU pragma: export
 
 // Widgets/Windows
-#include "Widgets/Windows/ROkCancelWindow.hpp" // IWYU pragma: export
-#include "Widgets/Windows/RPopupWindow.hpp"    // IWYU pragma: export
-#include "Widgets/Windows/RWindow.hpp"         // IWYU pragma: export
+#include "RWidgets/Windows/ROkCancelWindow.hpp" // IWYU pragma: export
+#include "RWidgets/Windows/RPopupWindow.hpp"    // IWYU pragma: export
+#include "RWidgets/Windows/RWindow.hpp"         // IWYU pragma: export
