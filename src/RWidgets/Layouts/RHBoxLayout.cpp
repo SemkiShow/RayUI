@@ -3,7 +3,6 @@
 // SPDX-License-Identifier: MIT
 
 #include "RWidgets/Layouts/RHBoxLayout.hpp"
-#include <cmath>
 
 void RHBoxLayout::Shrink()
 {
@@ -11,11 +10,10 @@ void RHBoxLayout::Shrink()
     float newHeight = 0, totalWidth = 0;
     for (auto& widget: widgets)
     {
-        if (widget->IsVisible())
-        {
-            newHeight = std::max(newHeight, widget->GetHeight() + 2 * margin);
-            totalWidth += widget->GetWidth() + padding;
-        }
+        if (!widget->IsVisible()) continue;
+
+        newHeight = std::max(newHeight, widget->GetHeight() + 2 * margin);
+        totalWidth += widget->GetWidth() + padding;
     }
     totalWidth -= padding;
 
@@ -97,8 +95,19 @@ void RHBoxLayout::Shrink()
     }
 
     // Set shrinked size
-    SetWidth(posX - bounds.x + margin);
-    SetHeight(std::max(bounds.height, newHeight + 2 * margin));
+    bool allTop = true;
+    for (auto& widget: widgets)
+    {
+        if (!widget->IsVisible()) continue;
+
+        if (widget->GetAlignV() != RAlign::Top)
+        {
+            allTop = false;
+            break;
+        }
+    }
+    SetWidth(posX - bounds.x - padding + margin);
+    if (allTop) SetHeight(newHeight + 2 * margin);
     bounds = ClampBounds(bounds, minSize, maxSize);
 }
 
@@ -117,44 +126,49 @@ void RHBoxLayout::Update()
     int visibleCount = 0, dynamicCount = 0;
     for (auto& widget: widgets)
     {
-        if (widget->IsVisible())
-        {
-            if (widget->GetMaxWidth() < 0)
-                dynamicCount++;
-            else
-                fixedWidth += widget->GetMaxWidth();
-            visibleCount++;
-        }
+        if (!widget->IsVisible()) continue;
+
+        if (widget->GetMaxWidth() < 0)
+            dynamicCount++;
+        else
+            fixedWidth += widget->GetMaxWidth();
+        visibleCount++;
     }
+    float dynamicWidth = GetWidth() - 2 * margin - (visibleCount - 1) * padding - fixedWidth;
 
     if (visibleCount == 0) return;
 
+    // Update widgets' bounds upfront
+    for (auto& widget: widgets)
+    {
+        if (widget->IsVisible()) widget->UpdateBounds();
+    }
+
     // Set widgets' sizes
     float maxHeight = GetHeight() - 2 * margin;
-    float dynamicWidth = GetWidth() - 2 * margin - (visibleCount - 1) * padding - fixedWidth;
-    dynamicWidth = fmax(0, dynamicWidth);
-    if (dynamicCount > 0) dynamicWidth /= dynamicCount;
     for (auto& widget: widgets)
     {
         if (!widget->IsVisible()) continue;
 
         if (widget->GetMaxWidth() < 0)
         {
-            widget->SetWidth(dynamicWidth);
+            widget->SetWidth(dynamicWidth / dynamicCount);
         }
         else
         {
             widget->SetWidth(widget->GetMaxWidth());
         }
-        widget->SetHeight(maxHeight);
-    }
 
-    // Update widgets
-    for (auto& widget: widgets)
-    {
-        if (widget->IsVisible()) widget->UpdateBounds();
+        widget->SetHeight(maxHeight);
+
+        widget->Update();
+
+        if (widget->GetMaxWidth() < 0)
+        {
+            dynamicWidth -= widget->GetWidth();
+            dynamicCount--;
+        }
     }
-    RLayout::UpdateWidgets();
 
     Shrink();
 }

@@ -8,113 +8,171 @@
 
 void RGridLayout::Shrink()
 {
-    // Calculate shrinked size
-    RVector2 newSize = {2 * margin, 2 * margin};
-    for (auto& widget: widgets)
+    // Calculate total width and height
+    float totalWidth = 0, totalHeight = 0;
     {
-        if (!widget->IsVisible()) continue;
-        newSize += widget->GetSize();
-        newSize.x += padding;
-        newSize.y += padding;
-    }
-    newSize.x -= padding;
-    newSize.y -= padding;
-
-    // Calculate rows count
-    int rowsCount = 0;
-    for (auto& widget: widgets)
-    {
-        if (!widget->IsVisible()) continue;
-
-        rowsCount++;
-    }
-    rowsCount = std::ceil(rowsCount * 1.0f / columns);
-
-    // Calculate cell widths and heights
-    std::vector<float> widths(columns, 0), heights(rowsCount, 0);
-    for (size_t i = 0; i < widgets.size(); i++)
-    {
-        widths[i % columns] = std::max(widths[i % columns], widgets[i]->GetWidth());
-        heights[i / columns] = std::max(heights[i / columns], widgets[i]->GetHeight());
-    }
-
-    // Calculate additional width to spread the widgets
-    std::vector<float> reservedWidths(columns, 0);
-    {
-        int idx = 0;
+        int column = 0;
+        float currentWidth = 0, currentHeight = 0;
         for (auto& widget: widgets)
         {
             if (!widget->IsVisible()) continue;
 
-            reservedWidths[idx] += widget->GetWidth();
+            currentWidth += widget->GetWidth() + padding;
+            currentHeight = std::max(currentHeight, widget->GetHeight() + padding);
 
-            idx++;
-            idx %= columns;
+            column++;
+            if (column >= columns)
+            {
+                column = 0;
+
+                totalWidth = std::max(totalWidth, currentWidth);
+                totalHeight += currentHeight;
+            }
         }
+        totalWidth -= padding;
+        totalHeight -= padding;
     }
-    float reservedWidth = *std::max_element(reservedWidths.begin(), reservedWidths.end());
-    float additionalWidth = (GetWidth() - reservedWidth);
-    additionalWidth = fmax(0, additionalWidth);
-    if (columns > 0) additionalWidth /= columns;
 
-    int row = 0, column = 0;
-    RVector2 pos = bounds.GetPosition();
-    pos.x += margin;
-    pos.y += margin;
+    // Calculate rows count
+    int rows = 0;
     for (auto& widget: widgets)
     {
-        auto widgetPos = pos;
+        if (!widget->IsVisible()) continue;
+
+        rows++;
+    }
+    rows = std::ceil(rows * 1.0f / columns);
+
+    // Calculate cell widths and heights
+    std::vector<float> widths(columns, 0), heights(rows, 0);
+    {
+        int column = 0, row = 0;
+        for (size_t i = 0; i < widgets.size(); i++)
+        {
+            if (!widgets[i]->IsVisible()) continue;
+
+            widths[column] = std::max(widths[column], widgets[i]->GetWidth());
+            heights[row] = std::max(heights[row], widgets[i]->GetHeight());
+
+            column++;
+            if (column >= columns)
+            {
+                column = 0;
+                row++;
+            }
+        }
+    }
+
+    // Calculate posX offset
+    float posX = GetPositionX() + margin;
+    switch (GetAlignH())
+    {
+    case RAlign::Left:
+        break;
+    case RAlign::HCenter:
+        posX += (GetWidth() - 2 * margin - totalWidth) / 2;
+        break;
+    case RAlign::Right:
+        posX += (GetWidth() - 2 * margin - totalWidth);
+        break;
+    default:
+        throw std::runtime_error("Invalid alignH set!");
+        break;
+    }
+    float startPosX = posX;
+
+    // Calculate posY offset
+    float posY = GetPositionY() + margin;
+    switch (GetAlignV())
+    {
+    case RAlign::Top:
+        break;
+    case RAlign::VCenter:
+        posY += (GetHeight() - 2 * margin - totalHeight) / 2;
+        break;
+    case RAlign::Bottom:
+        posY += (GetHeight() - 2 * margin - totalHeight);
+        break;
+    default:
+        throw std::runtime_error("Invalid alignV set!");
+        break;
+    }
+
+    // Set widget positions
+    int column = 0, row = 0;
+    float maxPosX = 0, maxPosY = 0;
+    for (auto& widget: widgets)
+    {
         RVector2 cellSize = {widths[column], heights[row]};
 
-        widgetPos.x = std::max(widgetPos.x, widget->GetPositionX());
-        switch (widget->GetAlignH())
         {
-        case RAlign::Left:
-            break;
-        case RAlign::HCenter:
-            widgetPos.x += (cellSize.x - widget->GetWidth()) / 2;
-            break;
-        case RAlign::Right:
-            widgetPos.x += (cellSize.x - widget->GetWidth());
-            break;
-        default:
-            throw std::runtime_error("Invalid alignH set!");
-            break;
+            float delta = cellSize.x + padding;
+            switch (widget->GetAlignH())
+            {
+            case RAlign::Left:
+                break;
+            case RAlign::HCenter:
+                posX += (cellSize.x - widget->GetWidth()) / 2;
+                break;
+            case RAlign::Right:
+                posX += (cellSize.x - widget->GetWidth()) / 2;
+                break;
+            default:
+                throw std::runtime_error("Invalid alignH set!");
+                break;
+            }
+            widget->SetPositionX(posX);
+            posX += delta;
         }
 
-        switch (widget->GetAlignV())
         {
-        case RAlign::Top:
-            break;
-        case RAlign::VCenter:
-            widgetPos.y += (cellSize.y - widget->GetHeight()) / 2;
-            break;
-        case RAlign::Bottom:
-            widgetPos.y += (cellSize.y - widget->GetHeight());
-            break;
-        default:
-            throw std::runtime_error("Invalid alignV set!");
-            break;
+            float widgetPosY = posY;
+            switch (widget->GetAlignV())
+            {
+            case RAlign::Top:
+                break;
+            case RAlign::VCenter:
+                widgetPosY += (cellSize.y - widget->GetHeight()) / 2;
+                break;
+            case RAlign::Bottom:
+                widgetPosY += (cellSize.y - widget->GetHeight());
+                break;
+            default:
+                throw std::runtime_error("Invalid alignV set!");
+                break;
+            }
+            widget->SetPositionY(widgetPosY);
         }
 
-        widget->SetPosition(widgetPos);
         widget->UpdateBounds();
         widget->Update();
 
         column++;
-        pos.x += cellSize.x + padding + additionalWidth;
         if (column >= columns)
         {
             column = 0;
+            maxPosX = std::max(maxPosX, posX);
+            posX = startPosX;
+
+            float delta = cellSize.y + padding;
+            posY += delta;
+            maxPosY = std::max(maxPosY, posY);
+
             row++;
-            pos.x = GetPositionX() + margin;
-            pos.y += cellSize.y + padding;
         }
     }
 
     // Set shrinked size
-    SetWidth(std::max(bounds.width, newSize.x));
-    SetHeight(std::max(bounds.height, newSize.y));
+    bool allLeft = true, allTop = true;
+    for (auto& widget: widgets)
+    {
+        if (!widget->IsVisible()) continue;
+
+        if (widget->GetAlignH() != RAlign::Left) allLeft = false;
+        if (widget->GetAlignV() != RAlign::Top) allTop = false;
+    }
+    if (allLeft) SetWidth(maxPosX - bounds.x - padding + margin);
+    if (allTop) SetHeight(maxPosY - bounds.y - padding + margin);
     bounds = ClampBounds(bounds, minSize, maxSize);
 }
 
@@ -129,14 +187,43 @@ void RGridLayout::Update()
     updateBounds = false;
 
     // Calculate rows count
-    int rowsCount = 0;
+    int rows = 0;
+    std::vector<std::shared_ptr<RWidget>> visibleWidgets;
     for (auto& widget: widgets)
     {
         if (!widget->IsVisible()) continue;
 
-        rowsCount++;
+        rows++;
+        visibleWidgets.push_back(widget);
     }
-    rowsCount = std::ceil(rowsCount * 1.0f / columns);
+    rows = std::ceil(rows * 1.0f / columns);
+
+    // Calculate widths
+    std::vector<float> fixedWidths(rows, 0);
+    int dynamicWidthCount = 0;
+    for (int column = 0; column < columns; column++)
+    {
+        bool foundDynamic = false;
+        for (int row = 0; row < rows; row++)
+        {
+            size_t idx = column * rows + row;
+            if (idx >= visibleWidgets.size()) break;
+
+            auto widget = visibleWidgets[idx];
+
+            if (widget->GetMaxWidth() < 0)
+                foundDynamic = true;
+            else
+                fixedWidths[row] += widget->GetMaxWidth();
+        }
+        if (foundDynamic) dynamicWidthCount++;
+    }
+    float fixedWidth = 0;
+    if (!fixedWidths.empty())
+    {
+        fixedWidth = *std::max_element(fixedWidths.begin(), fixedWidths.end());
+    }
+    float dynamicWidth = GetWidth() - 2 * margin - (columns - 1) * padding - fixedWidth;
 
     // Calculate heights
     std::vector<float> fixedHeights(columns, 0);
@@ -156,72 +243,72 @@ void RGridLayout::Update()
             idx %= columns;
         }
     }
-    float fixedHeight = *std::max_element(fixedHeights.begin(), fixedHeights.end());
-    int dynamicHeightCount =
-        *std::max_element(dynamicHeightCounts.begin(), dynamicHeightCounts.end());
-    float dynamicHeight = GetHeight() - 2 * margin - (rowsCount - 1) * padding - fixedHeight;
-    dynamicHeight = fmax(0, dynamicHeight);
-    if (dynamicHeightCount > 0) dynamicHeight /= dynamicHeightCount;
-
-    // Calculate widths
-    std::vector<float> fixedWidths(rowsCount, 0);
-    std::vector<int> dynamicWidthCounts(rowsCount, 0);
+    float fixedHeight = 0;
+    if (!fixedHeights.empty())
     {
-        int idx = 0;
-        for (auto& widget: widgets)
-        {
-            if (!widget->IsVisible()) continue;
-
-            if (widget->GetMaxWidth() < 0)
-                dynamicWidthCounts[idx]++;
-            else
-                fixedWidths[idx] += widget->GetMaxWidth();
-
-            idx++;
-            idx %= rowsCount;
-        }
+        fixedHeight = *std::max_element(fixedHeights.begin(), fixedHeights.end());
     }
-    float fixedWidth = 0;
-    if (!fixedWidths.empty())
-        fixedWidth = *std::max_element(fixedWidths.begin(), fixedWidths.end());
-    int dynamicWidthCount = 0;
-    if (!dynamicWidthCounts.empty())
-        dynamicWidthCount = *std::max_element(dynamicWidthCounts.begin(), dynamicWidthCounts.end());
-    float dynamicWidth = GetWidth() - 2 * margin - (columns - 1) * padding - fixedWidth;
-    dynamicWidth = fmax(0, dynamicWidth);
-    if (dynamicWidthCount > 0) dynamicWidth /= dynamicWidthCount;
-
-    float posX = GetPositionX() + margin;
-    int counter = 0;
-    for (auto& widget: widgets)
+    int dynamicHeightCount = 0;
+    if (!dynamicHeightCounts.empty())
     {
-        if (widget->GetMaxHeight() < 0)
-            widget->SetHeight(dynamicHeight);
-        else
-            widget->SetHeight(widget->GetMaxHeight());
-
-        if (widget->GetMaxWidth() < 0)
-            widget->SetWidth(dynamicWidth);
-        else
-            widget->SetWidth(widget->GetMaxWidth());
-
-        widget->SetPositionX(posX);
-        posX += widget->GetWidth() + padding;
-
-        counter++;
-        if (counter >= columns)
-        {
-            counter = 0;
-            posX = GetPositionX() + margin;
-        }
+        dynamicHeightCount =
+            *std::max_element(dynamicHeightCounts.begin(), dynamicHeightCounts.end());
     }
+    float dynamicHeight = GetHeight() - 2 * margin - (rows - 1) * padding - fixedHeight;
 
-    // Update widgets
+    // Update widgets' bounds upfront
     for (auto& widget: widgets)
     {
         if (widget->IsVisible()) widget->UpdateBounds();
     }
-    RLayout::UpdateWidgets();
+
+    // Set widgets' widths
+    for (int column = 0; column < columns; column++)
+    {
+        // std::cout << dynamicWidthCount << '\n';
+        float maxDynamicWidth = 0;
+        bool foundDynamic = false;
+        for (int row = 0; row < rows; row++)
+        {
+            size_t idx = column * rows + row;
+            if (idx >= visibleWidgets.size()) break;
+
+            auto widget = visibleWidgets[idx];
+
+            if (widget->GetMaxWidth() < 0)
+                widget->SetWidth(dynamicWidth / dynamicWidthCount);
+            else
+                widget->SetWidth(widget->GetMaxWidth());
+
+            widget->UpdateBounds();
+            widget->Update();
+
+            if (widget->GetMaxWidth() < 0)
+            {
+                maxDynamicWidth = std::max(maxDynamicWidth, widget->GetWidth());
+                foundDynamic = true;
+            }
+        }
+        if (foundDynamic)
+        {
+            dynamicWidth -= maxDynamicWidth;
+            dynamicWidthCount--;
+        }
+    }
+
+    // Set widgets' heights
+    for (auto& widget: widgets)
+    {
+        if (!widget->IsVisible()) continue;
+
+        if (widget->GetMaxHeight() < 0)
+            widget->SetHeight(dynamicHeight / dynamicHeightCount);
+        else
+            widget->SetHeight(widget->GetMaxHeight());
+
+        widget->UpdateBounds();
+        widget->Update();
+    }
 
     Shrink();
 }
