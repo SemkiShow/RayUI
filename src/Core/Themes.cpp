@@ -103,34 +103,33 @@ RThemeDark::RThemeDark()
     colors[primary][hovered] = RColor{"#ffffff"} - lightTheme.colors[primary][hovered];
     colors[primary][clicked] = RColor{"#ffffff"} - lightTheme.colors[primary][clicked];
     colors[primary][disabled] = RColor{"#ffffff"} - lightTheme.colors[primary][disabled];
-    colors[primary][highlighted] = RColor{"#ffffff"} - lightTheme.colors[primary][highlighted];
+    colors[primary][highlighted] = lightTheme.colors[primary][highlighted];
 
     colors[secondary][defaultState] =
         RColor{"#ffffff"} - lightTheme.colors[secondary][defaultState];
     colors[secondary][hovered] = RColor{"#ffffff"} - lightTheme.colors[secondary][hovered];
     colors[secondary][clicked] = RColor{"#ffffff"} - lightTheme.colors[secondary][clicked];
     colors[secondary][disabled] = RColor{"#ffffff"} - lightTheme.colors[secondary][disabled];
-    colors[secondary][highlighted] = RColor{"#ffffff"} - lightTheme.colors[secondary][highlighted];
+    colors[secondary][highlighted] = lightTheme.colors[secondary][highlighted];
 
     colors[border][defaultState] = RColor{"#ffffff"} - lightTheme.colors[border][defaultState];
     colors[border][hovered] = RColor{"#ffffff"} - lightTheme.colors[border][hovered];
     colors[border][clicked] = RColor{"#ffffff"} - lightTheme.colors[border][clicked];
     colors[border][disabled] = RColor{"#ffffff"} - lightTheme.colors[border][disabled];
-    colors[border][highlighted] = RColor{"#ffffff"} - lightTheme.colors[border][highlighted];
+    colors[border][highlighted] = lightTheme.colors[border][highlighted];
 
     colors[text][defaultState] = RColor{"#ffffff"} - lightTheme.colors[text][defaultState];
     colors[text][hovered] = RColor{"#ffffff"} - lightTheme.colors[text][hovered];
     colors[text][clicked] = RColor{"#ffffff"} - lightTheme.colors[text][clicked];
     colors[text][disabled] = RColor{"#ffffff"} - lightTheme.colors[text][disabled];
-    colors[text][highlighted] = RColor{"#ffffff"} - lightTheme.colors[text][highlighted];
+    colors[text][highlighted] = lightTheme.colors[text][highlighted];
 
     colors[background][defaultState] =
         RColor{"#ffffff"} - lightTheme.colors[background][defaultState];
     colors[background][hovered] = RColor{"#ffffff"} - lightTheme.colors[background][hovered];
     colors[background][clicked] = RColor{"#ffffff"} - lightTheme.colors[background][clicked];
     colors[background][disabled] = RColor{"#ffffff"} - lightTheme.colors[background][disabled];
-    colors[background][highlighted] =
-        RColor{"#ffffff"} - lightTheme.colors[background][highlighted];
+    colors[background][highlighted] = lightTheme.colors[background][highlighted];
 }
 
 RColor GetThemeColor(RTheme theme, RThemeList themeList, RThemeState themeState)
