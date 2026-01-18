@@ -96,5 +96,6 @@ void RWidget::UpdateColors()
 void RWidget::DrawDebugOutline()
 {
     const float outlineThickness = 1;
-    rui::DrawRectangleLines(bounds, outlineThickness, {255, 0, 0});
+    RColor color = (IsMouseHovered() ? RColor{0, 0, 255} : RColor{255, 0, 0});
+    rui::DrawRectangleLines(bounds, outlineThickness, color);
 }
