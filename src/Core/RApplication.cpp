@@ -59,6 +59,7 @@ void RApplication::UpdateLabels()
     {
         window->UpdateLabels();
     }
+    UpdateBounds();
 }
 
 void RApplication::SetLanguage(const std::string& domain, const std::filesystem::path& localePath,

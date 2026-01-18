@@ -37,6 +37,7 @@ void RPane::UpdateLabels()
 {
     if (centralWidget) centralWidget->UpdateLabels();
     RWidget::UpdateLabels();
+    UpdateBounds();
 }
 
 void RPane::Draw()

@@ -13,4 +13,8 @@ void RLabel::Shrink()
 
 void RLabel::Draw() { rui::DrawText(font, label, GetPosition(), maxSize.y, fontSpacing, color); }
 
-void RLabel::UpdateLabels() { label = GetText(labelId); }
+void RLabel::UpdateLabels()
+{
+    label = GetText(labelId);
+    UpdateBounds();
+}

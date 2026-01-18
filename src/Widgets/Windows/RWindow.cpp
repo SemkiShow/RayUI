@@ -51,6 +51,7 @@ void RWindow::UpdateLabels()
 {
     if (centralWidget) centralWidget->UpdateLabels();
     RWidget::UpdateLabels();
+    UpdateBounds();
 }
 
 void RWindow::SetFont(std::shared_ptr<RFont> font)

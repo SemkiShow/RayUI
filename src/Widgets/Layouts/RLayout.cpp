@@ -46,6 +46,7 @@ void RLayout::UpdateLabels()
         widget->UpdateLabels();
     }
     RWidget::UpdateLabels();
+    UpdateBounds();
 }
 
 void RLayout::SetFont(std::shared_ptr<RFont> font)
