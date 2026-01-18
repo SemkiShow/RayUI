@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-10 23:27+0100\n"
-"PO-Revision-Date: 2026-01-11 14:12+0100\n"
+"POT-Creation-Date: 2026-01-18 14:35+0100\n"
+"PO-Revision-Date: 2026-01-18 14:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -18,27 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.8\n"
 
-#: examples/src/AllWidgets.cpp:31
+#: examples/src/AllWidgets.cpp:33
 msgid "Enter text..."
 msgstr "Enter text..."
 
-#: examples/src/AllWidgets.cpp:34
+#: examples/src/AllWidgets.cpp:36
 msgid "Enter an int..."
 msgstr "Enter an int..."
 
-#: examples/src/AllWidgets.cpp:37
+#: examples/src/AllWidgets.cpp:39
 msgid "Enter a double..."
 msgstr "Enter a double..."
 
-#: examples/src/AllWidgets.cpp:40
-msgid "Click me"
-msgstr "Click me"
+#: examples/src/AllWidgets.cpp:42 examples/src/AllWidgets.cpp:51
+msgid "Enable debug mode"
+msgstr "Enable debug mode"
 
-#: examples/src/AllWidgets.cpp:56
+#: examples/src/AllWidgets.cpp:50
+msgid "Disable debug mode"
+msgstr "Disable debug mode"
+
+#: examples/src/AllWidgets.cpp:67
 msgid "label"
 msgstr "label"
 
-#: examples/src/AllWidgets.cpp:133
+#: examples/src/AllWidgets.cpp:156
 msgid ""
 "This is a popup window\n"
 "You can drag it by the title bar!"
@@ -46,23 +50,23 @@ msgstr ""
 "This is a popup window\n"
 "You can drag it by the title bar!"
 
-#: examples/src/AllWidgets.cpp:136
+#: examples/src/AllWidgets.cpp:159
 msgid "Show ok cancel window"
 msgstr "Show ok cancel window"
 
-#: examples/src/AllWidgets.cpp:151
+#: examples/src/AllWidgets.cpp:174
 msgid "label1"
 msgstr "label1"
 
-#: examples/src/AllWidgets.cpp:154
+#: examples/src/AllWidgets.cpp:177
 msgid "label2"
 msgstr "label2"
 
-#: examples/src/AllWidgets.cpp:157
+#: examples/src/AllWidgets.cpp:180
 msgid "label3"
 msgstr "label3"
 
-#: examples/src/AllWidgets.cpp:180
+#: examples/src/AllWidgets.cpp:205
 msgid ""
 "Would you like to close the app?\n"
 "Line 2\n"
@@ -72,10 +76,13 @@ msgstr ""
 "Line 2\n"
 "Line 3"
 
-#: examples/src/AllWidgets.cpp:180
+#: examples/src/AllWidgets.cpp:205
 msgid "Yes"
 msgstr "Yes"
 
-#: examples/src/AllWidgets.cpp:180
+#: examples/src/AllWidgets.cpp:205
 msgid "No"
 msgstr "No"
+
+#~ msgid "Click me"
+#~ msgstr "Click me"

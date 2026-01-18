@@ -92,3 +92,9 @@ void RWidget::UpdateColors()
         color = GetThemeColor();
     }
 }
+
+void RWidget::DrawDebugOutline()
+{
+    const float outlineThickness = 1;
+    rui::DrawRectangleLines(bounds, outlineThickness, {255, 0, 0});
+}

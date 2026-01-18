@@ -16,16 +16,14 @@ class RLabel : public RWidget
     }
     RLabel(const std::string& label, float fontSize = 24, float fontSpacing = 0) : RLabel()
     {
-        this->labelId = label;
-        UpdateLabels();
+        SetLabel(label);
         this->maxSize.y = fontSize;
         this->fontSpacing = fontSpacing;
     }
     RLabel(const std::string& label, RColor tint, float fontSize = 24, float fontSpacing = 0)
         : RLabel()
     {
-        this->labelId = label;
-        UpdateLabels();
+        SetLabel(label);
         this->maxSize.y = fontSize;
         this->fontSpacing = fontSpacing;
         RWidget::SetTint(tint);
@@ -41,7 +39,6 @@ class RLabel : public RWidget
     {
         labelId = val;
         UpdateLabels();
-        UpdateBounds();
     }
 
     std::string GetLabel() { return label; }

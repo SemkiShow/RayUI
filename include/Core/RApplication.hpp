@@ -14,6 +14,8 @@ class RApplication
   public:
     virtual ~RApplication() = default;
 
+    virtual void ResetEvents();
+    virtual bool PollEvents();
     virtual void Update();
     virtual void Draw();
 
@@ -58,15 +60,25 @@ class RApplication
 
     void SetScale(float val);
 
+    void SetDebugMode(bool val)
+    {
+        for (auto& window: windows)
+            window->SetDebugMode(val);
+        debugMode = val;
+    }
+
+    bool IsDebugMode() { return debugMode; }
+
+    virtual void DrawDebugOutline();
+
     bool IsWindowSizeChanged() { return windowSizeChanged; }
 
   protected:
     bool updateBounds = true;
     std::vector<std::shared_ptr<RWindow>> windows;
-    RVector2 lastWindowSize{-1, -1};
-
-    virtual bool PollEvents();
+    bool debugMode = false;
 
   private:
+    RVector2 lastWindowSize{-1, -1};
     bool windowSizeChanged = false;
 };

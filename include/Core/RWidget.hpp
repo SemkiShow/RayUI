@@ -160,7 +160,13 @@ class RWidget
 
     bool IsAnimated() { return isAnimated; }
     bool IsHoverable() { return isHoverable; }
-    bool IsClickablew() { return isClickable; }
+    bool IsClickable() { return isClickable; }
+
+    virtual void SetDebugMode(bool val) { debugMode = val; }
+
+    bool IsDebugMode() { return debugMode; }
+
+    virtual void DrawDebugOutline();
 
     bool IsMouseHovered() { return isMouseHovered; }
     bool IsMouseLeftDown() { return isMouseLeftDown; }
@@ -189,6 +195,7 @@ class RWidget
     float borderThickness = 2;
     float scale = 1;
     bool isAnimated = true, isHoverable = true, isClickable = true;
+    bool debugMode = false;
 
   private:
     bool isMouseHovered = false, isMouseLeftDown = false, isMouseLeftPressed = false,

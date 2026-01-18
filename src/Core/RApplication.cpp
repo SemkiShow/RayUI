@@ -6,6 +6,14 @@
 #include "Core/Api.hpp"
 #include "Core/Translations.hpp"
 
+void RApplication::ResetEvents()
+{
+    for (auto& window: windows)
+    {
+        window->ResetEvents();
+    }
+}
+
 bool RApplication::PollEvents()
 {
     for (int i = windows.size() - 1; i >= 0; i--)
@@ -33,10 +41,7 @@ void RApplication::Update()
         }
     }
 
-    for (auto& window: windows)
-    {
-        window->ResetEvents();
-    }
+    ResetEvents();
     PollEvents();
 
     for (auto& window: windows)
@@ -49,7 +54,10 @@ void RApplication::Draw()
 {
     for (auto& window: windows)
     {
-        if (window->IsVisible()) window->Draw();
+        if (!window->IsVisible()) continue;
+
+        window->Draw();
+        if (debugMode) window->DrawDebugOutline();
     }
 }
 
@@ -90,5 +98,15 @@ void RApplication::SetScale(float val)
     for (auto& window: windows)
     {
         window->SetScale(val);
+    }
+}
+
+void RApplication::DrawDebugOutline()
+{
+    for (auto& window: windows)
+    {
+        if (!window->IsVisible()) continue;
+
+        window->DrawDebugOutline();
     }
 }

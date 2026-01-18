@@ -49,6 +49,17 @@ void RLayout::UpdateLabels()
     UpdateBounds();
 }
 
+void RLayout::DrawDebugOutline()
+{
+    RWidget::DrawDebugOutline();
+    for (auto& widget: widgets)
+    {
+        if (!widget->IsVisible()) continue;
+
+        widget->DrawDebugOutline();
+    }
+}
+
 void RLayout::SetFont(std::shared_ptr<RFont> font)
 {
     for (auto& widget: widgets)

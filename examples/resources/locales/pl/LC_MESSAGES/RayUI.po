@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-10 23:27+0100\n"
-"PO-Revision-Date: 2026-01-11 14:38+0100\n"
+"POT-Creation-Date: 2026-01-18 14:35+0100\n"
+"PO-Revision-Date: 2026-01-18 14:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -18,27 +18,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.8\n"
 
-#: examples/src/AllWidgets.cpp:31
+#: examples/src/AllWidgets.cpp:33
 msgid "Enter text..."
 msgstr "Wpisz tekst..."
 
-#: examples/src/AllWidgets.cpp:34
+#: examples/src/AllWidgets.cpp:36
 msgid "Enter an int..."
 msgstr "Wpisz liczbę całkowitą..."
 
-#: examples/src/AllWidgets.cpp:37
+#: examples/src/AllWidgets.cpp:39
 msgid "Enter a double..."
 msgstr "Wpisz liczbę zmiennoprzecinkową..."
 
-#: examples/src/AllWidgets.cpp:40
-msgid "Click me"
-msgstr "Kliknij mnie"
+#: examples/src/AllWidgets.cpp:42 examples/src/AllWidgets.cpp:51
+msgid "Enable debug mode"
+msgstr "Włącz tryb debugowania"
 
-#: examples/src/AllWidgets.cpp:56
+#: examples/src/AllWidgets.cpp:50
+msgid "Disable debug mode"
+msgstr "Wyłącz tryb debugowania"
+
+#: examples/src/AllWidgets.cpp:67
 msgid "label"
 msgstr "etykieta"
 
-#: examples/src/AllWidgets.cpp:133
+#: examples/src/AllWidgets.cpp:156
 msgid ""
 "This is a popup window\n"
 "You can drag it by the title bar!"
@@ -46,23 +50,23 @@ msgstr ""
 "To jest okno wyskakujące\n"
 "Możesz je przeciągnąć za pasek tytułu!"
 
-#: examples/src/AllWidgets.cpp:136
+#: examples/src/AllWidgets.cpp:159
 msgid "Show ok cancel window"
 msgstr "Pokaż okno OK/Anuluj"
 
-#: examples/src/AllWidgets.cpp:151
+#: examples/src/AllWidgets.cpp:174
 msgid "label1"
 msgstr "etykieta1"
 
-#: examples/src/AllWidgets.cpp:154
+#: examples/src/AllWidgets.cpp:177
 msgid "label2"
 msgstr "etykieta2"
 
-#: examples/src/AllWidgets.cpp:157
+#: examples/src/AllWidgets.cpp:180
 msgid "label3"
 msgstr "etykieta3"
 
-#: examples/src/AllWidgets.cpp:180
+#: examples/src/AllWidgets.cpp:205
 msgid ""
 "Would you like to close the app?\n"
 "Line 2\n"
@@ -72,10 +76,13 @@ msgstr ""
 "Linia 2\n"
 "Linia 3"
 
-#: examples/src/AllWidgets.cpp:180
+#: examples/src/AllWidgets.cpp:205
 msgid "Yes"
 msgstr "Tak"
 
-#: examples/src/AllWidgets.cpp:180
+#: examples/src/AllWidgets.cpp:205
 msgid "No"
 msgstr "Nie"
+
+#~ msgid "Click me"
+#~ msgstr "Kliknij mnie"

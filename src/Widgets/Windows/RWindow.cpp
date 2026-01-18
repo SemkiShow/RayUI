@@ -54,6 +54,12 @@ void RWindow::UpdateLabels()
     UpdateBounds();
 }
 
+void RWindow::DrawDebugOutline()
+{
+    RWidget::DrawDebugOutline();
+    if (centralWidget && centralWidget->IsVisible()) centralWidget->DrawDebugOutline();
+}
+
 void RWindow::SetFont(std::shared_ptr<RFont> font)
 {
     if (centralWidget) centralWidget->SetFont(font);

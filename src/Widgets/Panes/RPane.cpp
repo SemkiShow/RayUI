@@ -40,6 +40,12 @@ void RPane::UpdateLabels()
     UpdateBounds();
 }
 
+void RPane::DrawDebugOutline()
+{
+    RWidget::DrawDebugOutline();
+    if (centralWidget && centralWidget->IsVisible()) centralWidget->DrawDebugOutline();
+}
+
 void RPane::Draw()
 {
     rui::DrawRectangleBorder(bounds, drawBorder, borderThickness, color, *theme, themeState);

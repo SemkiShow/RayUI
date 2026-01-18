@@ -20,6 +20,14 @@ class RWindow : public RWidget
 
     void UpdateLabels() override;
 
+    void SetDebugMode(bool val) override
+    {
+        if (centralWidget) centralWidget->SetDebugMode(val);
+        debugMode = val;
+    }
+
+    void DrawDebugOutline() override;
+
     void SetFont(std::shared_ptr<RFont> font) override;
 
     void SetTheme(std::shared_ptr<RTheme> theme) override;

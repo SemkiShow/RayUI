@@ -10,17 +10,18 @@ class RLabelButton : public RButton
 {
   public:
     using RButton::RButton;
-    RLabelButton(const std::string& label, float margin = 5)
-        : label(label), labelId(label), margin(margin)
-    {
-    }
+    RLabelButton(const std::string& label, float margin = 5) : margin(margin) { SetLabel(label); }
     virtual ~RLabelButton() = default;
 
     void Draw() override;
 
     void UpdateLabels() override;
 
-    void SetLabel(const std::string& val) { label = labelId = val; }
+    void SetLabel(const std::string& val)
+    {
+        labelId = val;
+        UpdateLabels();
+    }
 
     std::string GetLabel() { return label; }
 

@@ -39,11 +39,17 @@ class MainWindow : public RWindow
         auto textBoxDouble = std::make_shared<RTextboxDouble>(_("Enter a double..."));
         layout->AddWidget(textBoxDouble);
 
-        auto button = std::make_shared<RLabelButton>(_("Click me"));
+        auto button = std::make_shared<RLabelButton>(_("Enable debug mode"));
         layout->AddWidget(button);
 
         Connect([button] { return button->IsClicked(); },
-                [] { std::cout << "RLabelButton is clicked!\n"; });
+                [button]
+                {
+                    std::cout << "RLabelButton is clicked!\n";
+                    app->SetDebugMode(!app->IsDebugMode());
+                    button->SetLabel(app->IsDebugMode() ? _("Disable debug mode")
+                                                        : _("Enable debug mode"));
+                });
 
         auto slider = std::make_shared<RSlider>(0, 0, 20, RSliderType::Rectangle);
         layout->AddWidget(slider);
