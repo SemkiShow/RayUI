@@ -101,20 +101,13 @@ void DrawTextFont(RFont font, const std::string& text, RVector2 pos, float fontS
 RVector2 MeasureText(const std::string& text, float fontSize)
 {
     auto res = ::MeasureText(text.c_str(), fontSize);
-    RVector2 size = {static_cast<float>(res), fontSize};
-    auto split = Split(text, '\n');
-    size.y *= split.size();
-    return size;
+    return {static_cast<float>(res), fontSize};
 }
 
 RVector2 MeasureTextFont(RFont font, const std::string& text, float fontSize, float spacing)
 {
     auto res = ::MeasureTextEx(ToRaylib(font), text.c_str(), fontSize, spacing);
-    auto size = FromRaylib(res);
-    auto split = Split(text, '\n');
-    size.y *= split.size();
-    size.y += (split.size() - 1) * spacing;
-    return size;
+    return FromRaylib(res);
 }
 
 void BeginScissorMode(RRectangle rec) { ::BeginScissorMode(rec.x, rec.y, rec.width, rec.height); }
