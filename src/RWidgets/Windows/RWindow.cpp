@@ -41,7 +41,7 @@ void RWindow::Update()
 
     for (auto it = events.begin(); it != events.end();)
     {
-        if (it->tracker.expired())
+        if (!it->IsValid())
         {
             it = events.erase(it);
             continue;

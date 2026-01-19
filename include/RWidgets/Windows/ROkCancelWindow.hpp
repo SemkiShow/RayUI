@@ -38,13 +38,14 @@ class ROkCancelWindow : public RPopupWindow
         okButton->SetAlignment(RAlign::HCenter);
         okButton->SetAlignment(RAlign::VCenter);
         buttonLayout->AddWidget(okButton);
-        Connect(okButton, [this]() { return IsOkClicked(); }, [this]() { SetVisible(false); });
+        Connect([this]() { return IsOkClicked(); }, [this]() { SetVisible(false); }, okButton);
 
         cancelButton = std::make_shared<RLabelButton>(cancelText);
         cancelButton->SetAlignment(RAlign::HCenter);
         cancelButton->SetAlignment(RAlign::VCenter);
         buttonLayout->AddWidget(cancelButton);
-        Connect(cancelButton, [this]() { return IsCancelClicked(); }, [this]() { SetVisible(false); });
+        Connect([this]() { return IsCancelClicked(); }, [this]() { SetVisible(false); },
+                cancelButton);
 
         layout->UpdateBounds();
         layout->Update();

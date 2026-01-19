@@ -21,9 +21,8 @@ class RPopupWindow : public RWindow
         closeButton = std::make_shared<RIconButton>(RIcon::Cross);
         closeButton->SetMaxSize({titleBarHeight, titleBarHeight});
 
-        Connect(
-            closeButton, [this]() { return closeButton->IsClicked(); },
-            [this]() { SetVisible(false); });
+        Connect([this]() { return closeButton->IsClicked(); }, [this]() { SetVisible(false); },
+                closeButton);
     }
     virtual ~RPopupWindow() = default;
 

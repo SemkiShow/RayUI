@@ -10,13 +10,17 @@
 
 struct REvent
 {
-    std::weak_ptr<void> tracker;
+    std::vector<std::weak_ptr<void>> dependencies;
     std::function<bool()> event;
     std::function<void()> func;
 
-    REvent(std::weak_ptr<void> tracker, std::function<bool()> event, std::function<void()> func)
-        : tracker(tracker), event(event), func(func)
+    bool IsValid() const
     {
+        for (auto& dep: dependencies)
+        {
+            if (dep.expired()) return false;
+        }
+        return true;
     }
 };
 
@@ -54,10 +58,15 @@ class RWindow : public RWidget
 
     std::shared_ptr<RWidget> GetCentralWidget() { return centralWidget; }
 
-    void Connect(std::shared_ptr<RWidget> tracker, std::function<bool()> event,
-                 std::function<void()> func)
+    template <typename... Tracker>
+    void Connect(std::function<bool()> event, std::function<void()> func,
+                 std::shared_ptr<Tracker>... deps)
     {
-        events.emplace_back(tracker, event, func);
+        REvent e;
+        e.event = event;
+        e.func = func;
+        (e.dependencies.push_back(deps), ...);
+        events.push_back(e);
     }
 
   protected:
