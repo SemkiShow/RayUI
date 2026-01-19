@@ -24,7 +24,7 @@ void RPane::Update()
     {
         updateBounds = false;
         bounds = ClampBounds(bounds, minSize, maxSize);
-        if (centralWidget && centralWidget->IsVisible())
+        if (centralWidget)
         {
             centralWidget->SetBounds(GetBounds());
             centralWidget->UpdateBounds();

@@ -29,7 +29,7 @@ void RWindow::Update()
         if (maxSize.y < 0) SetHeight(windowSize.y);
         bounds = ClampBounds(bounds, minSize, maxSize);
 
-        if (centralWidget && centralWidget->IsVisible())
+        if (centralWidget)
         {
             auto centralWidgetBounds = GetBounds();
             centralWidgetBounds = AddMargin(centralWidgetBounds, margin);

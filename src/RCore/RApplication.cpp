@@ -37,7 +37,7 @@ void RApplication::Update()
         updateBounds = false;
         for (auto& window: windows)
         {
-            if (window->IsVisible()) window->UpdateBounds();
+            window->UpdateBounds();
         }
     }
 

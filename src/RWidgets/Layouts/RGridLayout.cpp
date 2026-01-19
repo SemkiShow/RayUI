@@ -231,7 +231,7 @@ void RGridLayout::Update()
     // Update widgets' bounds upfront
     for (auto& widget: widgets)
     {
-        if (widget->IsVisible()) widget->UpdateBounds();
+        widget->UpdateBounds();
     }
 
     // Set widgets' widths

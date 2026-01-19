@@ -64,7 +64,7 @@ void RPopupWindow::Update()
         closeButton.SetPosition({bounds.x + bounds.width - titleBarHeight, bounds.y});
         closeButton.UpdateBounds();
 
-        if (centralWidget && centralWidget->IsVisible())
+        if (centralWidget)
         {
             auto centralWidgetBounds = GetBounds();
             centralWidgetBounds.y += titleBarHeight;
