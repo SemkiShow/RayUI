@@ -15,17 +15,19 @@ void DrawIcon(RIcon icon, RVector2 pos, float size, RColor color)
     const int iconIdx = static_cast<int>(icon) * RAYGUI_ICON_DATA_ELEMENTS;
     const int totalBits = RAYGUI_ICON_SIZE * RAYGUI_ICON_SIZE;
 
-    for (int bitIndex = 0; bitIndex < totalBits; bitIndex++)
+    float y = 0;
+    for (int i = 0; i < totalBits / 32; i++)
     {
-        int idx = bitIndex / 32;
-        int bitShift = bitIndex % 32;
-
-        if (guiIcons[iconIdx + idx] & (1u << bitShift))
+        for (int k = 0; k < 32; k++)
         {
-            float x = (bitIndex % RAYGUI_ICON_SIZE) * pixelSize;
-            float y = (bitIndex * 1.0f / RAYGUI_ICON_SIZE) * pixelSize;
+            if (guiIcons[iconIdx + i] & (1u << k))
+            {
+                float x = (k % RAYGUI_ICON_SIZE) * pixelSize;
 
-            rui::DrawRectangle({pos.x + x, pos.y + y, pixelSize, pixelSize}, color);
+                rui::DrawRectangle({pos.x + x, pos.y + y * pixelSize, pixelSize, pixelSize}, color);
+            }
+
+            if (k == 15 || k == 31) y++;
         }
     }
 }
