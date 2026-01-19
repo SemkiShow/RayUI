@@ -103,6 +103,8 @@ void RGridLayout::Shrink()
     float maxPosX = 0, maxPosY = 0;
     for (auto& widget: widgets)
     {
+        if (!widget->IsVisible()) continue;
+        
         RVector2 cellSize = {widths[column], heights[row]};
 
         {

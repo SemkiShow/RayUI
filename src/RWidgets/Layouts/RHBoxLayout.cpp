@@ -52,6 +52,8 @@ void RHBoxLayout::Shrink()
     // Set widgets' positions
     for (auto& widget: widgets)
     {
+        if (!widget->IsVisible()) continue;
+        
         float delta = widget->GetWidth() + padding;
         switch (widget->GetAlignH())
         {
