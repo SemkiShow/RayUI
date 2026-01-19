@@ -9,13 +9,13 @@
 void RPopupWindow::ResetEvents()
 {
     RWindow::ResetEvents();
-    closeButton.ResetEvents();
+    closeButton->ResetEvents();
 }
 
 bool RPopupWindow::PollEvents()
 {
     if (PollCentralWidgetEvents()) return true;
-    if (closeButton.PollEvents()) return true;
+    if (closeButton->PollEvents()) return true;
     return RWidget::PollEvents();
 }
 
@@ -61,8 +61,8 @@ void RPopupWindow::Update()
         bounds.y = std::clamp(bounds.y, outOfWindowMargin - bounds.height,
                               windowSize.y - outOfWindowMargin);
 
-        closeButton.SetPosition({bounds.x + bounds.width - titleBarHeight, bounds.y});
-        closeButton.UpdateBounds();
+        closeButton->SetPosition({bounds.x + bounds.width - titleBarHeight, bounds.y});
+        closeButton->UpdateBounds();
 
         if (centralWidget)
         {
@@ -76,11 +76,21 @@ void RPopupWindow::Update()
         }
     }
     if (centralWidget && centralWidget->IsVisible()) centralWidget->Update();
-    closeButton.Update();
+    closeButton->Update();
 
-    for (auto& [event, func]: events)
+    for (auto it = events.begin(); it != events.end();)
     {
-        if (event()) func();
+        if (it->tracker.expired())
+        {
+            it = events.erase(it);
+            continue;
+        }
+
+        if (it->event())
+        {
+            it->func();
+        }
+        ++it;
     }
 }
 
@@ -97,7 +107,7 @@ void RPopupWindow::Draw()
         titleBarBounds, titleBarRoundness, segments, drawBorder, borderThickness,
         GetThemeColor(RThemeList::Secondary, themeState), *theme, themeState);
 
-    closeButton.Draw();
+    closeButton->Draw();
 
     DrawCentralWidget();
 }

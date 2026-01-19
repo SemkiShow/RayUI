@@ -42,14 +42,15 @@ class MainWindow : public RWindow
         auto button = std::make_shared<RLabelButton>(_("Enable debug mode"));
         layout->AddWidget(button);
 
-        Connect([button] { return button->IsClicked(); },
-                [button]
-                {
-                    std::cout << "RLabelButton is clicked!\n";
-                    app->SetDebugMode(!app->IsDebugMode());
-                    button->SetLabel(app->IsDebugMode() ? _("Disable debug mode")
-                                                        : _("Enable debug mode"));
-                });
+        Connect(
+            button, [button] { return button->IsClicked(); },
+            [button]
+            {
+                std::cout << "RLabelButton is clicked!\n";
+                app->SetDebugMode(!app->IsDebugMode());
+                button->SetLabel(app->IsDebugMode() ? _("Disable debug mode")
+                                                    : _("Enable debug mode"));
+            });
 
         auto slider = std::make_shared<RSlider>(0, 0, 20, RSliderType::Rectangle);
         layout->AddWidget(slider);
@@ -70,18 +71,20 @@ class MainWindow : public RWindow
         auto iconButton = std::make_shared<RIconButton>(RIcon::Cpu);
         colorLayout->AddWidget(iconButton);
 
-        Connect([iconButton] { return iconButton->IsClicked(); },
-                []
-                {
-                    std::cout << "RIconButton is clicked!\n";
-                    popupWindow->SetVisible(true);
-                });
+        Connect(
+            iconButton, [iconButton] { return iconButton->IsClicked(); },
+            []
+            {
+                std::cout << "RIconButton is clicked!\n";
+                popupWindow->SetVisible(true);
+            });
 
         auto settingsButton = std::make_shared<RIconButton>(RIcon::Gear);
         colorLayout->AddWidget(settingsButton);
 
-        Connect([settingsButton] { return settingsButton->IsClicked(); },
-                [] { settingsWindow->SetVisible(true); });
+        Connect(
+            settingsButton, [settingsButton] { return settingsButton->IsClicked(); },
+            [] { settingsWindow->SetVisible(true); });
 
         auto bar = std::make_shared<RBar>();
         bar->SetAlignment(RAlign::VCenter);
@@ -121,14 +124,17 @@ class MainWindow : public RWindow
             rec3->SetMaxHeight(rec3->GetMaxHeight() * 3);
             colorLayout3->AddWidget(rec3);
 
-            Connect([rec] { return rec->IsMouseLeftDown(); },
-                    [rec] { std::cout << "Mouse down on " << rec->GetColor() << '\n'; });
+            Connect(
+                rec, [rec] { return rec->IsMouseLeftDown(); },
+                [rec] { std::cout << "Mouse down on " << rec->GetColor() << '\n'; });
 
-            Connect([rec2] { return rec2->IsMouseLeftPressed(); },
-                    [rec2] { std::cout << "Mouse pressed on " << rec2->GetColor() << '\n'; });
+            Connect(
+                rec2, [rec2] { return rec2->IsMouseLeftPressed(); },
+                [rec2] { std::cout << "Mouse pressed on " << rec2->GetColor() << '\n'; });
 
-            Connect([rec3] { return rec3->IsMouseLeftReleased(); },
-                    [rec3] { std::cout << "Mouse released on " << rec3->GetColor() << '\n'; });
+            Connect(
+                rec3, [rec3] { return rec3->IsMouseLeftReleased(); },
+                [rec3] { std::cout << "Mouse released on " << rec3->GetColor() << '\n'; });
         }
     }
 
@@ -159,7 +165,9 @@ class PopupWindow : public RPopupWindow
         auto button = std::make_shared<RLabelButton>(_("Show ok cancel window"));
         layout->AddWidget(button);
 
-        Connect([button] { return button->IsClicked(); }, [] { okCancelWindow->SetVisible(true); });
+        Connect(
+            button, [button] { return button->IsClicked(); },
+            [] { okCancelWindow->SetVisible(true); });
     }
 };
 
@@ -204,8 +212,8 @@ void InitUI()
     okCancelWindow = std::make_shared<ROkCancelWindow>(
         _("Would you like to close the app?\nLine 2\nLine 3"), _("Yes"), _("No"));
     okCancelWindow->SetVisible(false);
-    okCancelWindow->Connect([] { return okCancelWindow->IsOkClicked(); },
-                            [] { shouldClose = true; });
+    okCancelWindow->Connect(
+        okCancelWindow, [] { return okCancelWindow->IsOkClicked(); }, [] { shouldClose = true; });
     app->AddWindow(okCancelWindow);
 
     // app->SetTheme(std::make_shared<RThemeDark>());

@@ -12,15 +12,18 @@ class RPopupWindow : public RWindow
 {
   public:
     RPopupWindow(float titleBarHeight = 20, float radius = 5, int segments = 5)
-        : titleBarHeight(titleBarHeight), radius(radius), segments(segments),
-          closeButton(RIcon::Cross)
+        : titleBarHeight(titleBarHeight), radius(radius), segments(segments)
     {
         maxSize.x = 16 * minSize.x;
         maxSize.y = 9 * minSize.y;
         bounds.SetPosition((rui::GetWindowSize() - maxSize) / 2);
-        closeButton.SetMaxSize({titleBarHeight, titleBarHeight});
 
-        Connect([this]() { return closeButton.IsClicked(); }, [this]() { SetVisible(false); });
+        closeButton = std::make_shared<RIconButton>(RIcon::Cross);
+        closeButton->SetMaxSize({titleBarHeight, titleBarHeight});
+
+        Connect(
+            closeButton, [this]() { return closeButton->IsClicked(); },
+            [this]() { SetVisible(false); });
     }
     virtual ~RPopupWindow() = default;
 
@@ -55,5 +58,5 @@ class RPopupWindow : public RWindow
 
   private:
     RVector2 lastMousePosition;
-    RIconButton closeButton;
+    std::shared_ptr<RIconButton> closeButton;
 };

@@ -39,9 +39,19 @@ void RWindow::Update()
     }
     if (centralWidget && centralWidget->IsVisible()) centralWidget->Update();
 
-    for (auto& [event, func]: events)
+    for (auto it = events.begin(); it != events.end();)
     {
-        if (event()) func();
+        if (it->tracker.expired())
+        {
+            it = events.erase(it);
+            continue;
+        }
+
+        if (it->event())
+        {
+            it->func();
+        }
+        ++it;
     }
 }
 

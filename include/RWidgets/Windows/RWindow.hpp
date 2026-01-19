@@ -8,6 +8,18 @@
 #include <functional>
 #include <memory>
 
+struct REvent
+{
+    std::weak_ptr<void> tracker;
+    std::function<bool()> event;
+    std::function<void()> func;
+
+    REvent(std::weak_ptr<void> tracker, std::function<bool()> event, std::function<void()> func)
+        : tracker(tracker), event(event), func(func)
+    {
+    }
+};
+
 class RWindow : public RWidget
 {
   public:
@@ -42,15 +54,16 @@ class RWindow : public RWidget
 
     std::shared_ptr<RWidget> GetCentralWidget() { return centralWidget; }
 
-    void Connect(std::function<bool()> event, std::function<void()> func)
+    void Connect(std::shared_ptr<RWidget> tracker, std::function<bool()> event,
+                 std::function<void()> func)
     {
-        events.emplace_back(event, func);
+        events.emplace_back(tracker, event, func);
     }
 
   protected:
     float margin = 10;
     std::shared_ptr<RWidget> centralWidget;
-    std::vector<std::pair<std::function<bool()>, std::function<void()>>> events;
+    std::vector<REvent> events;
 
     bool PollCentralWidgetEvents()
     {
