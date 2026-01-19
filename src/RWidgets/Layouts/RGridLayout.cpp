@@ -163,16 +163,8 @@ void RGridLayout::Shrink()
     }
 
     // Set shrinked size
-    bool allLeft = true, allTop = true;
-    for (auto& widget: widgets)
-    {
-        if (!widget->IsVisible()) continue;
-
-        if (widget->GetAlignH() != RAlign::Left) allLeft = false;
-        if (widget->GetAlignV() != RAlign::Top) allTop = false;
-    }
-    if (allLeft) SetWidth(maxPosX - bounds.x - padding + margin);
-    if (allTop) SetHeight(maxPosY - bounds.y - padding + margin);
+    SetWidth(maxPosX - bounds.x - padding + margin);
+    SetHeight(maxPosY - bounds.y - padding + margin);
     bounds = ClampBounds(bounds, minSize, maxSize);
 }
 
@@ -199,62 +191,40 @@ void RGridLayout::Update()
     rows = std::ceil(rows * 1.0f / columns);
 
     // Calculate widths
-    std::vector<float> fixedWidths(rows, 0);
     int dynamicWidthCount = 0;
     for (int column = 0; column < columns; column++)
     {
         bool foundDynamic = false;
         for (int row = 0; row < rows; row++)
         {
-            size_t idx = column * rows + row;
+            size_t idx = row * columns + column;
             if (idx >= visibleWidgets.size()) break;
 
             auto widget = visibleWidgets[idx];
 
-            if (widget->GetMaxWidth() < 0)
-                foundDynamic = true;
-            else
-                fixedWidths[row] += widget->GetMaxWidth();
+            if (widget->GetMaxWidth() < 0) foundDynamic = true;
         }
         if (foundDynamic) dynamicWidthCount++;
     }
-    float fixedWidth = 0;
-    if (!fixedWidths.empty())
-    {
-        fixedWidth = *std::max_element(fixedWidths.begin(), fixedWidths.end());
-    }
-    float dynamicWidth = GetWidth() - 2 * margin - (columns - 1) * padding - fixedWidth;
+    float dynamicWidth = GetWidth() - 2 * margin - (columns - 1) * padding;
 
     // Calculate heights
-    std::vector<float> fixedHeights(columns, 0);
-    std::vector<int> dynamicHeightCounts(columns, 0);
-    {
-        int idx = 0;
-        for (auto& widget: widgets)
-        {
-            if (!widget->IsVisible()) continue;
-
-            if (widget->GetMaxHeight() < 0)
-                dynamicHeightCounts[idx]++;
-            else
-                fixedHeights[idx] += widget->GetMaxHeight();
-
-            idx++;
-            idx %= columns;
-        }
-    }
-    float fixedHeight = 0;
-    if (!fixedHeights.empty())
-    {
-        fixedHeight = *std::max_element(fixedHeights.begin(), fixedHeights.end());
-    }
     int dynamicHeightCount = 0;
-    if (!dynamicHeightCounts.empty())
+    for (int row = 0; row < rows; row++)
     {
-        dynamicHeightCount =
-            *std::max_element(dynamicHeightCounts.begin(), dynamicHeightCounts.end());
+        bool foundDynamic = false;
+        for (int column = 0; column < columns; column++)
+        {
+            size_t idx = row * columns + column;
+            if (idx >= visibleWidgets.size()) break;
+
+            auto widget = visibleWidgets[idx];
+
+            if (widget->GetMaxHeight() < 0) foundDynamic = true;
+        }
+        if (foundDynamic) dynamicHeightCount++;
     }
-    float dynamicHeight = GetHeight() - 2 * margin - (rows - 1) * padding - fixedHeight;
+    float dynamicHeight = GetHeight() - 2 * margin - (rows - 1) * padding;
 
     // Update widgets' bounds upfront
     for (auto& widget: widgets)
@@ -265,12 +235,11 @@ void RGridLayout::Update()
     // Set widgets' widths
     for (int column = 0; column < columns; column++)
     {
-        // std::cout << dynamicWidthCount << '\n';
-        float maxDynamicWidth = 0;
+        float maxWidth = 0;
         bool foundDynamic = false;
         for (int row = 0; row < rows; row++)
         {
-            size_t idx = column * rows + row;
+            size_t idx = row * columns + column;
             if (idx >= visibleWidgets.size()) break;
 
             auto widget = visibleWidgets[idx];
@@ -283,31 +252,40 @@ void RGridLayout::Update()
             widget->UpdateBounds();
             widget->Update();
 
-            if (widget->GetMaxWidth() < 0)
-            {
-                maxDynamicWidth = std::max(maxDynamicWidth, widget->GetWidth());
-                foundDynamic = true;
-            }
+            maxWidth = std::max(maxWidth, widget->GetWidth());
+            if (widget->GetMaxWidth() < 0) foundDynamic = true;
         }
-        if (foundDynamic)
-        {
-            dynamicWidth -= maxDynamicWidth;
-            dynamicWidthCount--;
-        }
+
+        dynamicWidth -= maxWidth;
+        if (foundDynamic) dynamicWidthCount--;
     }
 
     // Set widgets' heights
-    for (auto& widget: widgets)
+    for (int row = 0; row < rows; row++)
     {
-        if (!widget->IsVisible()) continue;
+        float maxHeight = 0;
+        bool foundDynamic = false;
+        for (int column = 0; column < columns; column++)
+        {
+            size_t idx = row * columns + column;
+            if (idx >= visibleWidgets.size()) break;
 
-        if (widget->GetMaxHeight() < 0)
-            widget->SetHeight(dynamicHeight / dynamicHeightCount);
-        else
-            widget->SetHeight(widget->GetMaxHeight());
+            auto widget = visibleWidgets[idx];
 
-        widget->UpdateBounds();
-        widget->Update();
+            if (widget->GetMaxHeight() < 0)
+                widget->SetHeight(dynamicHeight / dynamicHeightCount);
+            else
+                widget->SetHeight(widget->GetMaxHeight());
+
+            widget->UpdateBounds();
+            widget->Update();
+
+            maxHeight = std::max(maxHeight, widget->GetHeight());
+            if (widget->GetMaxHeight() < 0) foundDynamic = true;
+        }
+
+        dynamicHeight -= maxHeight;
+        if (foundDynamic) dynamicHeightCount--;
     }
 
     Shrink();
