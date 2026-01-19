@@ -4,7 +4,6 @@
 
 #pragma once
 
-#include "RCore/Translations.hpp"
 #include "RWidgets/Buttons/RLabelButton.hpp"
 #include "RWidgets/Labels/RLabel.hpp"
 #include "RWidgets/Layouts/RHBoxLayout.hpp"
@@ -51,28 +50,33 @@ class ROkCancelWindow : public RPopupWindow
         layout->Update();
         SetMaxWidth(layout->GetWidth() + 2 * margin);
         SetMaxHeight(layout->GetHeight() + 2 * margin + titleBarHeight);
+        // UpdateBounds();
     }
     virtual ~ROkCancelWindow() = default;
 
-    virtual void UpdateLabels() override
+    void SetMessageText(const std::string& val)
     {
-        messageLabel->SetLabel(GetText(messageLabel->GetLabelId()));
-        okButton->SetLabel(GetText(okButton->GetLabelId()));
-        cancelButton->SetLabel(GetText(cancelButton->GetLabelId()));
-        RWindow::UpdateLabels();
+        messageLabel->SetLabel(val);
+        UpdateBounds();
     }
-
-    void SetMessageText(const std::string& val) { messageLabel->SetLabel(val); }
 
     std::string GetMessageText() { return messageLabel->GetLabel(); }
 
     std::string GetMessageTextId() { return messageLabel->GetLabelId(); }
 
-    void SetOkText(const std::string& val) { okButton->SetLabel(val); }
+    void SetOkText(const std::string& val)
+    {
+        okButton->SetLabel(val);
+        UpdateBounds();
+    }
 
     std::string GetOkText() { return okButton->GetLabel(); }
 
-    void SetCancelText(const std::string& val) { cancelButton->SetLabel(val); }
+    void SetCancelText(const std::string& val)
+    {
+        cancelButton->SetLabel(val);
+        UpdateBounds();
+    }
 
     std::string GetCancelText() { return cancelButton->GetLabel(); }
 

@@ -53,7 +53,7 @@ void RHBoxLayout::Shrink()
     for (auto& widget: widgets)
     {
         if (!widget->IsVisible()) continue;
-        
+
         float delta = widget->GetWidth() + padding;
         switch (widget->GetAlignH())
         {

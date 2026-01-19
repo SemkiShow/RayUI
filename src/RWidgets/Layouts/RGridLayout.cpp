@@ -104,7 +104,7 @@ void RGridLayout::Shrink()
     for (auto& widget: widgets)
     {
         if (!widget->IsVisible()) continue;
-        
+
         RVector2 cellSize = {widths[column], heights[row]};
 
         {

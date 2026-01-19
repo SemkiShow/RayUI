@@ -25,18 +25,24 @@ class RApplication
 
     void UpdateBounds() { updateBounds = true; }
 
-    void AddWindow(std::shared_ptr<RWindow> window) { windows.push_back(window); }
+    void AddWindow(std::shared_ptr<RWindow> window)
+    {
+        windows.push_back(window);
+        UpdateBounds();
+    }
 
     void InsertWindow(size_t idx, std::shared_ptr<RWindow> window)
     {
         if (idx > windows.size()) throw std::runtime_error("Invalid idx in InsertWindow!");
         windows.insert(windows.begin() + idx, window);
+        UpdateBounds();
     }
 
     void EraseWindow(size_t idx)
     {
         if (idx >= windows.size()) throw std::runtime_error("Invalid idx in EraseWindow!");
         windows.erase(windows.begin() + idx);
+        UpdateBounds();
     }
 
     void PopBack()
@@ -44,9 +50,14 @@ class RApplication
         if (windows.empty())
             throw std::runtime_error("PopBack is called on an empty RApplication!");
         windows.pop_back();
+        UpdateBounds();
     }
 
-    void ClearWindows() { windows.clear(); }
+    void ClearWindows()
+    {
+        windows.clear();
+        UpdateBounds();
+    }
 
     std::shared_ptr<RWindow> GetWindow(size_t idx)
     {

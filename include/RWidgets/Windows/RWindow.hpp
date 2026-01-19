@@ -50,11 +50,23 @@ class RWindow : public RWidget
 
     void SetScale(float scale) override;
 
-    void SetMargin(float val) { margin = val; }
+    void SetMargin(float val)
+    {
+        margin = val;
+        UpdateBounds();
+    }
 
-    void SetCentralWidget(std::shared_ptr<RWidget> widget) { centralWidget = widget; }
+    void SetCentralWidget(std::shared_ptr<RWidget> widget)
+    {
+        centralWidget = widget;
+        UpdateBounds();
+    }
 
-    void UnsetCentralWidget() { centralWidget.reset(); }
+    void UnsetCentralWidget()
+    {
+        centralWidget.reset();
+        UpdateBounds();
+    }
 
     std::shared_ptr<RWidget> GetCentralWidget() { return centralWidget; }
 
