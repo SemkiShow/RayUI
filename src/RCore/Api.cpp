@@ -4,6 +4,7 @@
 
 #include "RCore/Api.hpp"
 #include "RCore/Conversions.hpp"
+#include <algorithm>
 #include <raylib.h>
 
 namespace rui
@@ -101,7 +102,7 @@ void DrawTextFont(RFont font, const std::string& text, RVector2 pos, float fontS
 RVector2 MeasureText(const std::string& text, float fontSize)
 {
     auto res = ::MeasureText(text.c_str(), fontSize);
-    return {static_cast<float>(res), fontSize};
+    return {static_cast<float>(res), fontSize * (std::count(text.begin(), text.end(), '\n') + 1)};
 }
 
 RVector2 MeasureTextFont(RFont font, const std::string& text, float fontSize, float spacing)

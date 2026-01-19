@@ -109,7 +109,10 @@ void RHBoxLayout::Shrink()
         }
     }
     SetWidth(posX - bounds.x - padding + margin);
-    if (allTop) SetHeight(newHeight + 2 * margin);
+    if (allTop)
+        SetHeight(newHeight + 2 * margin);
+    else
+        SetHeight(std::max(bounds.height, newHeight + 2 * margin));
     bounds = ClampBounds(bounds, minSize, maxSize);
 }
 
@@ -124,19 +127,15 @@ void RHBoxLayout::Update()
     updateBounds = false;
 
     // Calculate widths
-    float fixedWidth = 0;
     int visibleCount = 0, dynamicCount = 0;
     for (auto& widget: widgets)
     {
         if (!widget->IsVisible()) continue;
 
-        if (widget->GetMaxWidth() < 0)
-            dynamicCount++;
-        else
-            fixedWidth += widget->GetMaxWidth();
+        if (widget->GetMaxWidth() < 0) dynamicCount++;
         visibleCount++;
     }
-    float dynamicWidth = GetWidth() - 2 * margin - (visibleCount - 1) * padding - fixedWidth;
+    float dynamicWidth = GetWidth() - 2 * margin - (visibleCount - 1) * padding;
 
     if (visibleCount == 0) return;
 
@@ -165,11 +164,8 @@ void RHBoxLayout::Update()
 
         widget->Update();
 
-        if (widget->GetMaxWidth() < 0)
-        {
-            dynamicWidth -= widget->GetWidth();
-            dynamicCount--;
-        }
+        dynamicWidth -= widget->GetWidth();
+        if (widget->GetMaxWidth() < 0) dynamicCount--;
     }
 
     Shrink();

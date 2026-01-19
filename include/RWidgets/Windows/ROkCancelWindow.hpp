@@ -16,9 +16,6 @@ class ROkCancelWindow : public RPopupWindow
     ROkCancelWindow(const std::string& message, const std::string& okText = "Ok",
                     const std::string& cancelText = "Cancel")
     {
-        maxSize.x = 8 * minSize.x;
-        maxSize.y = 4 * minSize.y;
-
         layout = std::make_shared<RVBoxLayout>();
         layout->SetMargin(0);
         SetCentralWidget(layout);
@@ -34,14 +31,10 @@ class ROkCancelWindow : public RPopupWindow
         layout->AddWidget(buttonLayout);
 
         okButton = std::make_shared<RLabelButton>(okText);
-        okButton->SetAlignment(RAlign::HCenter);
-        okButton->SetAlignment(RAlign::VCenter);
         buttonLayout->AddWidget(okButton);
         Connect([this]() { return IsOkClicked(); }, [this]() { SetVisible(false); }, okButton);
 
         cancelButton = std::make_shared<RLabelButton>(cancelText);
-        cancelButton->SetAlignment(RAlign::HCenter);
-        cancelButton->SetAlignment(RAlign::VCenter);
         buttonLayout->AddWidget(cancelButton);
         Connect([this]() { return IsCancelClicked(); }, [this]() { SetVisible(false); },
                 cancelButton);
@@ -50,7 +43,6 @@ class ROkCancelWindow : public RPopupWindow
         layout->Update();
         SetMaxWidth(layout->GetWidth() + 2 * margin);
         SetMaxHeight(layout->GetHeight() + 2 * margin + titleBarHeight);
-        // UpdateBounds();
     }
     virtual ~ROkCancelWindow() = default;
 

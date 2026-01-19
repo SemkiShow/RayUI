@@ -109,7 +109,10 @@ void RVBoxLayout::Shrink()
             break;
         }
     }
-    if (allLeft) SetWidth(newWidth + 2 * margin);
+    if (allLeft)
+        SetWidth(newWidth + 2 * margin);
+    else
+        SetWidth(std::max(bounds.width, newWidth + 2 * margin));
     SetHeight(posY - bounds.y - padding + margin);
     bounds = ClampBounds(bounds, minSize, maxSize);
 }
@@ -125,20 +128,16 @@ void RVBoxLayout::Update()
     updateBounds = false;
 
     // Calculate heights
-    float fixedHeight = 0;
     int visibleCount = 0, dynamicCount = 0;
     for (auto& widget: widgets)
     {
         if (widget->IsVisible())
         {
-            if (widget->GetMaxHeight() < 0)
-                dynamicCount++;
-            else
-                fixedHeight += widget->GetMaxHeight();
+            if (widget->GetMaxHeight() < 0) dynamicCount++;
             visibleCount++;
         }
     }
-    float dynamicHeight = GetHeight() - 2 * margin - (visibleCount - 1) * padding - fixedHeight;
+    float dynamicHeight = GetHeight() - 2 * margin - (visibleCount - 1) * padding;
 
     if (visibleCount == 0) return;
 
@@ -167,11 +166,8 @@ void RVBoxLayout::Update()
 
         widget->Update();
 
-        if (widget->GetMaxHeight() < 0)
-        {
-            dynamicHeight -= widget->GetHeight();
-            dynamicCount--;
-        }
+        dynamicHeight -= widget->GetHeight();
+        if (widget->GetMaxHeight() < 0) dynamicCount--;
     }
 
     Shrink();
