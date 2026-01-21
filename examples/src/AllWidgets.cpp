@@ -12,6 +12,7 @@ Vector2 windowSize{16 * 50, 9 * 50};
 std::shared_ptr<RApplication> app;
 std::shared_ptr<RWindow> popupWindow, settingsWindow;
 std::shared_ptr<ROkCancelWindow> okCancelWindow;
+Texture imageTexture;
 bool shouldClose = false;
 
 class MainWindow : public RWindow
@@ -26,9 +27,17 @@ class MainWindow : public RWindow
         auto layout = std::make_shared<RVBoxLayout>();
         pane->SetCentralWidget(layout);
 
+        auto hbox = std::make_shared<RHBoxLayout>();
+        hbox->SetMargin(0);
+        layout->AddWidget(hbox);
+
+        auto image = std::make_shared<RImage>(rui::FromRaylib(imageTexture));
+        image->SetMaxHeight(image->GetMinHeight());
+        hbox->AddWidget(image);
+
         auto link = std::make_shared<RLinkLabel>("https://github.com/SemkiShow/RayUI",
                                                  "https://github.com/SemkiShow/RayUI");
-        layout->AddWidget(link);
+        hbox->AddWidget(link);
 
         auto textBox = std::make_shared<RTextbox>(_("Enter text..."));
         layout->AddWidget(textBox);
@@ -236,6 +245,7 @@ int main()
 
     InitWindow(windowSize.x, windowSize.y, "RayUI All Widgets Example");
 
+    imageTexture = LoadTexture("resources/textures/raylib.png");
     InitUI();
 
     while (!shouldClose && !WindowShouldClose())
@@ -243,6 +253,7 @@ int main()
         DrawFrame();
     }
 
+    UnloadTexture(imageTexture);
     CloseWindow();
 
     return 0;

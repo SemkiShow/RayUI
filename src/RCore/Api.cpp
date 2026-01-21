@@ -115,4 +115,11 @@ void BeginScissorMode(RRectangle rec) { ::BeginScissorMode(rec.x, rec.y, rec.wid
 
 void EndScissorMode() { ::EndScissorMode(); }
 
+void DrawTexture(RTexture texture, RRectangle rec, RColor tint)
+{
+    ::DrawTexturePro(ToRaylib(texture),
+                     {0, 0, static_cast<float>(texture.width), static_cast<float>(texture.height)},
+                     ToRaylib(rec), {0, 0}, 0, ToRaylib(tint));
+}
+
 } // namespace rui

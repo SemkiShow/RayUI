@@ -48,4 +48,6 @@ RVector2 MeasureTextFont(RFont font, const std::string& text, float fontSize, fl
 void BeginScissorMode(RRectangle rec);
 void EndScissorMode();
 
+void DrawTexture(RTexture texture, RRectangle rec, RColor tint);
+
 } // namespace rui
