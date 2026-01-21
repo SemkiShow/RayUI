@@ -16,6 +16,7 @@ struct REvent
 
     bool IsValid() const
     {
+        if (!event || !func) return false;
         for (auto& dep: dependencies)
         {
             if (dep.expired()) return false;
@@ -78,7 +79,7 @@ class RWindow : public RWidget
         e.event = event;
         e.func = func;
         (e.dependencies.push_back(deps), ...);
-        events.push_back(e);
+        events.push_back(std::move(e));
     }
 
   protected:
@@ -98,5 +99,30 @@ class RWindow : public RWidget
     void DrawCentralWidget()
     {
         if (centralWidget && centralWidget->IsVisible()) centralWidget->Draw();
+    }
+
+    void UpdateEvents()
+    {
+        std::vector<std::function<void()>> actionsToRun;
+
+        for (auto it = events.begin(); it != events.end();)
+        {
+            if (!it->IsValid())
+            {
+                it = events.erase(it);
+                continue;
+            }
+
+            if (it->event && it->event())
+            {
+                actionsToRun.push_back(it->func);
+            }
+            ++it;
+        }
+
+        for (const auto& action: actionsToRun)
+        {
+            action();
+        }
     }
 };

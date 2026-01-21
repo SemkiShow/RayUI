@@ -39,20 +39,7 @@ void RWindow::Update()
     }
     if (centralWidget && centralWidget->IsVisible()) centralWidget->Update();
 
-    for (auto it = events.begin(); it != events.end();)
-    {
-        if (!it->IsValid())
-        {
-            it = events.erase(it);
-            continue;
-        }
-
-        if (it->event())
-        {
-            it->func();
-        }
-        ++it;
-    }
+    UpdateEvents();
 }
 
 void RWindow::Draw() { DrawCentralWidget(); }
