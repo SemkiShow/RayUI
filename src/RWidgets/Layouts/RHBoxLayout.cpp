@@ -118,6 +118,8 @@ void RHBoxLayout::Shrink()
 
 void RHBoxLayout::Update()
 {
+    CleanupWidgets();
+
     if (!updateBounds)
     {
         RLayout::UpdateWidgets();

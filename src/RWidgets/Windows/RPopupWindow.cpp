@@ -21,6 +21,8 @@ bool RPopupWindow::PollEvents()
 
 void RPopupWindow::Update()
 {
+    if (centralWidget && centralWidget->IsDeleteLater()) UnsetCentralWidget();
+
     if (IsMouseLeftPressed())
     {
         RRectangle titleBarBounds = bounds;

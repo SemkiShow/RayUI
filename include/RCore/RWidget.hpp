@@ -168,6 +168,10 @@ class RWidget
 
     virtual void DrawDebugOutline();
 
+    void DeleteLater() { deleteLater = true; }
+
+    bool IsDeleteLater() { return deleteLater; }
+
     bool IsMouseHovered() { return isMouseHovered; }
     bool IsMouseLeftDown() { return isMouseLeftDown; }
     bool IsMouseLeftPressed() { return isMouseLeftPressed; }
@@ -196,6 +200,7 @@ class RWidget
     float scale = 1;
     bool isAnimated = true, isHoverable = true, isClickable = true;
     bool debugMode = false;
+    bool deleteLater = false;
 
   private:
     bool isMouseHovered = false, isMouseLeftDown = false, isMouseLeftPressed = false,

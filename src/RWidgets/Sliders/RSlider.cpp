@@ -55,6 +55,7 @@ void RBaseSlider<T>::Update()
     RWidget::Update();
     RBaseSlider::CheckSelected();
 
+    valueChanged = false;
     if (selected)
     {
         valueChanged = rui::GetMousePosition() != lastMousePosition;

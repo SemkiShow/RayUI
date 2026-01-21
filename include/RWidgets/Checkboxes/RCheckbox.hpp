@@ -9,7 +9,7 @@
 class RCheckbox : public RIconButton
 {
   public:
-    RCheckbox() : RIconButton(RIcon::None) {}
+    RCheckbox(bool value = false) : RIconButton(RIcon::None) { SetValue(value); }
     virtual ~RCheckbox() = default;
 
     void Update() override;

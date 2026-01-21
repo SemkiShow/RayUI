@@ -172,6 +172,8 @@ void RGridLayout::Shrink()
 
 void RGridLayout::Update()
 {
+    CleanupWidgets();
+
     if (!updateBounds)
     {
         RLayout::UpdateWidgets();

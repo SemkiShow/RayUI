@@ -19,6 +19,8 @@ bool RLayout::PollEvents()
 
 void RLayout::Update()
 {
+    CleanupWidgets();
+
     if (updateBounds)
     {
         updateBounds = false;

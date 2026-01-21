@@ -25,6 +25,16 @@ bool RApplication::PollEvents()
 
 void RApplication::Update()
 {
+    for (auto it = windows.begin(); it != windows.end();)
+    {
+        if ((*it)->IsDeleteLater())
+        {
+            it = windows.erase(it);
+            continue;
+        }
+        ++it;
+    }
+
     if (windowSizeChanged) windowSizeChanged = false;
     if (rui::GetWindowSize() != lastWindowSize)
     {
@@ -32,6 +42,7 @@ void RApplication::Update()
         updateBounds = true;
         windowSizeChanged = true;
     }
+
     if (updateBounds)
     {
         updateBounds = false;

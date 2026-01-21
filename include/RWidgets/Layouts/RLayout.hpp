@@ -110,4 +110,17 @@ class RLayout : public RWidget
             if (widget->IsVisible()) widget->Update();
         }
     }
+
+    void CleanupWidgets()
+    {
+        for (auto it = widgets.begin(); it != widgets.end();)
+        {
+            if ((*it)->IsDeleteLater())
+            {
+                it = widgets.erase(it);
+                continue;
+            }
+            ++it;
+        }
+    }
 };

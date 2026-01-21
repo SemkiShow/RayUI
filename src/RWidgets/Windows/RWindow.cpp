@@ -19,6 +19,8 @@ bool RWindow::PollEvents()
 
 void RWindow::Update()
 {
+    if (centralWidget && centralWidget->IsDeleteLater()) UnsetCentralWidget();
+
     if (updateBounds)
     {
         updateBounds = false;

@@ -119,6 +119,8 @@ void RVBoxLayout::Shrink()
 
 void RVBoxLayout::Update()
 {
+    CleanupWidgets();
+
     if (!updateBounds)
     {
         RLayout::UpdateWidgets();

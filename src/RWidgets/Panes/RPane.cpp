@@ -18,6 +18,7 @@ bool RPane::PollEvents()
 
 void RPane::Update()
 {
+    if (centralWidget && centralWidget->IsDeleteLater()) UnsetCentralWidget();
     RWidget::UpdateColors();
 
     if (updateBounds)

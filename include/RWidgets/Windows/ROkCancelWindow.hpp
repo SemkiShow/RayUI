@@ -41,8 +41,8 @@ class ROkCancelWindow : public RPopupWindow
 
         layout->UpdateBounds();
         layout->Update();
-        SetMaxWidth(layout->GetWidth() + 2 * margin);
-        SetMaxHeight(layout->GetHeight() + 2 * margin + titleBarHeight);
+        SetMaxWidth(std::max(GetMaxWidth(), layout->GetWidth() + 2 * margin));
+        SetMaxHeight(std::max(GetMaxHeight(), layout->GetHeight() + 2 * margin + titleBarHeight));
     }
     virtual ~ROkCancelWindow() = default;
 
