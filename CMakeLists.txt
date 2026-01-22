@@ -8,7 +8,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Raylib
-find_package(raylib REQUIRED)
+if(NOT TARGET raylib)
+    find_package(raylib REQUIRED)
+endif()
 
 # tinyfiledialogs
 add_library(tinyfiledialogs thirdparty/tinyfiledialogs/tinyfiledialogs.c)
