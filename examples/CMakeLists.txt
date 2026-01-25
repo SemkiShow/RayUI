@@ -7,6 +7,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Generate compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+if (DOWNLOAD_RAYLIB)
+    include(FetchContent)
+    set(RAYLIB_VERSION 5.5)
+    cmake_policy(SET CMP0135 NEW)
+    message("Downloading raylib ${RAYLIB_VERSION}")
+
+    FetchContent_Declare(
+        raylib 
+        URL https://github.com/raysan5/raylib/archive/${RAYLIB_VERSION}.zip
+    )
+    FetchContent_MakeAvailable(raylib)
+endif()
+
 # RayUI
 add_subdirectory(${CMAKE_SOURCE_DIR}/.. ${CMAKE_SOURCE_DIR}/../build)
 

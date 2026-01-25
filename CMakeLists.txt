@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Generate compile_commands.json
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Raylib
+# raylib
 if(NOT TARGET raylib)
     find_package(raylib REQUIRED)
 endif()

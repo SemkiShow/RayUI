@@ -2,6 +2,13 @@
 
 set -e
 
+download_raylib=OFF
+
+if [ "$1" == "-r" ] || [ "$1" == "--raylib" ]; then
+    download_raylib=ON
+    shift
+fi
+
 PrintHelp() {
     echo "Usage: $0 [OPTION] <EXAMPLE-NAME>"
     echo "Compile and run the example"
@@ -9,6 +16,7 @@ PrintHelp() {
     echo "With no OPTION, compile and run the release build"
     echo ""
     echo "-h, --help           Print help"
+    echo "-r, --raylib         Download raylib"
     echo "-d, --debug          Compile the debug build and run it with gdb"
     echo "-w, --windows        Compile the Windows build and run it with Wine"
     echo "-p, --profile        Compile the profile build, profile it with perf and display the data with hotspot"
@@ -29,7 +37,7 @@ elif [ "$1" == "-d" ] || [ "$1" == "--debug" ]; then
         exit 1
     fi
     clear
-    cmake -B build_debug -DCMAKE_BUILD_TYPE=Debug
+    cmake -B build_debug -DCMAKE_BUILD_TYPE=Debug -DDOWNLOAD_RAYLIB=$download_raylib
     cmake --build build_debug -j$(nproc)
     gdb -ex run --args ./build_debug/bin/$2
 
@@ -40,7 +48,7 @@ elif [ "$1" == "-w" ] || [ "$1" == "--windows" ]; then
         exit 1
     fi
     clear
-    cmake -B build_windows -DCMAKE_TOOLCHAIN_FILE="$(pwd)/mingw-w64-x86_64.cmake" -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cmake -B build_windows -DCMAKE_TOOLCHAIN_FILE="$(pwd)/mingw-w64-x86_64.cmake" -DCMAKE_BUILD_TYPE=RelWithDebInfo -DDOWNLOAD_RAYLIB=$download_raylib
     cmake --build build_windows -j$(nproc)
     wine ./build_windows/bin/$2.exe
 
@@ -51,7 +59,7 @@ elif [ "$1" == "-p" ] || [ "$1" == "--profile" ]; then
         exit 1
     fi
     clear
-    cmake -B build_profile -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS="-fno-omit-frame-pointer"
+    cmake -B build_profile -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS="-fno-omit-frame-pointer" -DDOWNLOAD_RAYLIB=$download_raylib
     cmake --build build_profile -j$(nproc)
     perf record -g --call-graph dwarf ./build_profile/bin/$2
     hotspot perf.data
@@ -63,7 +71,7 @@ elif [ "$1" == "-m" ] || [ "$1" == "--memory-leak" ]; then
         exit 1
     fi
     clear
-    cmake -B build_memory_leak -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS="-fsanitize=address"
+    cmake -B build_memory_leak -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_CXX_FLAGS="-fsanitize=address" -DDOWNLOAD_RAYLIB=$download_raylib
     cmake --build build_memory_leak -j$(nproc)
     ./build_memory_leak/bin/$2
 
@@ -74,7 +82,7 @@ else
         exit 1
     fi
     clear
-    cmake -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cmake -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DDOWNLOAD_RAYLIB=$download_raylib
     cmake --build build -j$(nproc)
     cp build/compile_commands.json ../build
     ./build/bin/$1
