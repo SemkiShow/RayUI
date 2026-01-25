@@ -13,7 +13,7 @@ cd thirdparty
 git submodule add --depth 1 https://github.com/SemkiShow/RayUI
 cd ..
 ```
-2. Add RayUI to you CMakeLists.txt
+2. Add RayUI to your CMakeLists.txt
 ```cmake
 add_subdirectory(${CMAKE_SOURCE_DIR}/thirdparty/RayUI ${CMAKE_BINARY_DIR}/_deps/RayUI-build SYSTEM)
 ```
@@ -28,3 +28,4 @@ cd RayUI/examples
 chmod +x run.sh
 ./run.sh
 ```
+
