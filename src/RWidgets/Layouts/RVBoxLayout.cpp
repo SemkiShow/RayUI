@@ -130,16 +130,20 @@ void RVBoxLayout::Update()
     updateBounds = false;
 
     // Calculate heights
+    float fixedHeight = 0;
     int visibleCount = 0, dynamicCount = 0;
     for (auto& widget: widgets)
     {
         if (widget->IsVisible())
         {
-            if (widget->GetMaxHeight() < 0) dynamicCount++;
+            if (widget->GetMaxHeight() < 0)
+                dynamicCount++;
+            else
+                fixedHeight += widget->GetMaxHeight();
             visibleCount++;
         }
     }
-    float dynamicHeight = GetHeight() - 2 * margin - (visibleCount - 1) * padding;
+    float dynamicHeight = GetHeight() - 2 * margin - (visibleCount - 1) * padding - fixedHeight;
 
     if (visibleCount == 0) return;
 
@@ -168,8 +172,11 @@ void RVBoxLayout::Update()
 
         widget->Update();
 
-        dynamicHeight -= widget->GetHeight();
-        if (widget->GetMaxHeight() < 0) dynamicCount--;
+        if (widget->GetMaxHeight() < 0)
+        {
+            dynamicHeight -= widget->GetHeight();
+            dynamicCount--;
+        }
     }
 
     Shrink();

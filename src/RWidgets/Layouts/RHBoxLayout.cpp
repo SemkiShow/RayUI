@@ -129,15 +129,19 @@ void RHBoxLayout::Update()
     updateBounds = false;
 
     // Calculate widths
+    float fixedWidth = 0;
     int visibleCount = 0, dynamicCount = 0;
     for (auto& widget: widgets)
     {
         if (!widget->IsVisible()) continue;
 
-        if (widget->GetMaxWidth() < 0) dynamicCount++;
+        if (widget->GetMaxWidth() < 0)
+            dynamicCount++;
+        else
+            fixedWidth += widget->GetMaxWidth();
         visibleCount++;
     }
-    float dynamicWidth = GetWidth() - 2 * margin - (visibleCount - 1) * padding;
+    float dynamicWidth = GetWidth() - 2 * margin - (visibleCount - 1) * padding - fixedWidth;
 
     if (visibleCount == 0) return;
 
@@ -166,8 +170,11 @@ void RHBoxLayout::Update()
 
         widget->Update();
 
-        dynamicWidth -= widget->GetWidth();
-        if (widget->GetMaxWidth() < 0) dynamicCount--;
+        if (widget->GetMaxWidth() < 0)
+        {
+            dynamicWidth -= widget->GetWidth();
+            dynamicCount--;
+        }
     }
 
     Shrink();
