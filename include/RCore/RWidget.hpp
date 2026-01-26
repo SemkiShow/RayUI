@@ -106,6 +106,8 @@ class RWidget
 
     RThemeList GetThemeList() { return themeList; }
 
+    RThemeState GetThemeState() { return themeState; }
+
     RColor GetThemeColor()
     {
         return theme->colors[static_cast<int>(themeList)][static_cast<int>(themeState)];

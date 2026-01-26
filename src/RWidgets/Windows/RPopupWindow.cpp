@@ -8,21 +8,19 @@
 
 void RPopupWindow::ResetEvents()
 {
-    RWindow::ResetEvents();
     closeButton->ResetEvents();
+    RWindow::ResetEvents();
 }
 
 bool RPopupWindow::PollEvents()
 {
-    if (PollCentralWidgetEvents()) return true;
     if (closeButton->PollEvents()) return true;
+    if (PollCentralWidgetEvents()) return true;
     return RWidget::PollEvents();
 }
 
 void RPopupWindow::Update()
 {
-    if (centralWidget && centralWidget->IsDeleteLater()) UnsetCentralWidget();
-
     if (IsMouseLeftPressed())
     {
         RRectangle titleBarBounds = bounds;
@@ -30,7 +28,6 @@ void RPopupWindow::Update()
         titleBarBounds.height = titleBarHeight;
         if (titleBarBounds.IsInside(rui::GetMousePosition()))
         {
-            lastMousePosition = rui::GetMousePosition();
             selected = true;
         }
     }
@@ -41,22 +38,15 @@ void RPopupWindow::Update()
 
     if (selected)
     {
-        RVector2 delta = rui::GetMousePosition() - lastMousePosition;
-        bounds.SetPosition(bounds.GetPosition() + delta);
+        bounds.SetPosition(bounds.GetPosition() + rui::GetMouseDelta());
         UpdateBounds();
-        lastMousePosition = rui::GetMousePosition();
     }
 
     if (updateBounds)
     {
-        updateBounds = false;
-
-        auto windowSize = rui::GetWindowSize();
-        SetSize(GetMaxSize());
-        if (maxSize.x < 0) SetWidth(windowSize.x);
-        if (maxSize.y < 0) SetHeight(windowSize.y);
         bounds = ClampBounds(bounds, minSize, maxSize);
 
+        auto windowSize = rui::GetWindowSize();
         float outOfWindowMargin = 2 * titleBarHeight;
         bounds.x = std::clamp(bounds.x, outOfWindowMargin - bounds.width,
                               windowSize.x - outOfWindowMargin);
@@ -65,22 +55,10 @@ void RPopupWindow::Update()
 
         closeButton->SetPosition({bounds.x + bounds.width - titleBarHeight, bounds.y});
         closeButton->UpdateBounds();
-
-        if (centralWidget)
-        {
-            auto centralWidgetBounds = GetBounds();
-            centralWidgetBounds.y += titleBarHeight;
-            centralWidgetBounds.height -= titleBarHeight;
-
-            centralWidgetBounds = AddMargin(centralWidgetBounds, margin);
-            centralWidget->SetBounds(centralWidgetBounds);
-            centralWidget->UpdateBounds();
-        }
     }
-    if (centralWidget && centralWidget->IsVisible()) centralWidget->Update();
     closeButton->Update();
 
-    UpdateEvents();
+    RWindow::Update();
 }
 
 void RPopupWindow::Draw()
@@ -99,4 +77,16 @@ void RPopupWindow::Draw()
     closeButton->Draw();
 
     DrawCentralWidget();
+}
+
+void RPopupWindow::SetCentralWidgetsBounds()
+{
+    if (centralWidget)
+    {
+        auto centralWidgetBounds = AddMargin(bounds, margin);
+        centralWidgetBounds.y += titleBarHeight;
+        centralWidgetBounds.height -= titleBarHeight;
+        centralWidget->SetBounds(centralWidgetBounds);
+        centralWidget->UpdateBounds();
+    }
 }

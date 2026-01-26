@@ -17,6 +17,7 @@ class RPopupWindow : public RWindow
         maxSize.x = 16 * minSize.x;
         maxSize.y = 9 * minSize.y;
         bounds.SetPosition((rui::GetWindowSize() - maxSize) / 2);
+        SetAnimated(false);
 
         closeButton = std::make_shared<RIconButton>(RIcon::Cross);
         closeButton->SetMaxSize({titleBarHeight, titleBarHeight});
@@ -55,7 +56,8 @@ class RPopupWindow : public RWindow
     int segments = 5;
     bool selected = false, draggable = true;
 
+    void SetCentralWidgetsBounds() override;
+
   private:
-    RVector2 lastMousePosition;
     std::shared_ptr<RIconButton> closeButton;
 };

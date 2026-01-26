@@ -47,6 +47,7 @@
 #include "RWidgets/ProgressBars/RProgressBar.hpp" // IWYU pragma: export
 
 // RWidgets/ScrollAreas
+#include "RWidgets/ScrollAreas/RScrollArea.hpp" // IWYU pragma: export
 
 // RWidgets/Separators
 #include "RWidgets/Separators/RBar.hpp" // IWYU pragma: export

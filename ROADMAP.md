@@ -20,7 +20,7 @@
   - [ ] RDropdown
   - [ ] RColorPicker
   - [x] RBar
-  - [ ] RScrollArea
+  - [x] RScrollArea
   - [x] RLayout
     - [x] RVBoxLayout
     - [x] RHBoxLayout

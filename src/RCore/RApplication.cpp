@@ -46,8 +46,12 @@ void RApplication::Update()
     if (updateBounds)
     {
         updateBounds = false;
+
+        auto windowSize = rui::GetWindowSize();
         for (auto& window: windows)
         {
+            if (window->GetMaxWidth() < 0) window->SetWidth(windowSize.x);
+            if (window->GetMaxHeight() < 0) window->SetHeight(windowSize.y);
             window->UpdateBounds();
         }
     }
@@ -110,6 +114,13 @@ void RApplication::SetScale(float val)
     {
         window->SetScale(val);
     }
+}
+
+void RApplication::SetDebugMode(bool val)
+{
+    for (auto& window: windows)
+        window->SetDebugMode(val);
+    debugMode = val;
 }
 
 void RApplication::DrawDebugOutline()

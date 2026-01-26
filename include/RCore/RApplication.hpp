@@ -65,22 +65,13 @@ class RApplication
         return windows[idx];
     }
 
-    void SetFont(std::shared_ptr<RFont> font);
-
-    void SetTheme(std::shared_ptr<RTheme> theme);
-
-    void SetScale(float val);
-
-    void SetDebugMode(bool val)
-    {
-        for (auto& window: windows)
-            window->SetDebugMode(val);
-        debugMode = val;
-    }
+    virtual void SetFont(std::shared_ptr<RFont> font);
+    virtual void SetTheme(std::shared_ptr<RTheme> theme);
+    virtual void SetScale(float val);
+    virtual void SetDebugMode(bool val);
+    virtual void DrawDebugOutline();
 
     bool IsDebugMode() { return debugMode; }
-
-    virtual void DrawDebugOutline();
 
     bool IsWindowSizeChanged() { return windowSizeChanged; }
 

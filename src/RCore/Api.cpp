@@ -6,6 +6,7 @@
 #include "RCore/Conversions.hpp"
 #include <algorithm>
 #include <raylib.h>
+#include <stack>
 
 namespace rui
 {
@@ -17,6 +18,10 @@ float GetWindowHeight() { return static_cast<float>(GetRenderHeight()) / GetWind
 RVector2 GetWindowSize() { return {GetWindowWidth(), GetWindowHeight()}; }
 
 RVector2 GetMousePosition() { return FromRaylib(::GetMousePosition()); }
+
+RVector2 GetMouseDelta() { return FromRaylib(::GetMouseDelta()); }
+
+RVector2 GetMouseWheelMove() { return FromRaylib(::GetMouseWheelMoveV()); }
 
 bool IsMouseButtonPressed(RMouseButton button)
 {
@@ -111,9 +116,36 @@ RVector2 MeasureTextFont(RFont font, const std::string& text, float fontSize, fl
     return FromRaylib(res);
 }
 
-void BeginScissorMode(RRectangle rec) { ::BeginScissorMode(rec.x, rec.y, rec.width, rec.height); }
+std::stack<RRectangle> scissorRecs;
 
-void EndScissorMode() { ::EndScissorMode(); }
+void BeginScissorMode(RRectangle rec)
+{
+    if (!scissorRecs.empty())
+    {
+        auto recEndPos = rec.GetPosition() + rec.GetSize();
+        auto scissorEndPos = scissorRecs.top().GetPosition() + scissorRecs.top().GetSize();
+        RVector2 endPos;
+        endPos.x = std::min(recEndPos.x, scissorEndPos.x);
+        endPos.y = std::min(recEndPos.y, scissorEndPos.y);
+        rec.x = std::max(rec.x, scissorRecs.top().x);
+        rec.y = std::max(rec.y, scissorRecs.top().y);
+        rec.width = endPos.x - rec.x;
+        rec.height = endPos.y - rec.y;
+    }
+    ::BeginScissorMode(rec.x, rec.y, rec.width, rec.height);
+    scissorRecs.push(rec);
+}
+
+void EndScissorMode()
+{
+    scissorRecs.pop();
+    ::EndScissorMode();
+    if (!scissorRecs.empty())
+    {
+        ::BeginScissorMode(scissorRecs.top().x, scissorRecs.top().y, scissorRecs.top().width,
+                           scissorRecs.top().height);
+    }
+}
 
 void DrawTexture(RTexture texture, RRectangle rec, RColor tint)
 {

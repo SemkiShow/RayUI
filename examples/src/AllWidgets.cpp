@@ -22,10 +22,14 @@ class MainWindow : public RWindow
     {
         auto pane = std::make_shared<RPaneRounded>();
         pane->SetMinSize({100, 100});
+        pane->SetMargin(10);
         SetCentralWidget(pane);
 
+        auto scrollArea = std::make_shared<RScrollArea>();
+        pane->SetCentralWidget(scrollArea);
+
         auto layout = std::make_shared<RVBoxLayout>();
-        pane->SetCentralWidget(layout);
+        scrollArea->SetCentralWidget(layout);
 
         auto hbox = std::make_shared<RHBoxLayout>();
         hbox->SetMargin(0);

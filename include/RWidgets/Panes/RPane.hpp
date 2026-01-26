@@ -4,69 +4,19 @@
 
 #pragma once
 
-#include "RCore/RWidget.hpp"
-#include <memory>
+#include "RCore/RContainer.hpp"
 
-class RPane : public RWidget
+class RPane : public RContainer
 {
   public:
     RPane()
     {
         themeList = RThemeList::Background;
         SetAnimated(false);
+        SetMargin(0);
     }
     RPane(RColor tint) : RPane() { RWidget::SetTint(tint); }
     virtual ~RPane() = default;
 
-    void ResetEvents() override;
-    bool PollEvents() override;
-    void Update() override;
     void Draw() override;
-
-    void UpdateLabels() override;
-
-    void SetDebugMode(bool val) override
-    {
-        if (centralWidget) centralWidget->SetDebugMode(val);
-        debugMode = val;
-    }
-
-    void DrawDebugOutline() override;
-
-    void SetFont(std::shared_ptr<RFont> font) override;
-
-    void SetTheme(std::shared_ptr<RTheme> theme) override;
-
-    void SetScale(float scale) override;
-
-    void SetCentralWidget(std::shared_ptr<RWidget> widget)
-    {
-        centralWidget = widget;
-        UpdateBounds();
-    }
-
-    void UnsetCentralWidget()
-    {
-        centralWidget.reset();
-        UpdateBounds();
-    }
-
-    std::shared_ptr<RWidget> GetCentralWidget() { return centralWidget; }
-
-  protected:
-    std::shared_ptr<RWidget> centralWidget;
-
-    bool PollCentralWidgetEvents()
-    {
-        if (centralWidget && centralWidget->IsVisible())
-        {
-            if (centralWidget->PollEvents()) return true;
-        }
-        return false;
-    }
-
-    void DrawCentralWidget()
-    {
-        if (centralWidget && centralWidget->IsVisible()) centralWidget->Draw();
-    }
 };
