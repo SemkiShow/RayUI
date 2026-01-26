@@ -48,7 +48,7 @@ void RScrollArea::Update()
         auto vBarBounds = bounds;
         vBarBounds.width = barSize;
         if (hBar.IsVisible()) vBarBounds.height -= barSize;
-        vBarBounds.height *= std::min(1.0f, vBarBounds.height / centralWidget->GetHeight());
+        vBarBounds.height *= vBarBounds.height / centralWidget->GetHeight();
         vBarBounds.x = bounds.x + bounds.width - vBarBounds.width;
         vBarBounds.y = std::max(bounds.y, vBar.GetPositionY());
         vBar.SetBounds(vBarBounds);
@@ -57,7 +57,7 @@ void RScrollArea::Update()
         auto hBarBounds = bounds;
         hBarBounds.height = barSize;
         if (vBar.IsVisible()) hBarBounds.width -= barSize;
-        hBarBounds.width *= std::min(1.0f, hBarBounds.width / centralWidget->GetWidth());
+        hBarBounds.width *= hBarBounds.width / centralWidget->GetWidth();
         hBarBounds.x = std::max(bounds.x, hBar.GetPositionX());
         hBarBounds.y = bounds.y + bounds.height - hBarBounds.height;
         hBar.SetBounds(hBarBounds);
@@ -75,8 +75,11 @@ void RScrollArea::Update()
         vBar.SetPositionY(vBar.GetPositionY() + mouseDelta.y);
         if (mouseDelta.y != 0) UpdateBounds();
     }
-    vBar.SetPositionY(
-        std::clamp(vBar.GetPositionY(), bounds.y, bounds.y + bounds.height - vBar.GetHeight()));
+    if (vBar.IsVisible())
+    {
+        vBar.SetPositionY(
+            std::clamp(vBar.GetPositionY(), bounds.y, bounds.y + bounds.height - vBar.GetHeight()));
+    }
 
     if (bounds.IsInside(rui::GetMousePosition()) && hBar.IsVisible())
     {
@@ -89,8 +92,11 @@ void RScrollArea::Update()
         hBar.SetPositionX(hBar.GetPositionX() + mouseDelta.x);
         if (mouseDelta.x != 0) UpdateBounds();
     }
-    hBar.SetPositionX(
-        std::clamp(hBar.GetPositionX(), bounds.x, bounds.x + bounds.width - hBar.GetWidth()));
+    if (hBar.IsVisible())
+    {
+        hBar.SetPositionX(
+            std::clamp(hBar.GetPositionX(), bounds.x, bounds.x + bounds.width - hBar.GetWidth()));
+    }
 
     if (vBar.IsVisible()) vBar.Update();
     if (hBar.IsVisible()) hBar.Update();
