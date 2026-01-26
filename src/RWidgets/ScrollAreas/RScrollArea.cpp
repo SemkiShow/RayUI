@@ -28,7 +28,8 @@ void RScrollArea::Update()
     vBar.SetVisible(enabled && centralWidget->GetHeight() > GetHeight());
     hBar.SetVisible(enabled && centralWidget->GetWidth() > GetWidth());
 
-    auto mouseDelta = rui::GetMouseDelta();
+    auto mouseDelta = rui::GetMousePosition() - lastMousePosition;
+    lastMousePosition = rui::GetMousePosition();
 
     if (vBar.IsMouseLeftPressed()) vBarActive = true;
     if (hBar.IsMouseLeftPressed()) hBarActive = true;
@@ -47,7 +48,7 @@ void RScrollArea::Update()
         auto vBarBounds = bounds;
         vBarBounds.width = barSize;
         if (hBar.IsVisible()) vBarBounds.height -= barSize;
-        vBarBounds.height *= vBarBounds.height / centralWidget->GetHeight();
+        vBarBounds.height *= std::min(1.0f, vBarBounds.height / centralWidget->GetHeight());
         vBarBounds.x = bounds.x + bounds.width - vBarBounds.width;
         vBarBounds.y = std::max(bounds.y, vBar.GetPositionY());
         vBar.SetBounds(vBarBounds);
@@ -56,7 +57,7 @@ void RScrollArea::Update()
         auto hBarBounds = bounds;
         hBarBounds.height = barSize;
         if (vBar.IsVisible()) hBarBounds.width -= barSize;
-        hBarBounds.width *= hBarBounds.width / centralWidget->GetWidth();
+        hBarBounds.width *= std::min(1.0f, hBarBounds.width / centralWidget->GetWidth());
         hBarBounds.x = std::max(bounds.x, hBar.GetPositionX());
         hBarBounds.y = bounds.y + bounds.height - hBarBounds.height;
         hBar.SetBounds(hBarBounds);

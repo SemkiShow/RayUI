@@ -14,7 +14,6 @@ float GetWindowHeight();
 RVector2 GetWindowSize();
 
 RVector2 GetMousePosition();
-RVector2 GetMouseDelta();
 RVector2 GetMouseWheelMove();
 
 bool IsMouseButtonPressed(RMouseButton button);

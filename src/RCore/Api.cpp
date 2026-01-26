@@ -19,8 +19,6 @@ RVector2 GetWindowSize() { return {GetWindowWidth(), GetWindowHeight()}; }
 
 RVector2 GetMousePosition() { return FromRaylib(::GetMousePosition()); }
 
-RVector2 GetMouseDelta() { return FromRaylib(::GetMouseDelta()); }
-
 RVector2 GetMouseWheelMove() { return FromRaylib(::GetMouseWheelMoveV()); }
 
 bool IsMouseButtonPressed(RMouseButton button)

@@ -55,6 +55,7 @@ class RScrollArea : public RContainer
     void SetCentralWidgetsBounds() override;
 
   private:
+    RVector2 lastMousePosition;
     RRectangle centralWidgetDrawBounds;
     RWidget vBar, hBar;
     bool vBarActive = false, hBarActive = false;
