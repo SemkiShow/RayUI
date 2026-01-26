@@ -118,8 +118,7 @@ void RApplication::SetScale(float val)
 
 void RApplication::SetDebugMode(bool val)
 {
-    for (auto& window: windows)
-        window->SetDebugMode(val);
+    for (auto& window: windows) window->SetDebugMode(val);
     debugMode = val;
 }
 

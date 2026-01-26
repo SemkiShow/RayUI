@@ -6,8 +6,7 @@
 
 void RLayout::ResetEvents()
 {
-    for (auto& widget: widgets)
-        widget->ResetEvents();
+    for (auto& widget: widgets) widget->ResetEvents();
     RWidget::ResetEvents();
 }
 

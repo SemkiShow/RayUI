@@ -59,5 +59,6 @@ class RPopupWindow : public RWindow
     void SetCentralWidgetsBounds() override;
 
   private:
+    RVector2 lastMousePosition;
     std::shared_ptr<RIconButton> closeButton;
 };

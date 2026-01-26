@@ -28,6 +28,7 @@ void RPopupWindow::Update()
         titleBarBounds.height = titleBarHeight;
         if (titleBarBounds.IsInside(rui::GetMousePosition()))
         {
+            lastMousePosition = rui::GetMousePosition();
             selected = true;
         }
     }
@@ -38,8 +39,10 @@ void RPopupWindow::Update()
 
     if (selected)
     {
-        bounds.SetPosition(bounds.GetPosition() + rui::GetMouseDelta());
+        RVector2 delta = rui::GetMousePosition() - lastMousePosition;
+        bounds.SetPosition(bounds.GetPosition() + delta);
         UpdateBounds();
+        lastMousePosition = rui::GetMousePosition();
     }
 
     if (updateBounds)

@@ -22,8 +22,7 @@ class RLayout : public RWidget
 
     void SetDebugMode(bool val) override
     {
-        for (auto& widget: widgets)
-            widget->SetDebugMode(val);
+        for (auto& widget: widgets) widget->SetDebugMode(val);
         debugMode = val;
     }
 
