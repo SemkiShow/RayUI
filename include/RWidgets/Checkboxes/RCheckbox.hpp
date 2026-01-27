@@ -4,12 +4,15 @@
 /**
  * @file
  * @brief @copydoc RCheckbox
+ */
+
+#pragma once
+
+/**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#pragma once
 
 #include "RWidgets/Buttons/RIconButton.hpp"
 

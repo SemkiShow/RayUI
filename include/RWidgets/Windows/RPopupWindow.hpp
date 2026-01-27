@@ -4,12 +4,15 @@
 /**
  * @file
  * @brief @copydoc RPopupWindow
+ */
+
+#pragma once
+
+/**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#pragma once
 
 #include "RCore/Api.hpp"
 #include "RWidgets/Buttons/RIconButton.hpp"

@@ -4,12 +4,15 @@
 /**
  * @file
  * @brief @copydoc RWindow
+ */
+
+#pragma once
+
+/**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#pragma once
 
 #include "RCore/RContainer.hpp"
 #include <functional>

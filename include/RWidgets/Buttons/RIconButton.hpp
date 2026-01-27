@@ -4,12 +4,15 @@
 /**
  * @file
  * @brief @copydoc RIconButton
+ */
+
+#pragma once
+
+/**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#pragma once
 
 #include "RCore/Icons.hpp"
 #include "RWidgets/Buttons/RButton.hpp"

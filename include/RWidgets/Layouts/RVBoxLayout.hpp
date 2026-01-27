@@ -4,12 +4,15 @@
 /**
  * @file
  * @brief @copydoc RVBoxLayout
+ */
+
+#pragma once
+
+/**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#pragma once
 
 #include "RWidgets/Layouts/RLayout.hpp"
 

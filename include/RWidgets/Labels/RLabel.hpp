@@ -4,12 +4,15 @@
 /**
  * @file
  * @brief @copydoc RLabel
+ */
+
+#pragma once
+
+/**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#pragma once
 
 #include "RCore/RWidget.hpp"
 

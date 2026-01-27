@@ -4,12 +4,15 @@
 /**
  * @file
  * @brief @copydoc RTextboxInt
+ */
+
+#pragma once
+
+/**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#pragma once
 
 #include "RWidgets/Textboxes/RTextbox.hpp"
 

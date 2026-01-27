@@ -4,12 +4,15 @@
 /**
  * @file
  * @brief @copydoc RLinkLabel
+ */
+
+#pragma once
+
+/**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#pragma once
 
 #include "RWidgets/Labels/RLabel.hpp"
 

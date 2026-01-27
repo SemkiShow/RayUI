@@ -4,12 +4,15 @@
 /**
  * @file
  * @brief @copydoc RLabelButton
+ */
+
+#pragma once
+
+/**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#pragma once
 
 #include "RWidgets/Buttons/RButton.hpp"
 

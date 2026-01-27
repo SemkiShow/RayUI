@@ -4,12 +4,15 @@
 /**
  * @file
  * @brief @copydoc RPaneRounded
+ */
+
+#pragma once
+
+/**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#pragma once
 
 #include "RWidgets/Panes/RPane.hpp"
 
