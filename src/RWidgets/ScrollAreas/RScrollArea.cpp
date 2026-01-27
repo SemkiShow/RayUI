@@ -78,7 +78,8 @@ void RScrollArea::Update()
     if (vBar.IsVisible())
     {
         vBar.SetPositionY(
-            std::clamp(vBar.GetPositionY(), bounds.y, bounds.y + bounds.height - vBar.GetHeight()));
+            std::clamp(vBar.GetPositionY(), bounds.y,
+                       bounds.y + bounds.height - vBar.GetHeight() - hBar.IsVisible() * barSize));
     }
 
     if (bounds.IsInside(rui::GetMousePosition()) && hBar.IsVisible())
@@ -95,7 +96,8 @@ void RScrollArea::Update()
     if (hBar.IsVisible())
     {
         hBar.SetPositionX(
-            std::clamp(hBar.GetPositionX(), bounds.x, bounds.x + bounds.width - hBar.GetWidth()));
+            std::clamp(hBar.GetPositionX(), bounds.x,
+                       bounds.x + bounds.width - hBar.GetWidth() - vBar.IsVisible() * barSize));
     }
 
     if (vBar.IsVisible()) vBar.Update();
