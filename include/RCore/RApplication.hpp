@@ -1,6 +1,10 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RApplication
+ */
 
 #pragma once
 
@@ -9,6 +13,9 @@
 #include <memory>
 #include <vector>
 
+/**
+ * @brief The main object for storing windows
+ */
 class RApplication
 {
   public:

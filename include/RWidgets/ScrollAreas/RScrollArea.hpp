@@ -1,11 +1,21 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RScrollArea
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
 #include "RCore/RContainer.hpp"
 
+/**
+ * @brief A scroll area
+ */
 class RScrollArea : public RContainer
 {
   public:

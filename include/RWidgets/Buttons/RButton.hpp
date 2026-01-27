@@ -1,11 +1,21 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RButton
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
 #include "RCore/RWidget.hpp"
 
+/**
+ * @brief A generic button with no label
+ */
 class RButton : public RWidget
 {
   public:

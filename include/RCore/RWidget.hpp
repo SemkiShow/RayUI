@@ -1,6 +1,13 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RWidget
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
@@ -8,6 +15,9 @@
 #include "RCore/Utils.hpp"
 #include <memory>
 
+/**
+ * @brief The main widget class
+ */
 class RWidget
 {
   public:
@@ -53,6 +63,11 @@ class RWidget
     float GetMaxWidth() { return maxSize.x; }
     float GetMaxHeight() { return maxSize.y; }
 
+    /**
+     * @brief Flags widget for a bounds update
+     * @note The bounds are actually updated on the next Update() call
+     * @see Update
+     */
     void UpdateBounds() { updateBounds = true; }
 
     void SetVisible(bool val)
@@ -63,6 +78,11 @@ class RWidget
 
     bool IsVisible() { return visible; }
 
+    /**
+     * @brief Set the widget's alignment
+     * @note Has to be called separately for vertical and horizontal alignment
+     * @param flag
+     */
     void SetAlignment(RAlign flag)
     {
         if (flag == RAlign::Left || flag == RAlign::HCenter || flag == RAlign::Right) alignH = flag;
@@ -184,8 +204,19 @@ class RWidget
 
   protected:
     bool updateBounds = false;
+    /**
+     * @brief The widget's current bounds
+     */
     RRectangle bounds{0, 0, -1, -1};
+    /**
+     * @brief The minimal size of the widget
+     * @note Negative values mean no min limit (the size can be negative)
+     */
     RVector2 minSize{30, 30};
+    /**
+     * @brief The maximum size of the widget
+     * @note Negative values mean that the widget can expand in that axis
+     */
     RVector2 maxSize{-1, -1};
     bool visible = true;
     RAlign alignH = RAlign::Left, alignV = RAlign::Top;

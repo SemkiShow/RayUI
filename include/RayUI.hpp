@@ -1,6 +1,12 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief A header including everything
+ * @note This is file isn't recommended for production because including it everywhere can increase
+ * compile times significantly
+ */
 
 #pragma once
 

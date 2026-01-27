@@ -1,11 +1,21 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RProgressBar
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
 #include "RCore/RWidget.hpp"
 
+/**
+ * @brief A progressbar
+ */
 class RProgressBar : public RWidget
 {
   public:

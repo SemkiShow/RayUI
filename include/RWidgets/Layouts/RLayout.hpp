@@ -1,6 +1,13 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RLayout
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
@@ -8,6 +15,9 @@
 #include <memory>
 #include <vector>
 
+/**
+ * @brief A generic layout that does not position widgets
+ */
 class RLayout : public RWidget
 {
   public:

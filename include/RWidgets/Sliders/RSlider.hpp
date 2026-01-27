@@ -1,6 +1,13 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RBaseSlider
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
@@ -15,6 +22,9 @@ enum class RSliderType
 };
 
 template <typename T>
+/**
+ * @brief A generic slider
+ */
 class RBaseSlider : public RWidget
 {
   public:

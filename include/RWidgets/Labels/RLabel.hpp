@@ -1,11 +1,21 @@
 // SPDX-FileCopyrightfont: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RLabel
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
 #include "RCore/RWidget.hpp"
 
+/**
+ * @brief A label
+ */
 class RLabel : public RWidget
 {
   public:

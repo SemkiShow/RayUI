@@ -1,11 +1,21 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RContainer
+ * @ingroup RWidget
+ * @{
+ */
 
 #pragma once
 
 #include "RCore/RWidget.hpp"
 
+/**
+ * @brief The container widget
+ * Stores a central widget drawn with some margin
+ */
 class RContainer : public RWidget
 {
   public:
@@ -58,6 +68,11 @@ class RContainer : public RWidget
         return false;
     }
 
+    /**
+     * @brief Set the central widget's bounds
+     * @note Can be overridden for changing central widget's bounds calculation logic without
+     * repeating code
+     */
     virtual void SetCentralWidgetsBounds()
     {
         if (centralWidget)

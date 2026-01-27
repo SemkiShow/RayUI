@@ -1,11 +1,21 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RCheckbox
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
 #include "RWidgets/Buttons/RIconButton.hpp"
 
+/**
+ * @brief A checkbox
+ */
 class RCheckbox : public RIconButton
 {
   public:

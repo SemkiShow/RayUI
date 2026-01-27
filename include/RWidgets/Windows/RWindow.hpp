@@ -1,6 +1,13 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RWindow
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
@@ -8,6 +15,11 @@
 #include <functional>
 #include <memory>
 
+/**
+ * @brief An event for RWindow
+ * @p func is called if @p event () returns true
+ * The event is deleted if any of @p dependencies becomes null
+ */
 struct REvent
 {
     std::vector<std::weak_ptr<void>> dependencies;
@@ -25,6 +37,9 @@ struct REvent
     }
 };
 
+/**
+ * @brief A window that takes the whole render space
+ */
 class RWindow : public RContainer
 {
   public:

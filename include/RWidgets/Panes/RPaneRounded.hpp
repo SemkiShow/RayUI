@@ -1,11 +1,21 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RPaneRounded
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
 #include "RWidgets/Panes/RPane.hpp"
 
+/**
+ * @brief A rounded version of RPane
+ */
 class RPaneRounded : public RPane
 {
   public:

@@ -1,6 +1,13 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc ROkCancelWindow
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
@@ -10,6 +17,9 @@
 #include "RWidgets/Layouts/RVBoxLayout.hpp"
 #include "RWidgets/Windows/RPopupWindow.hpp"
 
+/**
+ * @brief A popup window with a message and 2 buttons
+ */
 class ROkCancelWindow : public RPopupWindow
 {
   public:

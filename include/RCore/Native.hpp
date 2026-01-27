@@ -1,6 +1,11 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief Native functions
+ * @warning None of the functions are safe to use with user input!
+ */
 
 #pragma once
 

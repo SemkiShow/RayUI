@@ -1,6 +1,13 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief Helper functions
+ * @defgroup Utils
+ * @brief Helper functions
+ * @{
+ */
 
 #pragma once
 
@@ -8,11 +15,25 @@
 #include <ostream>
 #include <vector>
 
+/**
+ * @defgroup Types
+ * @brief Mostly raylib wrapper types
+ * @{
+ */
+
+/**
+ * @brief A wrapper for raylib's Vector2
+ *
+ */
 struct RVector2
 {
     float x, y;
 };
 
+/**
+ * @brief A wrapper for raylib's Rectangle
+ *
+ */
 struct RRectangle
 {
     float x, y, width, height;
@@ -41,6 +62,10 @@ struct RColor;
 
 RColor HexToRgba(const std::string& hex);
 
+/**
+ * @brief A wrapper for raylib's Color
+ *
+ */
 struct RColor
 {
     unsigned char r, g, b, a;
@@ -53,6 +78,10 @@ struct RColor
     RColor(const std::string& hex) { *this = HexToRgba(hex); }
 };
 
+/**
+ * @brief A wrapper for raylib's Texture
+ *
+ */
 struct RTexture
 {
     unsigned int id; // OpenGL texture id
@@ -62,6 +91,10 @@ struct RTexture
     int format;      // Data format (PixelFormat type)
 };
 
+/**
+ * @brief A wrapper for raylib's Font
+ *
+ */
 struct RFont
 {
     typedef struct Rectangle Rectangle;
@@ -75,6 +108,9 @@ struct RFont
     GlyphInfo* glyphs; // Glyphs info data
 };
 
+/**
+ * @brief raylib's supported mouse buttons
+ */
 enum class RMouseButton
 {
     Left = 0,
@@ -86,6 +122,9 @@ enum class RMouseButton
     Back = 6
 };
 
+/**
+ * @brief raylib's supported keys
+ */
 enum class RKey
 {
     Null = 0, // Key: NULL, used for no key pressed
@@ -204,6 +243,9 @@ enum class RKey
     VolumeDown = 25 // Key: Android volume down button
 };
 
+/**
+ * @brief RWidget alignment flags
+ */
 enum class RAlign
 {
     Left,
@@ -214,54 +256,209 @@ enum class RAlign
     Bottom
 };
 
+/** @} */
+
+/**
+ * @defgroup Bounds
+ * @brief Non-typical functions for working with RWidget's bounds
+ * @warning These functions do not work as their STL counterparts. Use with care
+ * @see RWidget
+ * @{
+ */
+
+/**
+ * @defgroup Clamp
+ * @brief Non-typical clamp functions specifically for RWidget's bounds
+ * @note Allows the widget to expand to fill the provided space, if max < 0
+ * @code
+ * if (min < 0) return -1;
+ * if (max < 0) return std::max(min, val);
+ * if (val < 0) return max;
+ * return std::min(max, val);
+ * @endcode
+ * @warning This does not function like regular clamp. Use with care
+ * @{
+ */
 float ClampWidth(float val, float min, float max);
 float ClampHeight(float val, float min, float max);
 RVector2 ClampSize(const RVector2& size, const RVector2& minSize, const RVector2& maxSize);
 RRectangle ClampBounds(const RRectangle& bounds, const RVector2& minSize, const RVector2& maxSize);
+/** @} */
 
+/**
+ * @defgroup Min
+ * @brief Non-typical min functions specifically for RWidget's bounds
+ * @note Allows the widget to expand to fill the provided space
+ * @code
+ * if (a < 0 && b < 0) return -1;
+ * if (a < 0 || b < 0) return std::max(a, b);
+ * return std::min(a, b);
+ * @endcode
+ * @warning This does not function like regular min. Use with care
+ * @{
+ */
 float MinWidth(float a, float b);
 float MinHeight(float a, float b);
 RVector2 MinSize(const RVector2& a, const RVector2& b);
+/** @} */
 
+/**
+ * @defgroup Max
+ * @brief Non-typical max functions specifically for RWidget's bounds
+ * @note Allows the widget to expand to fill the provided space
+ * @code
+ * if (a < 0 || b < 0) return -1;
+ * return std::max(a, b);
+ * @endcode
+ * @warning This does not function like regular max. Use with care
+ * @{
+ */
 float MaxWidth(float a, float b);
 float MaxHeight(float a, float b);
 RVector2 MaxSize(const RVector2& a, const RVector2& b);
+/** @} */
 
+/** @} */
+
+/**
+ * @brief Add @p margin to @p bounds without modifying @p bounds
+ *
+ * @param bounds
+ * @param margin
+ * @return RRectangle
+ */
 RRectangle AddMargin(const RRectangle& bounds, float margin);
 
+/**
+ * @defgroup WString
+ * @brief Functions for converting between std::string and std::wstring
+ * @note These are the only functions causing a warning at compile time because std::wstring_convert
+ * is annoyingly deprecated in C++ 17 without a viable alternative
+ * @{
+ */
 std::wstring StringToWString(const std::string& s);
 std::string WStringToString(const std::wstring& s);
+/** @} */
 
 std::vector<std::string> Split(const std::string& s, char delimiter = ' ');
 
+/**
+ * @brief Get the chars pressed between frames as an std::string
+ *
+ * @return std::string
+ */
 std::string GetCharsPressed();
+
+/**
+ * @brief Removes exactly one UTF-8 character from an std::string
+ *
+ * @param s
+ */
 void Utf8PopBack(std::string& s);
 
+/**
+ * @brief Remaps @p val from range @p oldMin - @p oldMax to @p newMin - @p newMax
+ *
+ * @param val
+ * @param oldMin
+ * @param oldMax
+ * @param newMin
+ * @param newMax
+ * @return float
+ */
 float Map(float val, float oldMin, float oldMax, float newMin, float newMax);
 
 enum class RThemeState;
 struct RTheme;
 
+/**
+ * @defgroup Drawing
+ * @brief Wrappers for repeated function calls of functions from Api.hpp
+ * @see Api.hpp
+ * @{
+ */
+
 namespace rui
 {
 
+/**
+ * @brief Draw a rectangle with an outline
+ *
+ * @param rec
+ * @param drawBorder
+ * @param borderThickness
+ * @param color
+ * @param theme
+ * @param themeState
+ */
 void DrawRectangleBorder(RRectangle rec, bool drawBorder, float borderThickness, RColor color,
                          RTheme theme, RThemeState themeState);
 
+/**
+ * @brief Draw a rounded rectangle with an outline
+ *
+ * @param rec
+ * @param roundness
+ * @param segments
+ * @param drawBorder
+ * @param borderThickness
+ * @param color
+ * @param theme
+ * @param themeState
+ */
 void DrawRectangleRoundedBorder(RRectangle rec, float roundness, int segments, bool drawBorder,
                                 float borderThickness, RColor color, RTheme theme,
                                 RThemeState themeState);
 
+/**
+ * @brief Draw a circle with an outline
+ *
+ * @param pos
+ * @param radius
+ * @param drawBorder
+ * @param borderThickness
+ * @param segments
+ * @param color
+ * @param theme
+ * @param themeState
+ */
 void DrawCircleBorder(RVector2 pos, float radius, bool drawBorder, float borderThickness,
                       int segments, RColor color, RTheme theme, RThemeState themeState);
 
+/**
+ * @brief Draw text in the default font if @p font is null
+ *
+ * @param font
+ * @param text
+ * @param pos
+ * @param fontSize
+ * @param spacing
+ * @param color
+ */
 void DrawText(std::shared_ptr<RFont> font, const std::string& text, RVector2 pos, float fontSize,
               float spacing, RColor color);
 
+/**
+ * @brief Measure text in the default font if @p font is null
+ *
+ * @param font
+ * @param text
+ * @param fontSize
+ * @param spacing
+ * @return RVector2
+ */
 RVector2 MeasureText(std::shared_ptr<RFont> font, const std::string& text, float fontSize,
                      float spacing);
 
 } // namespace rui
+
+/** @} */
+
+/**
+ * @defgroup Operators
+ * @brief Operators for RayUI's types
+ * @{
+ */
 
 std::ostream& operator<<(std::ostream& out, const RVector2& vec);
 std::ostream& operator<<(std::ostream& out, const RRectangle& rec);
@@ -285,6 +482,16 @@ bool operator!=(const RVector2& a, const RVector2& b);
 bool operator==(const RRectangle& a, const RRectangle& b);
 bool operator!=(const RRectangle& a, const RRectangle& b);
 
-RColor MixColors(const RColor& a, const RColor& b);
 bool operator==(const RColor& a, const RColor& b);
 bool operator!=(const RColor& a, const RColor& b);
+
+/** @} */
+
+/**
+ * @brief Mix colors @p a and @p b in equal proportions
+ *
+ * @param a
+ * @param b
+ * @return RColor
+ */
+RColor MixColors(const RColor& a, const RColor& b);

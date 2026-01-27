@@ -1,12 +1,22 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RTextboxDouble
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
 #include "RWidgets/Textboxes/RTextbox.hpp"
 #include <sstream>
 
+/**
+ * @brief A textbox for real numbers
+ */
 class RTextboxDouble : public RTextbox
 {
   public:

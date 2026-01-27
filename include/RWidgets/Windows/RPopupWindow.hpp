@@ -1,6 +1,13 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RPopupWindow
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
@@ -8,6 +15,9 @@
 #include "RWidgets/Buttons/RIconButton.hpp"
 #include "RWidgets/Windows/RWindow.hpp"
 
+/**
+ * @brief A popup window
+ */
 class RPopupWindow : public RWindow
 {
   public:

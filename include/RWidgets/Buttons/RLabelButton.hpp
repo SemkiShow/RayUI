@@ -1,11 +1,21 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RLabelButton
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
 #include "RWidgets/Buttons/RButton.hpp"
 
+/**
+ * @brief A traditional button with a label
+ */
 class RLabelButton : public RButton
 {
   public:

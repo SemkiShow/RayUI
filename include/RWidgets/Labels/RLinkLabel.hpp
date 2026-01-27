@@ -1,11 +1,22 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RLinkLabel
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
 #include "RWidgets/Labels/RLabel.hpp"
 
+/**
+ * @brief A link label
+ * @warning It is not safe to use with user input
+ */
 class RLinkLabel : public RLabel
 {
   public:

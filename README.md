@@ -20,11 +20,28 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/thirdparty/RayUI ${CMAKE_BINARY_DIR}/_deps/
 
 ## Examples
 
+### Download raylib at configure time
+
+```bash
+git clone https://github.com/SemkiShow/RayUI
+cd RayUI/examples
+chmod +x run.sh
+./run.sh --help # See what examples are available
+./run.sh -r <example-name>
+```
+
+### Bring-Your-Own-Raylib
+
 1. Install Raylib following one of these tutorials based on your system: [Linux](https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux), [Windows](https://github.com/raysan5/raylib/wiki/Working-on-Windows), [macOS](https://github.com/raysan5/raylib/wiki/Working-on-macOS)
 1. Run 
 ```bash
 git clone https://github.com/SemkiShow/RayUI
 cd RayUI/examples
 chmod +x run.sh
-./run.sh
+./run.sh --help # See what examples are available
+./run.sh <example-name>
 ```
+
+## Documentation
+
+Documentation is available [here](https://SemkiShow.github.io/RayUI/)

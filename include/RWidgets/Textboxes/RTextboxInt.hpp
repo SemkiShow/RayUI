@@ -1,11 +1,21 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RTextboxInt
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 #pragma once
 
 #include "RWidgets/Textboxes/RTextbox.hpp"
 
+/**
+ * @brief A textbox for integers
+ */
 class RTextboxInt : public RTextbox
 {
   public:

@@ -1,11 +1,18 @@
 // SPDX-FileCopyrightText: 2026 SemkiShow
 //
 // SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief raygui icons support
+ */
 
 #pragma once
 
 #include "RCore/Utils.hpp"
 
+/**
+ * @brief A wrapper for raygui's ICON_* enum
+ */
 enum class RIcon
 {
     None = 0,
@@ -230,6 +237,23 @@ enum class RIcon
 namespace rui
 {
 
+/**
+ * @defgroup Drawing
+ * @brief Icons drawing
+ * @{
+ */
+
+/**
+ * @brief Draw an icon
+ * Draws icon @p icon at position @p pos with width/height @p size and color @p color
+ * @param icon
+ * @param pos
+ * @param size
+ * @param color
+ * @see RIcon
+ */
 void DrawIcon(RIcon icon, RVector2 pos, float size, RColor color = {0, 0, 0});
 
-}
+/** @} */
+
+} // namespace rui
