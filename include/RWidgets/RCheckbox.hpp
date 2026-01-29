@@ -1,0 +1,40 @@
+// SPDX-FileCopyrightText: 2026 SemkiShow
+//
+// SPDX-License-Identifier: MIT
+/**
+ * @file
+ * @brief @copydoc RCheckbox
+ */
+
+#pragma once
+
+#include "RWidgets/RIconButton.hpp"
+
+/**
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
+
+/**
+ * @brief A checkbox
+ */
+class RCheckbox : public RIconButton
+{
+  public:
+    RCheckbox(bool value = false) : RIconButton(RIcon::None) { SetValue(value); }
+    virtual ~RCheckbox() = default;
+
+    void Update() override;
+
+    void SetValue(bool val)
+    {
+        value = val;
+        icon = (value ? RIcon::Cross : RIcon::None);
+    }
+
+    bool GetValue() { return value; }
+
+  private:
+    bool value = false;
+};

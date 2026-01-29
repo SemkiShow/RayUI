@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include "RWidgets/Windows/RWindow.hpp"
+#include "RWidgets/RWindow.hpp"
 #include <filesystem>
 #include <memory>
 #include <vector>

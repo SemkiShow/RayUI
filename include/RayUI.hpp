@@ -20,53 +20,54 @@
 #include "RCore/Themes.hpp"       // IWYU pragma: export
 #include "RCore/Translations.hpp" // IWYU pragma: export
 
-// RWidgets/Buttons
-#include "RWidgets/Buttons/RButton.hpp"      // IWYU pragma: export
-#include "RWidgets/Buttons/RIconButton.hpp"  // IWYU pragma: export
-#include "RWidgets/Buttons/RLabelButton.hpp" // IWYU pragma: export
+// Buttons
+#include "RWidgets/RButton.hpp"      // IWYU pragma: export
+#include "RWidgets/RIconButton.hpp"  // IWYU pragma: export
+#include "RWidgets/RLabelButton.hpp" // IWYU pragma: export
 
-// RWidgets/Checkboxes
-#include "RWidgets/Checkboxes/RCheckbox.hpp" // IWYU pragma: export
+// Checkboxes
+#include "RWidgets/RCheckbox.hpp" // IWYU pragma: export
 
-// RWidgets/ColorPickers
+// ColorPickers
 
-// RWidgets/Dropdowns
+// Dropdowns
 
-// RWidgets/Images
-#include "RWidgets/Images/RImage.hpp" // IWYU pragma: export
+// Images
+#include "RWidgets/RImage.hpp" // IWYU pragma: export
 
-// RWidgets/Labels
-#include "RWidgets/Labels/RLabel.hpp"     // IWYU pragma: export
-#include "RWidgets/Labels/RLinkLabel.hpp" // IWYU pragma: export
+// Labels
+#include "RWidgets/RLabel.hpp"     // IWYU pragma: export
+#include "RWidgets/RLinkLabel.hpp" // IWYU pragma: export
 
-// RWidgets/Layouts
-#include "RWidgets/Layouts/RGridLayout.hpp" // IWYU pragma: export
-#include "RWidgets/Layouts/RHBoxLayout.hpp" // IWYU pragma: export
-#include "RWidgets/Layouts/RLayout.hpp"     // IWYU pragma: export
-#include "RWidgets/Layouts/RVBoxLayout.hpp" // IWYU pragma: export
+// Layouts
+#include "RWidgets/RGridLayout.hpp" // IWYU pragma: export
+#include "RWidgets/RHBoxLayout.hpp" // IWYU pragma: export
+#include "RWidgets/RLayout.hpp"     // IWYU pragma: export
+#include "RWidgets/RVBoxLayout.hpp" // IWYU pragma: export
 
-// RWidgets/Panes
-#include "RWidgets/Panes/RPane.hpp"        // IWYU pragma: export
-#include "RWidgets/Panes/RPaneRounded.hpp" // IWYU pragma: export
+// Panes
+#include "RWidgets/RPane.hpp"        // IWYU pragma: export
+#include "RWidgets/RPaneRounded.hpp" // IWYU pragma: export
 
-// RWidgets/ProgressBars
-#include "RWidgets/ProgressBars/RProgressBar.hpp" // IWYU pragma: export
+// ProgressBars
+#include "RWidgets/RProgressBar.hpp" // IWYU pragma: export
 
-// RWidgets/ScrollAreas
-#include "RWidgets/ScrollAreas/RScrollArea.hpp" // IWYU pragma: export
+// ScrollAreas
+#include "RWidgets/RScrollArea.hpp" // IWYU pragma: export
 
-// RWidgets/Separators
-#include "RWidgets/Separators/RBar.hpp" // IWYU pragma: export
+// Separators
+#include "RWidgets/RBar.hpp" // IWYU pragma: export
 
-// RWidgets/Sliders
-#include "RWidgets/Sliders/RSlider.hpp" // IWYU pragma: export
+// Sliders
+#include "RWidgets/RSlider.hpp" // IWYU pragma: export
 
-// RWidgets/Textboxes
-#include "RWidgets/Textboxes/RTextbox.hpp"       // IWYU pragma: export
-#include "RWidgets/Textboxes/RTextboxDouble.hpp" // IWYU pragma: export
-#include "RWidgets/Textboxes/RTextboxInt.hpp"    // IWYU pragma: export
+// Textboxes
+#include "RWidgets/RTextbox.hpp"       // IWYU pragma: export
+#include "RWidgets/RTextboxDouble.hpp" // IWYU pragma: export
+#include "RWidgets/RTextboxInt.hpp"    // IWYU pragma: export
 
-// RWidgets/Windows
-#include "RWidgets/Windows/ROkCancelWindow.hpp" // IWYU pragma: export
-#include "RWidgets/Windows/RPopupWindow.hpp"    // IWYU pragma: export
-#include "RWidgets/Windows/RWindow.hpp"         // IWYU pragma: export
+// Windows
+#include "RWidgets/ROkCancelWindow.hpp" // IWYU pragma: export
+#include "RWidgets/RPopupPane.hpp"      // IWYU pragma: export
+#include "RWidgets/RPopupWindow.hpp"    // IWYU pragma: export
+#include "RWidgets/RWindow.hpp"         // IWYU pragma: export
