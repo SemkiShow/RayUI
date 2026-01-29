@@ -11,8 +11,9 @@
 #include "RWidgets/RTextbox.hpp"
 
 /**
- * @defgroup RWidget
- * @brief Widgets
+ * @defgroup Widgets
+ * @{
+ * @defgroup Textboxes
  * @{
  */
 

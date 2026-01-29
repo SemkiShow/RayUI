@@ -13,8 +13,9 @@
 #include <vector>
 
 /**
- * @defgroup RWidget
- * @brief Widgets
+ * @defgroup Widgets
+ * @{
+ * @defgroup Layouts
  * @{
  */
 

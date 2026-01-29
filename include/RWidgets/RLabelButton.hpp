@@ -11,8 +11,9 @@
 #include "RWidgets/RButton.hpp"
 
 /**
- * @defgroup RWidget
- * @brief Widgets
+ * @defgroup Widgets
+ * @{
+ * @defgroup Buttons
  * @{
  */
 

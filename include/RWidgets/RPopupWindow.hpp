@@ -13,8 +13,9 @@
 #include "RWidgets/RWindow.hpp"
 
 /**
- * @defgroup RWidget
- * @brief Widgets
+ * @defgroup Widgets
+ * @{
+ * @defgroup Windows
  * @{
  */
 

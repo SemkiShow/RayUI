@@ -12,22 +12,23 @@
 #include <iomanip>
 #include <sstream>
 
+/**
+ * @defgroup Widgets
+ * @{
+ * @defgroup Sliders
+ * @{
+ */
+
 enum class RSliderType
 {
     Regular,
     Rectangle
 };
 
-template <typename T>
-/**
- * @defgroup RWidget
- * @brief Widgets
- * @{
- */
-
 /**
  * @brief A generic slider
  */
+template <typename T>
 class RBaseSlider : public RWidget
 {
   public:

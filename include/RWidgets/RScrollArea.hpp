@@ -11,8 +11,9 @@
 #include "RCore/RContainer.hpp"
 
 /**
- * @defgroup RWidget
- * @brief Widgets
+ * @defgroup Widgets
+ * @{
+ * @defgroup ScrollAreas
  * @{
  */
 

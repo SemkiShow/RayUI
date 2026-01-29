@@ -13,8 +13,9 @@
 #include <memory>
 
 /**
- * @defgroup RWidget
- * @brief Widgets
+ * @defgroup Widgets
+ * @{
+ * @defgroup Windows
  * @{
  */
 
@@ -41,8 +42,9 @@ struct REvent
 };
 
 /**
- * @defgroup RWidget
- * @brief Widgets
+ * @defgroup Widgets
+ * @{
+ * @defgroup
  * @{
  */
 

@@ -11,8 +11,9 @@
 #include "RCore/RWidget.hpp"
 
 /**
- * @defgroup RWidget
- * @brief Widgets
+ * @defgroup Widgets
+ * @{
+ * @defgroup Images
  * @{
  */
 

@@ -11,8 +11,9 @@
 #include "RWidgets/RLabel.hpp"
 
 /**
- * @defgroup RWidget
- * @brief Widgets
+ * @defgroup Widgets
+ * @{
+ * @defgroup Labels
  * @{
  */
 

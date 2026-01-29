@@ -11,8 +11,9 @@
 #include "RWidgets/RIconButton.hpp"
 
 /**
- * @defgroup RWidget
- * @brief Widgets
+ * @defgroup Widgets
+ * @{
+ * @defgroup Checkboxes
  * @{
  */
 

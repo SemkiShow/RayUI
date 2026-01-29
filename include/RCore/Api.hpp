@@ -14,6 +14,11 @@ namespace rui
 {
 
 /**
+ * @defgroup Api
+ * @{
+ */
+
+/**
  * @defgroup Window
  * @brief Get the dimensions of the window
  * @{

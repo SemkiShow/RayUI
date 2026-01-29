@@ -11,8 +11,9 @@
 #include "RWidgets/RLayout.hpp"
 
 /**
- * @defgroup RWidget
- * @brief Widgets
+ * @defgroup Widgets
+ * @{
+ * @defgroup Layouts
  * @{
  */
 
