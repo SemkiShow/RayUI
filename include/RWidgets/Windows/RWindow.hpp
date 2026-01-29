@@ -8,15 +8,15 @@
 
 #pragma once
 
+#include "RCore/RContainer.hpp"
+#include <functional>
+#include <memory>
+
 /**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#include "RCore/RContainer.hpp"
-#include <functional>
-#include <memory>
 
 /**
  * @brief An event for RWindow
@@ -39,6 +39,12 @@ struct REvent
         return true;
     }
 };
+
+/**
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 /**
  * @brief A window that takes the whole render space

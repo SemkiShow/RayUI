@@ -8,12 +8,6 @@
 
 #pragma once
 
-/**
- * @defgroup RWidget
- * @brief Widgets
- * @{
- */
-
 #include "RCore/RWidget.hpp"
 #include <iomanip>
 #include <sstream>
@@ -25,6 +19,12 @@ enum class RSliderType
 };
 
 template <typename T>
+/**
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
+
 /**
  * @brief A generic slider
  */

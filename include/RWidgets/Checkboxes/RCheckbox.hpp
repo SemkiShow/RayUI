@@ -8,13 +8,13 @@
 
 #pragma once
 
+#include "RWidgets/Buttons/RIconButton.hpp"
+
 /**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#include "RWidgets/Buttons/RIconButton.hpp"
 
 /**
  * @brief A checkbox

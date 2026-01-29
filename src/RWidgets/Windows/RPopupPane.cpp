@@ -1,0 +1,70 @@
+// SPDX-FileCopyrightText: 2026 SemkiShow
+//
+// SPDX-License-Identifier: MIT
+
+#include "RWidgets/Windows/RPopupPane.hpp"
+#include "RCore/Api.hpp"
+
+void RPopupPane::ResetEvents()
+{
+    RWindow::ResetEvents();
+    closeButton.ResetEvents();
+}
+
+bool RPopupPane::PollEvents()
+{
+    if (closeButton.PollEvents()) return true;
+    if (PollCentralWidgetEvents()) return true;
+    return RWidget::PollEvents();
+}
+
+void RPopupPane::Update()
+{
+    if (centralWidget && centralWidget->IsDeleteLater()) UnsetCentralWidget();
+
+    if (updateBounds)
+    {
+        updateBounds = false;
+
+        auto windowSize = rui::GetWindowSize();
+        SetSize(GetMaxSize());
+        if (maxSize.x < 0) SetWidth(windowSize.x);
+        if (maxSize.y < 0) SetHeight(windowSize.y);
+        bounds = ClampBounds(bounds, minSize, maxSize);
+
+        RVector2 closeButtonPos = GetPosition();
+        closeButtonPos.x = bounds.width - margin - closeButton.GetMaxWidth();
+        closeButtonPos.y += margin;
+
+        closeButton.SetPosition(closeButtonPos);
+        closeButton.UpdateBounds();
+        if (closeButton.GetWidth() < 0) closeButton.Update();
+
+        RRectangle paneBounds = AddMargin(bounds, paneMargin);
+        pane.SetBounds(paneBounds);
+        pane.UpdateBounds();
+
+        if (centralWidget)
+        {
+            auto centralWidgetBounds = AddMargin(paneBounds, margin);
+            centralWidgetBounds.width -= closeButton.GetWidth();
+            centralWidget->SetBounds(centralWidgetBounds);
+            centralWidget->UpdateBounds();
+        }
+    }
+    if (centralWidget && centralWidget->IsVisible()) centralWidget->Update();
+
+    closeButton.Update();
+    pane.Update();
+
+    UpdateEvents();
+
+    if (closeButton.IsClicked()) SetVisible(false);
+}
+
+void RPopupPane::Draw()
+{
+    pane.Draw();
+    RWindow::Draw();
+    closeButton.Draw();
+}

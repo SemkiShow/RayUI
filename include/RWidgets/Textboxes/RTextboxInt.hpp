@@ -8,13 +8,13 @@
 
 #pragma once
 
+#include "RWidgets/Textboxes/RTextbox.hpp"
+
 /**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#include "RWidgets/Textboxes/RTextbox.hpp"
 
 /**
  * @brief A textbox for integers

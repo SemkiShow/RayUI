@@ -8,14 +8,14 @@
 
 #pragma once
 
+#include "RWidgets/Textboxes/RTextbox.hpp"
+#include <sstream>
+
 /**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#include "RWidgets/Textboxes/RTextbox.hpp"
-#include <sstream>
 
 /**
  * @brief A textbox for real numbers

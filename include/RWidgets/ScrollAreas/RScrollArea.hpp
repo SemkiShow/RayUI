@@ -8,13 +8,13 @@
 
 #pragma once
 
+#include "RCore/RContainer.hpp"
+
 /**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#include "RCore/RContainer.hpp"
 
 /**
  * @brief A scroll area

@@ -8,13 +8,13 @@
 
 #pragma once
 
+#include "RCore/RWidget.hpp"
+
 /**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#include "RCore/RWidget.hpp"
 
 /**
  * @brief The container widget

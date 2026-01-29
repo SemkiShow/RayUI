@@ -8,14 +8,14 @@
 
 #pragma once
 
+#include "RCore/Icons.hpp"
+#include "RWidgets/Buttons/RButton.hpp"
+
 /**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#include "RCore/Icons.hpp"
-#include "RWidgets/Buttons/RButton.hpp"
 
 /**
  * @brief A button with an RIcon instead of a label

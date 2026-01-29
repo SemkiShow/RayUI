@@ -8,13 +8,13 @@
 
 #pragma once
 
+#include "RWidgets/Panes/RPane.hpp"
+
 /**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#include "RWidgets/Panes/RPane.hpp"
 
 /**
  * @brief A rounded version of RPane

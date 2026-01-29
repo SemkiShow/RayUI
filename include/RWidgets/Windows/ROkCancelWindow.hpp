@@ -8,17 +8,17 @@
 
 #pragma once
 
-/**
- * @defgroup RWidget
- * @brief Widgets
- * @{
- */
-
 #include "RWidgets/Buttons/RLabelButton.hpp"
 #include "RWidgets/Labels/RLabel.hpp"
 #include "RWidgets/Layouts/RHBoxLayout.hpp"
 #include "RWidgets/Layouts/RVBoxLayout.hpp"
 #include "RWidgets/Windows/RPopupWindow.hpp"
+
+/**
+ * @defgroup RWidget
+ * @brief Widgets
+ * @{
+ */
 
 /**
  * @brief A popup window with a message and 2 buttons

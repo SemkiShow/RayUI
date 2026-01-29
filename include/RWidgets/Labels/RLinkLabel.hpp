@@ -8,13 +8,13 @@
 
 #pragma once
 
+#include "RWidgets/Labels/RLabel.hpp"
+
 /**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#include "RWidgets/Labels/RLabel.hpp"
 
 /**
  * @brief A link label

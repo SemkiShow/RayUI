@@ -8,15 +8,15 @@
 
 #pragma once
 
+#include "RCore/Themes.hpp"
+#include "RCore/Utils.hpp"
+#include <memory>
+
 /**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#include "RCore/Themes.hpp"
-#include "RCore/Utils.hpp"
-#include <memory>
 
 /**
  * @brief The main widget class

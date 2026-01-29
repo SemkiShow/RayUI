@@ -8,13 +8,13 @@
 
 #pragma once
 
+#include "RWidgets/Buttons/RButton.hpp"
+
 /**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#include "RWidgets/Buttons/RButton.hpp"
 
 /**
  * @brief A traditional button with a label

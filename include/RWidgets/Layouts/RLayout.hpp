@@ -8,15 +8,15 @@
 
 #pragma once
 
+#include "RCore/RWidget.hpp"
+#include <memory>
+#include <vector>
+
 /**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#include "RCore/RWidget.hpp"
-#include <memory>
-#include <vector>
 
 /**
  * @brief A generic layout that does not position widgets

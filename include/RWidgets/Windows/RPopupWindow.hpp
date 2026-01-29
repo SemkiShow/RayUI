@@ -8,15 +8,15 @@
 
 #pragma once
 
+#include "RCore/Api.hpp"
+#include "RWidgets/Buttons/RIconButton.hpp"
+#include "RWidgets/Windows/RWindow.hpp"
+
 /**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#include "RCore/Api.hpp"
-#include "RWidgets/Buttons/RIconButton.hpp"
-#include "RWidgets/Windows/RWindow.hpp"
 
 /**
  * @brief A popup window

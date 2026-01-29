@@ -8,13 +8,13 @@
 
 #pragma once
 
+#include "RWidgets/Layouts/RLayout.hpp"
+
 /**
  * @defgroup RWidget
  * @brief Widgets
  * @{
  */
-
-#include "RWidgets/Layouts/RLayout.hpp"
 
 /**
  * @brief A layout positioning widgets in a grid
