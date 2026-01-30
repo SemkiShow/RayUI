@@ -15,6 +15,6 @@ void SetLanguage(const std::string& domain, const std::filesystem::path& localeP
 #else
     setenv("LANGUAGE", language.c_str(), 1);
 #endif
-    bindtextdomain(domain.c_str(), localePath.c_str());
+    bindtextdomain(domain.c_str(), localePath.string().c_str());
     textdomain(domain.c_str());
 }

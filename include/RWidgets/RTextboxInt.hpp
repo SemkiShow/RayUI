@@ -9,6 +9,7 @@
 #pragma once
 
 #include "RWidgets/RTextbox.hpp"
+#include <cstdint>
 
 /**
  * @defgroup Widgets
