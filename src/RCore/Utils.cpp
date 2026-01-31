@@ -164,6 +164,7 @@ float Map(float val, float oldMin, float oldMax, float newMin, float newMax)
 {
     float newVal = std::max(oldMin, std::min(oldMax, val));
     newVal -= oldMin;
+    if (oldMax - oldMin == 0) return val; // Avoid dividing by 0
     newVal *= (newMax - newMin) / (oldMax - oldMin);
     newVal += newMin;
     return newVal;
