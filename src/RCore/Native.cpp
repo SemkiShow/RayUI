@@ -231,15 +231,17 @@ RColor ShowColorPicker(const std::string& title, const std::string& defaultRbgHe
 #endif
 }
 
-RColor ShowColorPicker(const std::string& title, const unsigned char defaultRgb[3])
+RColor ShowColorPicker(const std::string& title, RColor defaultRgb)
 {
 #ifdef _WIN32
     unsigned char res[3]{0, 0, 0};
-    tinyfd_colorChooserW(StringToWString(title).c_str(), NULL, defaultRgb, res);
+    unsigned char rgb[3]{defaultRgb.r, defaultRgb.g, defaultRgb.b};
+    tinyfd_colorChooserW(StringToWString(title).c_str(), NULL, rgb, res);
     return {res[0], res[1], res[2]};
 #else
     unsigned char res[3]{0, 0, 0};
-    tinyfd_colorChooser(title.c_str(), NULL, defaultRgb, res);
+    unsigned char rgb[3]{defaultRgb.r, defaultRgb.g, defaultRgb.b};
+    tinyfd_colorChooser(title.c_str(), NULL, rgb, res);
     return {res[0], res[1], res[2]};
 #endif
 }
@@ -260,16 +262,18 @@ std::string ShowColorPickerHex(const std::string& title, const std::string& defa
 #endif
 }
 
-std::string ShowColorPickerHex(const std::string& title, const unsigned char defaultRgb[3])
+std::string ShowColorPickerHex(const std::string& title, RColor defaultRgb)
 {
 #ifdef _WIN32
     unsigned char buf[3]{0, 0, 0};
-    auto res = tinyfd_colorChooserW(StringToWString(title).c_str(), NULL, defaultRgb, buf);
+    unsigned char rgb[3]{defaultRgb.r, defaultRgb.g, defaultRgb.b};
+    auto res = tinyfd_colorChooserW(StringToWString(title).c_str(), NULL, rgb, buf);
     if (!res) return "";
     return WStringToString(std::wstring(res));
 #else
     unsigned char buf[3]{0, 0, 0};
-    auto res = tinyfd_colorChooser(title.c_str(), NULL, defaultRgb, buf);
+    unsigned char rgb[3]{defaultRgb.r, defaultRgb.g, defaultRgb.b};
+    auto res = tinyfd_colorChooser(title.c_str(), NULL, rgb, buf);
     if (!res) return "";
     return res;
 #endif

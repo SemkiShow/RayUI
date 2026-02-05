@@ -59,8 +59,8 @@ std::string ShowSelectFolderDialog(const std::string& title,
                                    const std::filesystem::path& defaultPath);
 
 RColor ShowColorPicker(const std::string& title, const std::string& defaultRbgHex);
-RColor ShowColorPicker(const std::string& title, const unsigned char defaultRgb[3]);
+RColor ShowColorPicker(const std::string& title, RColor defaultRgb);
 std::string ShowColorPickerHex(const std::string& title, const std::string& defaultRbgHex);
-std::string ShowColorPickerHex(const std::string& title, const unsigned char defaultRgb[3]);
+std::string ShowColorPickerHex(const std::string& title, RColor defaultRgb);
 
 void OpenLink(const std::string& url);
