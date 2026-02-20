@@ -42,13 +42,6 @@ struct REvent
 };
 
 /**
- * @defgroup Widgets
- * @{
- * @defgroup
- * @{
- */
-
-/**
  * @brief A window that takes the whole render space
  */
 class RWindow : public RContainer

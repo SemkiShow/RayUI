@@ -14,6 +14,13 @@
 #include <vector>
 
 /**
+ * @defgroup Widgets
+ * @{
+ * @defgroup Application
+ * @{
+ */
+
+/**
  * @brief The main object for storing windows
  */
 class RApplication
