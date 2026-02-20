@@ -13,7 +13,7 @@
 /**
  * @defgroup Widgets
  * @{
- * @defgroup ProgresBars
+ * @defgroup ProgressBars
  * @{
  */
 

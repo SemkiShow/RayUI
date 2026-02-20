@@ -60,6 +60,38 @@ class RWindow : public RContainer
 
     void SetScale(float scale) override;
 
+    /**
+     * @brief A function for attaching events to RWindow
+     * @warning Use this function carefully. If @p event and/or @p func is a lambda capturing a
+     * widget, then make sure that this widget is destroyed only once the window destructor is
+     * called, not before that. If this requirement is met, then your code can look like this:
+     * @code {.cpp}
+     * auto button = std::make_shared<RButton>();
+     *
+     * Connect([button] { return button->IsClicked(); }, [] { std::cout << "Button was
+     * clicked!\n"; });
+     * @endcode
+     * If you want to attach an event to a widget that can be destroyed, use a weak pointer to
+     * prevent the lambda from keeping the widget from being destroyed and make the original
+     * std::shared_ptr a dependency of the connection. This will destroy the connection once the
+     * widget is destroyed
+     * @code {.cpp}
+     * auto button = std::make_shared<RButton>();
+     *
+     * std::weak_ptr<RButton> weakButton = button;
+     * Connect(
+     *     [weakButton]
+     *     {
+     *         if (auto btn = weakButton.lock()) return btn->IsClicked();
+     *         return false;
+     *     },
+     *     []{ std::cout << "Button was clicked!\n"; }, button);
+     * @endcode
+     * @tparam Tracker
+     * @param event
+     * @param func
+     * @param deps
+     */
     template <typename... Tracker>
     void Connect(std::function<bool()> event, std::function<void()> func,
                  std::shared_ptr<Tracker>... deps)

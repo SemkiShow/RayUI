@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: MIT
 /**
  * @file
- * @brief Functions for converting from/to raylib types to/from RayUI types
+ * @brief @copydoc Conversions
  */
 
 #pragma once

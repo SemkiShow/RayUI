@@ -16,9 +16,11 @@
 #include "RCore/Icons.hpp"        // IWYU pragma: export
 #include "RCore/Native.hpp"       // IWYU pragma: export
 #include "RCore/RApplication.hpp" // IWYU pragma: export
+#include "RCore/RContainer.hpp"   // IWYU pragma: export
 #include "RCore/RWidget.hpp"      // IWYU pragma: export
 #include "RCore/Themes.hpp"       // IWYU pragma: export
 #include "RCore/Translations.hpp" // IWYU pragma: export
+#include "RCore/Utils.hpp"        // IWYU pragma: export
 
 // Buttons
 #include "RWidgets/RButton.hpp"      // IWYU pragma: export
